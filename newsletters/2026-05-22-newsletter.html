@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Claude Dispatch #1 — May 22, 2026</title>
+<style>
+  /* Fonts */
+  @font-face { font-family:'TiemposText'; src:url('https://www.anthropic.com/_next/static/media/TiemposText_Regular-s.p.7f1d46d6.woff2') format('woff2'); font-weight:400; font-style:normal; font-display:swap; }
+  @font-face { font-family:'TiemposText'; src:url('https://www.anthropic.com/_next/static/media/TiemposText_RegularItalic-s.p.1a798fcf.woff2') format('woff2'); font-weight:400; font-style:italic; font-display:swap; }
+  @font-face { font-family:'TiemposText'; src:url('https://www.anthropic.com/_next/static/media/TiemposText_Medium-s.p.520d99f8.woff2') format('woff2'); font-weight:500; font-style:normal; font-display:swap; }
+  @font-face { font-family:'StyreneA'; src:url('https://www.anthropic.com/_next/static/media/StyreneA_Regular_Web-s.p.429c699d.woff2') format('woff2'); font-weight:400; font-style:normal; font-display:swap; }
+  @font-face { font-family:'StyreneA'; src:url('https://www.anthropic.com/_next/static/media/StyreneA_Medium_Web-s.p.e5135f7e.woff2') format('woff2'); font-weight:500; font-style:normal; font-display:swap; }
+  @font-face { font-family:'StyreneB'; src:url('https://www.anthropic.com/_next/static/media/StyreneB_Regular_Web-s.p.cb3cc1a3.woff2') format('woff2'); font-weight:400; font-style:normal; font-display:swap; }
+  @font-face { font-family:'StyreneB'; src:url('https://www.anthropic.com/_next/static/media/StyreneB_Medium_Web-s.p.88fa5a67.woff2') format('woff2'); font-weight:500; font-style:normal; font-display:swap; }
+
+  /* Theme tokens — Claude palette */
+  :root, [data-theme="light"] {
+    --bg-outer: #F4F3EE;
+    --bg-container: #FFFFFF;
+    --bg-callout: #F4F3EE;
+    --bg-footer: #F4F3EE;
+    --text-primary: #2f2f2b;
+    --text-secondary: #4a4a44;
+    --text-muted: #B1ADA1;
+    --text-faint: #c5c1b8;
+    --accent: #C15F3C;
+    --border: rgba(177,173,161,0.3);
+    --link-underline: rgba(47,47,43,0.3);
+    --toggle-bg: rgba(47,47,43,0.06);
+    --toggle-hover: rgba(47,47,43,0.12);
+    --toggle-icon-show-sun: none;
+    --toggle-icon-show-moon: block;
+  }
+  [data-theme="dark"] {
+    --bg-outer: #2f2f2b;
+    --bg-container: #3a3a36;
+    --bg-callout: #454540;
+    --bg-footer: #2f2f2b;
+    --text-primary: #F4F3EE;
+    --text-secondary: #d5d3cb;
+    --text-muted: #B1ADA1;
+    --text-faint: #7a776e;
+    --accent: #C15F3C;
+    --border: rgba(244,243,238,0.1);
+    --link-underline: rgba(244,243,238,0.3);
+    --toggle-bg: rgba(244,243,238,0.06);
+    --toggle-hover: rgba(244,243,238,0.12);
+    --toggle-icon-show-sun: block;
+    --toggle-icon-show-moon: none;
+  }
+
+  /* Base */
+  body {
+    margin: 0; padding: 0;
+    background-color: var(--bg-outer);
+    font-family: 'TiemposText', Georgia, 'Times New Roman', serif;
+    color: var(--text-primary);
+    line-height: 1.5; font-size: 17px; letter-spacing: -0.01em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Themed elements */
+  .outer-wrap { background-color: var(--bg-outer); transition: background-color 0.3s ease; }
+  .container {
+    background-color: var(--bg-container);
+    transition: background-color 0.3s ease;
+    max-width: 680px !important;
+    width: 100% !important;
+    overflow: visible !important;
+  }
+
+  /* Responsive */
+  @media screen and (min-width: 740px) {
+    .container { max-width: 680px !important; }
+    .content-pad { padding-left: 48px !important; padding-right: 48px !important; }
+    .title-main { font-size: 38px !important; }
+    .intro-text { font-size: 17px !important; }
+    .heading-lg { font-size: 25px !important; }
+    .heading-md { font-size: 21px !important; }
+    .section-gap { padding-top: 24px !important; padding-bottom: 24px !important; }
+    .section-content { padding-top: 40px !important; padding-bottom: 40px !important; }
+  }
+  @media screen and (max-width: 480px) {
+    .container { margin: 0 12px !important; }
+    .content-pad { padding-left: 24px !important; padding-right: 24px !important; }
+    .title-main { font-size: 30px !important; }
+  }
+  .header-border { border-bottom: 1px solid var(--border); }
+  .meta-text { color: var(--text-muted); }
+  .title-text { color: var(--text-primary); transition: color 0.3s ease; }
+  .body-text { color: var(--text-primary); transition: color 0.3s ease; }
+  .secondary-text { color: var(--text-secondary); transition: color 0.3s ease; }
+  .accent-text { color: var(--accent); }
+  .faint-text { color: var(--text-faint); }
+  .section-label { color: var(--accent); border-bottom: 1px solid var(--border); }
+  .divider { border-top: 1px solid var(--border); }
+  .section-gap { padding-top: 20px !important; padding-bottom: 20px !important; }
+  .callout { background-color: var(--bg-callout); transition: background-color 0.3s ease; }
+  .footer { background-color: var(--bg-footer); border-top: 1px solid var(--border); transition: background-color 0.3s ease; }
+  .link { color: var(--text-primary); text-decoration: underline; text-decoration-color: var(--link-underline); text-underline-offset: 2px; transition: color 0.3s ease; }
+  .link:hover { text-decoration-color: var(--text-primary); }
+
+  /* Progress bar */
+  .progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0%;
+    background: var(--accent);
+    z-index: 10000;
+    transition: width 0.1s linear;
+  }
+
+  /* Pullquote hook */
+  .hook {
+    padding: 28px 48px 24px;
+  }
+  .hook-box {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 28px 32px;
+    background-color: var(--bg-callout);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+  .hook-quote {
+    font-family: 'TiemposText', Georgia, 'Times New Roman', serif;
+    font-size: 20px;
+    font-weight: 400;
+    font-style: italic;
+    letter-spacing: -0.01em;
+    line-height: 1.4;
+    color: var(--text-primary);
+    margin: 0 0 12px;
+    transition: color 0.3s ease;
+  }
+  .hook-sub {
+    font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    margin: 0;
+    letter-spacing: -0.01em;
+    line-height: 1.45;
+  }
+  @media screen and (min-width: 740px) {
+    .hook-quote { font-size: 22px !important; }
+  }
+
+  /* Reading list */
+  .reading-item {
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+    padding: 10px 0;
+    border-top: 1px solid var(--border);
+  }
+  .reading-tag {
+    font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--accent);
+    white-space: nowrap;
+    min-width: 52px;
+  }
+  .reading-desc {
+    font-family: 'TiemposText', Georgia, 'Times New Roman', serif;
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.45;
+    transition: color 0.3s ease;
+  }
+  .reading-desc a { color: var(--text-primary); text-decoration: underline; text-decoration-color: var(--link-underline); text-underline-offset: 2px; }
+
+  /* Closing PM blurb */
+  .closing-blurb {
+    border-top: 1px solid var(--border);
+    padding-top: 28px;
+    margin-top: 8px;
+  }
+  .closing-label {
+    font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--accent);
+    margin: 0 0 10px;
+  }
+  .closing-text {
+    font-family: 'TiemposText', Georgia, 'Times New Roman', serif;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--text-primary);
+    margin: 0;
+    transition: color 0.3s ease;
+  }
+
+  /* Toggle button */
+  .theme-toggle {
+    position: fixed; top: 20px; right: 20px; z-index: 999;
+    width: 40px; height: 40px;
+    background: var(--toggle-bg);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s ease;
+    padding: 0;
+  }
+  .theme-toggle:hover { background: var(--toggle-hover); }
+  .theme-toggle svg { width: 18px; height: 18px; }
+  .theme-toggle .icon-sun { display: var(--toggle-icon-show-sun); color: var(--text-primary); }
+  .theme-toggle .icon-moon { display: var(--toggle-icon-show-moon); color: var(--text-primary); }
+
+  /* Glossary toggle */
+  .glossary-toggle {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    transition: border-color 0.3s ease;
+  }
+  .glossary-toggle summary {
+    font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--accent);
+    cursor: pointer;
+    padding: 14px 20px;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    user-select: none;
+  }
+  .glossary-toggle summary::-webkit-details-marker { display: none; }
+  .glossary-toggle summary::before {
+    content: '+';
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--accent);
+    transition: transform 0.2s ease;
+    display: inline-block;
+    width: 16px;
+    text-align: center;
+  }
+  .glossary-toggle[open] summary::before {
+    content: '\2212';
+  }
+  .glossary-content {
+    padding: 0 20px 16px;
+  }
+  .glossary-item {
+    display: flex;
+    gap: 12px;
+    padding: 8px 0;
+    border-top: 1px solid var(--border);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .glossary-term {
+    font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    color: var(--text-primary);
+    white-space: nowrap;
+    min-width: 110px;
+    font-size: 13px;
+    letter-spacing: -0.01em;
+    transition: color 0.3s ease;
+  }
+  .glossary-def {
+    font-family: 'TiemposText', Georgia, 'Times New Roman', serif;
+    color: var(--text-secondary);
+    transition: color 0.3s ease;
+  }
+
+  /* Inline term tooltips */
+  .term {
+    border-bottom: 1px dotted var(--accent);
+    cursor: help;
+    color: inherit;
+    text-decoration: none;
+  }
+  .term-tip {
+    position: fixed;
+    visibility: hidden;
+    opacity: 0;
+    background-color: var(--text-primary);
+    color: var(--bg-container);
+    font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    line-height: 1.4;
+    letter-spacing: 0;
+    padding: 10px 16px;
+    border-radius: 6px;
+    width: 340px;
+    max-width: 90vw;
+    white-space: normal;
+    z-index: 9999;
+    pointer-events: none;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+    transition: opacity 0.15s ease, visibility 0.15s ease;
+  }
+  .term-tip.visible {
+    visibility: visible;
+    opacity: 1;
+  }
+  .term-tip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: var(--text-primary);
+  }
+</style>
+</head>
+<body>
+
+<!-- Progress bar -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- Theme toggle -->
+<button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+  <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+</button>
+
+<!-- Wrapper -->
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" class="outer-wrap">
+<tr><td align="center" style="padding:40px 16px;">
+
+<!-- Container -->
+<table role="presentation" width="680" cellpadding="0" cellspacing="0" class="container" style="max-width:680px;width:100%;">
+
+<!-- Header -->
+<tr><td class="header-border content-pad" style="padding:48px 48px 40px;">
+  <p class="meta-text" style="margin:0 0 12px;font-family:'StyreneA','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12px;letter-spacing:0.15em;text-transform:uppercase;font-weight:500;line-height:1;">Issue #1 &mdash; May 22, 2026</p>
+  <h1 class="title-text title-main" style="margin:0;font-family:'StyreneB','StyreneA','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:36px;font-weight:500;letter-spacing:-0.02em;line-height:0.95;">The Claude Dispatch</h1>
+</td></tr>
+
+<!-- Intro -->
+<tr><td class="content-pad" style="padding:36px 48px 28px;">
+  <p class="body-text intro-text" style="margin:0;font-family:'TiemposText',Georgia,'Times New Roman',serif;font-size:17px;line-height:1.5;letter-spacing:-0.01em;">Welcome to the inaugural issue of The Claude Dispatch, a twice-weekly briefing on Claude, Anthropic, and the broader tech landscape. Written for CS students and aspiring PMs who want to stay sharp.</p>
+</td></tr>
+
+<!-- Hook -->
+<tr><td class="hook content-pad">
+  <div class="hook-box">
+    <p class="hook-quote">&ldquo;Anthropic acquires Stainless for $300M+, taking control of the SDK tooling its rivals depend on.&rdquo;</p>
+    <p class="hook-sub">Also in this issue: Claude&rsquo;s agents learn to dream, Google ships Gemini Spark, and OpenAI puts ads in ChatGPT.</p>
+  </div>
+</td></tr>
+
+<!-- Glossary -->
+<tr><td class="content-pad" style="padding:0 48px 28px;">
+  <details class="glossary-toggle">
+    <summary>Jargon decoder: new to tech? Start here</summary>
+    <div class="glossary-content">
+      <div class="glossary-item">
+        <span class="glossary-term">SDK</span>
+        <span class="glossary-def">Software Development Kit. A toolkit that lets developers build apps for a specific platform.</span>
+      </div>
+      <div class="glossary-item">
+        <span class="glossary-term">CLI</span>
+        <span class="glossary-def">Command Line Interface. A text-based way to interact with software by typing commands (like Terminal on Mac).</span>
+      </div>
+      <div class="glossary-item">
+        <span class="glossary-term">API</span>
+        <span class="glossary-def">Application Programming Interface. The way two pieces of software talk to each other.</span>
+      </div>
+      <div class="glossary-item">
+        <span class="glossary-term">MCP</span>
+        <span class="glossary-def">Model Context Protocol. A standard that lets AI models connect to external tools and data sources.</span>
+      </div>
+      <div class="glossary-item">
+        <span class="glossary-term">Agent</span>
+        <span class="glossary-def">An AI system that can take actions on its own: browsing the web, writing code, or completing multi-step tasks without constant human direction.</span>
+      </div>
+      <div class="glossary-item">
+        <span class="glossary-term">Context window</span>
+        <span class="glossary-def">How much text an AI model can &ldquo;see&rdquo; at once, measured in tokens. Bigger = it can handle longer documents.</span>
+      </div>
+      <div class="glossary-item">
+        <span class="glossary-term">Tokens</span>
+        <span class="glossary-def">The units AI models use to measure text. Roughly 1 token &asymp; &frac34; of a word. Pricing is usually per million tokens.</span>
+      </div>
+      <div class="glossary-item">
+        <span class="glossary-term">Rate limits</span>
+        <span class="glossary-def">Caps on how much you can use a service in a given time period. Think of it like a speed limit for API requests.</span>
+      </div>
+    </div>
+  </details>
+</td></tr>
+
+<!-- Section 1: Anthropic Product News -->
+<tr><td class="content-pad section-content" style="padding:12px 48px 36px;">
+  <p class="section-label" style="margin:0 0 28px;font-family:'StyreneA','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:500;line-height:1;padding-bottom:16px;">Anthropic Product News</p>
+
+  <h3 class="title-text heading-md" style="margin:0 0 10px;font-family:'StyreneA','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:21px;font-weight:500;letter-spacing:-0.02em;line-height:1.2;">Stainless Acquisition ($300M+)</h3>
+  <p class="body-text" style="margin:0 0 12px;font-family:'TiemposText',Georgia,'Times New Roman',serif;font-size:16px;line-height:1.5;letter-spacing:-0.01em;">Anthropic <a href="https://www.anthropic.com/news/anthropic-acquires-stainless" class="link">acquired Stainless</a> on May 18 for over $300M. Stainless auto-generates <span class="term" tabindex="0">SDKs<span class="term-tip">Software Development Kit: a toolkit for building apps on a specific platform</span></span>, <span class="term" tabindex="0">CLIs<span class="term-tip">Command Line Interface: a text-based way to interact with software by typing commands</span></span>, and <span class="term" tabindex="0">MCP<span class="term-tip">Model Context Protocol: a standard that lets AI models connect to external tools and data</span></span> servers from <span class="term" tabindex="0">API<span class="term-tip">Application Programming Interface: the way two pieces of software talk to each other</span></span> specs, and its clients included OpenAI and Google. This is Anthropic&rsquo;s fourth acquisition in six months (after Bun, Vercept, and Coefficient Bio). By owning the tooling that generates developer SDKs, Anthropic controls infrastructure its competitors relied on. <a href="https://techcrunch.com/2026/05/18/anthropic-has-acquired-the-dev-tools-startup-used-by-openai-google-and-cloudflare/" class="link">TechCrunch reports</a> that hosted Stainless products will be wound down.</p>
+
+  <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 0 28px;width:100%;">
+    <tr><td class="callout" style="padding:16px 20px;border-radius:4px;">
+      <p class="secondary-text" style="margin:0;font-family:'TiemposText',Georgia,'Times New Roman',serif;font-size:15px;line-height:1.5;letter-spacing:-0.01em;"><span class="accent-text" style="font-family:'StyreneA','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:500;">PM takeaway</span><br>A textbook &ldquo;acquire the picks and shovels&rdquo; move. When you control the developer tools competitors depend on, you create switching costs and leverage &mdash; even when the product itself isn&rsquo;t consumer-facing.</p>
+    </td></tr>
+  </table>
+
+  <h3 class="title-text heading-md" style="margin:0 0 10px;font-family:'StyreneA','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:21px;font-weight:500;letter-spacing:-0.02em;line-height:1.2;">Claude for Small Business</h3>
+  <p class="body-text" style="margin:0 0 28px;font-family:'TiemposText',Georgia,'Times New Roman',serif;font-size:16px;line-height:1.5;letter-spacing:-0.01em;">On May 13, Anthropic <a href="https://www.anthropic.com/news/claude-for-small-business" class="link">launched Claude for Small Business</a>: connectors and ready-to-run workflows that embed Claude into QuickBooks, PayPal, HubSpot, Canva, Docusign, Google Workspace, and Microsoft 365. A clear move down-market from the enterprise partnerships. Anthropic is serious about breadth, not just depth.</p>
+
+  <h3 class="title-text heading-md" style="margin:0 0 10px;font-family:'StyreneA','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:21px;font-weight:500;letter-spacing:-0.02em;line-height:1.2;">Managed Agents: Dreaming, Outcomes &amp; Multi-Agent Orchestration</h3>
+  <p class="body-text" style="margin:0 0 28px;font-family:'TiemposText',Georgia,'Times New Roman',serif;font-size:16px;line-height:1.5;letter-spacing:-0.01em;"><a href="https://claude.com/blog/new-in-claude-managed-agents" class="link">Three new features</a> shipped for Claude Managed <span class="term" tabindex="0">Agents<span class="term-tip">An AI system that takes actions on its own &mdash; completing multi-step tasks without constant human direction</span></span> on May 7. The headline is Dreaming: a scheduled process where agents review past sessions, extract patterns, merge duplicate memories, and self-improve. Early tests show ~6x improvement in completion rates. Also new: structured Outcomes for tracking agent success, and multi-agent orchestration for chaining agents together.</p>
+
+  <h3 class="title-text heading-md" style="margin:0 0 10px;font-family:'StyreneA','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:21px;font-weight:500;letter-spacing:-0.02em;line-height:1.2;">Major Enterprise Deals</h3>
+  <p class="body-text" style="margin:0 0 8px;font-family:'TiemposText',Georgia,'Times New Roman',serif;font-size:16px;line-height:1.5;letter-spacing:-0.01em;">Two huge partnership expansions in the same week:</p>
+  <ul class="body-text" style="margin:0 0 28px;padding-left:20px;font-family:'TiemposText',Georgia,'Times New Roman',serif;font-size:16px;line-height:1.6;letter-spacing:-0.01em;">
+    <li style="margin-bottom:8px;"><strong style="font-weight:500;">KPMG</strong> <a href="https://kpmg.com/us/en/media/news/kpmg-anthropic-global-alliance.html" class="link">signed a global alliance</a> (May 19) to integrate Claude across its 276,000-person workforce.</li>
+    <li style="margin-bottom:8px;"><strong style="font-weight:500;">PwC</strong> <a href="https://www.anthropic.com/news/pwc-expanded-partnership" class="link">expanded its partnership</a> (May 14), rolling out Claude Code and Cowork to U.S. teams with a path to global deployment.</li>
+    <li style="margin-bottom:8px;">Anthropic formed a <strong style="font-weight:500;">$200M partnership with the Gates Foundation</strong> (May 13) for health and development applications.</li>
+  </ul>
+
+  <h3 class="title-text heading-md" style="margin:0 0 10px;font-family:'StyreneA','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:21px;font-weight:500;letter-spacing:-0.02em;line-height:1.2;">Claude Code Updates</h3>
+  <p class="body-text" style="margin:0 0 28px;font-family:'TiemposText',Georgia,'Times New Roman',serif;font-size:16px;line-height:1.5;letter-spacing:-0.01em;">Agent View launched the week of May 11 &mdash; a single dashboard showing every Claude Code session: what&rsquo;s running, what&rsquo;s blocked, and what&rsquo;s done. You can start agents, background them, check status, and jump back in only when needed. Fast mode now defaults to Opus 4.7, and <span class="term" tabindex="0">rate limits<span class="term-tip">Caps on how much you can use a service in a given time period</span></span> were doubled across Pro, Max, and Enterprise plans in early May.</p>
+
+  <h3 class="title-text heading-md" style="margin:0 0 10px;font-family:'StyreneA','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:21px;font-weight:500;letter-spacing:-0.02em;line-height:1.2;">Quick Hits</h3>
+  <ul class="body-text" style="margin:0;padding-left:20px;font-family:'TiemposText',Georgia,'Times New Roman',serif;font-size:16px;line-height:1.6;letter-spacing:-0.01em;">
+    <li style="margin-bottom:8px;">Higher usage limits and a compute deal with SpaceX announced May 5.</li>
+    <li style="margin-bottom:8px;">New Agents for Financial Services package launched May 4.</li>
+    <li style="margin-bottom:8px;">Anthropic is building a new enterprise AI services company with Blackstone, Hellman &amp; Friedman, and Goldman Sachs.</li>
+  </ul>
+</td></tr>
+
+<!-- Divider -->
+<tr><td class="content-pad section-gap" style="padding:0 48px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td class="divider" style="height:1px;font-size:0;line-height:0;">&nbsp;</td></tr></table></td></tr>
+
+<!-- Section 2: Feature Deep-Dive -->
+<tr><td class="content-pad section-content" style="padding:36px 48px;">
+  <p class="section-label" style="margin:0 0 28px;font-family:'StyreneA','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:500;line-height:1;padding-bottom:16px;">Feature Deep-Dive</p>
+
+  <h3 class="title-text heading-lg" style="margin:0 0 10px;font-family:'StyreneA','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:24px;font-weight:500;letter-spacing:-0.02em;line-height:1.15;">Claude Code Agent View</h3>
+
+  <p class="body-text" style="margin:0 0 24px;font-family:'TiemposText',Georgia,'Times New Roman',serif;font-size:16px;line-height:1.5;letter-spacing:-0.01em;">If you use Claude Code for anything beyond quick one-off prompts, the new Agent View is worth knowing about. Here&rsquo;s what it is, how to use it, and why it matters.</p>
+
+  <p class="meta-text" style="margin:0 0 8px;font-family:'StyreneA','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;font-weight:500;line-height:1;">What it does</p>
+  <p class="body-text" style="margin:0 0 24px;font-family:'TiemposText',Georgia,'Times New Roman',serif;font-size:16px;line-height:1.5;letter-spacing:-0.01em;">Agent View gives you a single screen that shows every Claude Code session (active, backgrounded, or completed). Before this, if you had multiple agents running (say, one refactoring a module while another writes tests), you had to juggle terminal tabs and manually check on each one. Now you get a unified dashboard.</p>
+
+  <p class="meta-text" style="margin:0 0 8px;font-family:'StyreneA','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;font-weight:500;line-height:1;">How to use it</p>
+  <ol class="body-text" style="margin:0 0 24px;padding-left:20px;font-family:'TiemposText',Georgia,'Times New Roman',serif;font-size:16px;line-height:1.6;letter-spacing:-0.01em;">
+    <li style="margin-bottom:8px;">Open Claude Code in your terminal as usual.</li>
+    <li style="margin-bottom:8px;">Start one or more tasks. When a task is running, you can background it (it keeps working without blocking your terminal).</li>
+    <li style="margin-bottom:8px;">Open Agent View to see all sessions at a glance. Each shows its status (running, waiting for input, done) and its last response.</li>
+    <li style="margin-bottom:8px;">Click into any session to resume, provide input, or review results.</li>
+  </ol>
+
+  <p class="meta-text" style="margin:0 0 8px;font-family:'StyreneA','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;font-weight:500;line-height:1;">Why it matters</p>
+  <p class="body-text" style="margin:0 0 24px;font-family:'TiemposText',Georgia,'Times New Roman',serif;font-size:16px;line-height:1.5;letter-spacing:-0.01em;">This turns Claude Code from a &ldquo;one conversation at a time&rdquo; tool into something closer to a task manager for AI-assisted development. You can kick off several parallel workstreams and only jump in when an agent needs your input. For students working on multi-file projects, this is a significant workflow upgrade.</p>
+
+  <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0;width:100%;">
+    <tr><td class="callout" style="padding:16px 20px;border-radius:4px;">
+      <p class="secondary-text" style="margin:0;font-family:'TiemposText',Georgia,'Times New Roman',serif;font-size:15px;line-height:1.5;letter-spacing:-0.01em;"><span class="accent-text" style="font-family:'StyreneA','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:500;">Tip</span><br>Combine Agent View with the Remote Control feature (shipped in Q1) to start a Claude Code task on your laptop, walk away, and check on it later from your phone or another device.</p>
+    </td></tr>
+  </table>
+</td></tr>
+
+<!-- Divider -->
+<tr><td class="content-pad section-gap" style="padding:0 48px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td class="divider" style="height:1px;font-size:0;line-height:0;">&nbsp;</td></tr></table></td></tr>
+
+<!-- Section 3: Broader Tech News -->
+<tr><td class="content-pad section-content" style="padding:36px 48px;">
+  <p class="section-label" style="margin:0 0 28px;font-family:'StyreneA','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:500;line-height:1;padding-bottom:16px;">Broader Tech News</p>
+
+  <h3 class="title-text heading-md" style="margin:0 0 10px;font-family:'StyreneA','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:21px;font-weight:500;letter-spacing:-0.02em;line-height:1.2;">Google I/O 2026: Gemini Spark and Gemini 3.5 Flash</h3>
+  <p class="body-text" style="margin:0 0 28px;font-family:'TiemposText',Georgia,'Times New Roman',serif;font-size:16px;line-height:1.5;letter-spacing:-0.01em;">Google introduced Gemini Spark at I/O &mdash; an always-on AI agent that runs in the background across Google Workspace and third-party apps. Meanwhile, Gemini 3.5 Flash is now generally available: frontier-level intelligence at 4x speed, priced at $1.50/$9 per 1M <span class="term" tabindex="0">tokens<span class="term-tip">The units AI models use to measure text &mdash; roughly 1 token &asymp; &frac34; of a word</span></span> with a 1M <span class="term" tabindex="0">context window<span class="term-tip">How much text an AI model can &ldquo;see&rdquo; at once &mdash; bigger means it can handle longer documents</span></span>. The pricing pressure on the API market continues to intensify.</p>
+
+  <h3 class="title-text heading-md" style="margin:0 0 10px;font-family:'StyreneA','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:21px;font-weight:500;letter-spacing:-0.02em;line-height:1.2;">OpenAI Launches Ads in ChatGPT</h3>
+  <p class="body-text" style="margin:0 0 28px;font-family:'TiemposText',Georgia,'Times New Roman',serif;font-size:16px;line-height:1.5;letter-spacing:-0.01em;">OpenAI rolled out a self-serve Ads Manager for ChatGPT, targeting $2.5B in ad revenue this year and $100B annually by 2030. A major strategic divergence from Anthropic, which has committed to keeping Claude ad-free. Worth watching as a case study in business model choices: ads vs. subscriptions vs. API revenue.</p>
+
+  <h3 class="title-text heading-md" style="margin:0 0 10px;font-family:'StyreneA','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:21px;font-weight:500;letter-spacing:-0.02em;line-height:1.2;">Nvidia&rsquo;s $91B Quarter and $80B Buyback</h3>
+  <p class="body-text" style="margin:0 0 28px;font-family:'TiemposText',Georgia,'Times New Roman',serif;font-size:16px;line-height:1.5;letter-spacing:-0.01em;">Nvidia forecasted $91 billion in Q2 revenue, above Wall Street expectations, and announced an $80B stock buyback. The GPU shortage narrative is fading, but Nvidia&rsquo;s dominance in AI infrastructure isn&rsquo;t. If you&rsquo;re a CS student thinking about where the industry is going, understanding the hardware layer matters as much as the software.</p>
+
+  <h3 class="title-text heading-md" style="margin:0 0 10px;font-family:'StyreneA','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:21px;font-weight:500;letter-spacing:-0.02em;line-height:1.2;">Meta Cuts 8,000 Roles</h3>
+  <p class="body-text" style="margin:0 0 28px;font-family:'TiemposText',Georgia,'Times New Roman',serif;font-size:16px;line-height:1.5;letter-spacing:-0.01em;">Meta began its planned 10% workforce reduction, cutting roughly 8,000 roles in an efficiency drive tied to heavy AI spending. The pattern across big tech continues: trim headcount, pour the savings into AI infrastructure. For job-seekers in CS, the message is clear: AI-adjacent skills are where the hiring momentum is.</p>
+
+  <h3 class="title-text heading-md" style="margin:0 0 10px;font-family:'StyreneA','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:21px;font-weight:500;letter-spacing:-0.02em;line-height:1.2;">$5.5B Floods the Deployment Gap</h3>
+  <p class="body-text" style="margin:0;font-family:'TiemposText',Georgia,'Times New Roman',serif;font-size:16px;line-height:1.5;letter-spacing:-0.01em;">Over $5.5 billion in VC capital was injected into startups targeting the enterprise AI &ldquo;deployment gap&rdquo; (the space between having an AI model and actually integrating it into business workflows). This is where a lot of the PM and product work is happening right now: not building models, but building the connectors, workflows, and interfaces that make AI usable in the real world.</p>
+</td></tr>
+
+<!-- Divider -->
+<tr><td class="content-pad section-gap" style="padding:0 48px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td class="divider" style="height:1px;font-size:0;line-height:0;">&nbsp;</td></tr></table></td></tr>
+
+<!-- Closing PM blurb -->
+<tr><td class="content-pad section-content" style="padding:36px 48px;">
+  <div class="closing-blurb" style="border-top:none;padding-top:0;margin-top:0;">
+    <p class="closing-label">The bigger picture</p>
+    <p class="closing-text">This week&rsquo;s theme is control points. Anthropic is buying the infrastructure layer (Stainless, Bun) while competitors monetize the consumer layer (OpenAI with ads, Google with Workspace integration). If you&rsquo;re thinking about product strategy, pay attention to <em>where</em> in the stack companies are placing their bets, because that&rsquo;s where the leverage is. The companies building the tools that other companies depend on tend to win long-term, even if they&rsquo;re less visible to end users.</p>
+  </div>
+</td></tr>
+
+<!-- Divider -->
+<tr><td class="content-pad section-gap" style="padding:0 48px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td class="divider" style="height:1px;font-size:0;line-height:0;">&nbsp;</td></tr></table></td></tr>
+
+<!-- Reading list -->
+<tr><td class="content-pad section-content" style="padding:36px 48px;">
+  <p class="section-label" style="margin:0 0 20px;font-family:'StyreneA','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:500;line-height:1;padding-bottom:16px;">Reading / Watching / Listening</p>
+
+  <div class="reading-item">
+    <span class="reading-tag">Read</span>
+    <span class="reading-desc"><a href="https://stratechery.com/concept/aggregation-theory/commoditizing-suppliers/" class="link">Commoditizing Your Complement</a> (Stratechery). Ben Thompson&rsquo;s classic framework for understanding why Anthropic acquires developer tools. Essential PM reading.</span>
+  </div>
+  <div class="reading-item">
+    <span class="reading-tag">Watch</span>
+    <span class="reading-desc"><a href="https://simonwillison.net/2026/May/6/code-w-claude-2026/" class="link">Code with Claude 2026 live blog</a> (Simon Willison). Detailed notes from Anthropic&rsquo;s developer event, including demos of Agent View and Managed Agents.</span>
+  </div>
+  <div class="reading-item">
+    <span class="reading-tag">Listen</span>
+    <span class="reading-desc"><a href="https://www.lennysnewsletter.com/" class="link">Lenny&rsquo;s Podcast</a>. If you&rsquo;re an aspiring PM, this is the single best resource. Recent episodes on AI product management are especially relevant.</span>
+  </div>
+</td></tr>
+
+<!-- Footer -->
+<tr><td class="footer content-pad" style="padding:36px 48px;">
+  <p class="meta-text" style="margin:0 0 6px;font-family:'StyreneA','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:13px;line-height:1.5;letter-spacing:-0.01em;">Thanks for reading Issue #1 of The Claude Dispatch.</p>
+  <p class="meta-text" style="margin:0 0 6px;font-family:'StyreneA','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:13px;line-height:1.5;letter-spacing:-0.01em;">New issues every Monday and Wednesday morning.</p>
+  <p class="meta-text" style="margin:0 0 20px;font-family:'StyreneA','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:13px;line-height:1.5;letter-spacing:-0.01em;">Know someone who'd enjoy this? <a href="https://forms.gle/pJGxqX6CKyVA9Km99" style="color:var(--accent);text-decoration:underline;text-underline-offset:2px;">Share the signup link</a>.</p>
+  <p class="faint-text" style="margin:0;font-family:'StyreneA','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:11px;line-height:1.5;letter-spacing:0;">AI-generated using Claude Code with web search. Always verify critical information from primary sources.</p>
+</td></tr>
+
+</table>
+</td></tr>
+</table>
+
+<script>
+function toggleTheme() {
+  const html = document.documentElement;
+  const current = html.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('claude-dispatch-theme', next);
+}
+
+// Restore saved preference
+(function() {
+  const saved = localStorage.getItem('claude-dispatch-theme');
+  if (saved) document.documentElement.setAttribute('data-theme', saved);
+})();
+
+// Tooltip positioning
+document.querySelectorAll('.term').forEach(function(term) {
+  var tip = term.querySelector('.term-tip');
+  if (!tip) return;
+
+  function show() {
+    var rect = term.getBoundingClientRect();
+    var tipW = 340;
+    var left = rect.left + rect.width / 2 - tipW / 2;
+    // Keep it on screen
+    if (left < 8) left = 8;
+    if (left + tipW > window.innerWidth - 8) left = window.innerWidth - tipW - 8;
+    tip.style.left = left + 'px';
+    tip.style.top = (rect.top - 8) + 'px';
+    tip.style.transform = 'translateY(-100%)';
+    tip.classList.add('visible');
+  }
+  function hide() {
+    tip.classList.remove('visible');
+  }
+
+  term.addEventListener('mouseenter', show);
+  term.addEventListener('mouseleave', hide);
+  term.addEventListener('focus', show);
+  term.addEventListener('blur', hide);
+});
+
+// Progress bar
+var bar = document.getElementById('progressBar');
+window.addEventListener('scroll', function() {
+  var h = document.documentElement.scrollHeight - window.innerHeight;
+  if (h > 0) bar.style.width = (window.scrollY / h * 100) + '%';
+}, { passive: true });
+</script>
+
+</body>
+</html>
