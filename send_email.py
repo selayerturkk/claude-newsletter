@@ -154,7 +154,7 @@ def send_newsletter(html_path: str | None = None):
 
     smtp_user = os.environ.get("GMAIL_ADDRESS")
     smtp_pass = os.environ.get("GMAIL_APP_PASSWORD")
-    sender_name = os.environ.get("SENDER_NAME", "The Claude Dispatch")
+    sender_name = os.environ.get("SENDER_NAME", "Claude & Co.")
     base_url = os.environ.get("NEWSLETTER_BASE_URL", "").strip().rstrip("/")
 
     recipients = fetch_subscribers()
@@ -188,7 +188,7 @@ def send_newsletter(html_path: str | None = None):
 
     # Extract a subject line from the issue index or the filename
     latest = get_latest_issue()
-    subject = latest["subject"] if latest and latest.get("subject") else f"The Claude Dispatch — {newsletter_file.stem}"
+    subject = latest["subject"] if latest and latest.get("subject") else f"Claude & Co. — {newsletter_file.stem}"
 
     # Plain-text fallback
     plain = ("This newsletter is best viewed in HTML. "

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ──────────────────────────────────────────────────────────────
-# install_cron.sh — Install the cron job for The Claude Dispatch
+# install_cron.sh — Install the cron job for Claude & Co.
 #
 # Runs the newsletter generator every Monday and Wednesday at 8:00 AM.
 # ──────────────────────────────────────────────────────────────

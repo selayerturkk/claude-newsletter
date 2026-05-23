@@ -1,6 +1,6 @@
 # Claude Newsletter Generator — Project Instructions
 
-This project generates a twice-weekly newsletter called **"The Claude Dispatch"**.
+This project generates a twice-weekly newsletter called **"Claude & Co."**.
 When invoked via `run.sh`, Claude Code generates a newsletter issue by searching the web
 for recent news about Anthropic/Claude and the broader tech world.
 
@@ -31,7 +31,7 @@ for recent news about Anthropic/Claude and the broader tech world.
 
 ## Newsletter Structure & Style
 
-The newsletter name is **"The Claude Dispatch"**.
+The newsletter name is **"Claude & Co."**.
 
 ### Required sections (in order):
 

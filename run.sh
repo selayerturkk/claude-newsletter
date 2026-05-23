@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ──────────────────────────────────────────────────────────────
-# run.sh — Generate and send The Claude Dispatch
+# run.sh — Generate and send Claude & Co.
 #
 # Called by cron (or manually). Invokes Claude Code to generate
 # the newsletter, then sends it via Gmail SMTP.
@@ -51,7 +51,7 @@ log "Starting generation — Issue #$NEXT_ISSUE covering $DATE_RANGE"
 
 # ── 2. Build the prompt for Claude Code ───────────────────────
 
-PROMPT="Generate Issue #$NEXT_ISSUE of The Claude Dispatch for $TODAY.
+PROMPT="Generate Issue #$NEXT_ISSUE of Claude & Co. for $TODAY.
 
 Cover news $DATE_RANGE.
 
@@ -64,7 +64,7 @@ Follow ALL instructions in CLAUDE.md exactly. Do the following:
    - \"issue_number\": $NEXT_ISSUE
    - \"date\": \"$TODAY\"
    - \"filename\": \"${TODAY}-newsletter.html\"
-   - \"subject\": (a short subject line for the email, like \"The Claude Dispatch #$NEXT_ISSUE — [brief headline]\")
+   - \"subject\": (a short subject line for the email, like \"Claude & Co. #$NEXT_ISSUE — [brief headline]\")
    - \"generated_at\": (current ISO timestamp)
 
 Do NOT skip any step. Do NOT ask questions — just generate the newsletter."
