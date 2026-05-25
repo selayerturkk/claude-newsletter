@@ -80,7 +80,8 @@ jobs:
              - \"generated_at\": (current ISO timestamp)
 
           Do NOT skip any step. Do NOT ask questions — just generate the newsletter." \
-            --allowedTools "WebSearch,WebFetch,Read,Write,Glob,Grep,Edit"
+            --allowedTools "WebSearch,WebFetch,Read,Write,Glob,Grep,Edit" \
+            --model claude-sonnet-4-20250514
 
       - name: Verify newsletter was created
         run: |
