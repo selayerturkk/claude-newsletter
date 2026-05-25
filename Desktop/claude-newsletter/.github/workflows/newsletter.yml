@@ -1,0 +1,131 @@
+name: Generate & Send Newsletter
+
+on:
+  schedule:
+    # 8:00 AM EST every Monday and Wednesday (13:00 UTC)
+    - cron: '0 13 * * 1,3'
+  workflow_dispatch: # Allow manual trigger from GitHub UI
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  generate-and-send:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Claude Code
+        run: npm install -g @anthropic-ai/claude-code
+
+      - name: Determine issue number and date range
+        id: info
+        run: |
+          LAST_ISSUE_NUM=$(python3 -c "
+          import json
+          with open('newsletters/index.json') as f:
+              issues = json.load(f)
+          print(issues[-1]['issue_number'] if issues else 0)
+          " 2>/dev/null || echo "0")
+
+          LAST_ISSUE_DATE=$(python3 -c "
+          import json
+          with open('newsletters/index.json') as f:
+              issues = json.load(f)
+          print(issues[-1]['date'] if issues else '')
+          " 2>/dev/null || echo "")
+
+          NEXT_ISSUE=$((LAST_ISSUE_NUM + 1))
+          TODAY=$(date '+%Y-%m-%d')
+
+          if [ -z "$LAST_ISSUE_DATE" ]; then
+            DATE_RANGE="the past 7 days (up to and including $TODAY)"
+          else
+            DATE_RANGE="from $LAST_ISSUE_DATE to $TODAY"
+          fi
+
+          echo "next_issue=$NEXT_ISSUE" >> "$GITHUB_OUTPUT"
+          echo "today=$TODAY" >> "$GITHUB_OUTPUT"
+          echo "date_range=$DATE_RANGE" >> "$GITHUB_OUTPUT"
+
+      - name: Generate newsletter with Claude Code
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          NEXT_ISSUE="${{ steps.info.outputs.next_issue }}"
+          TODAY="${{ steps.info.outputs.today }}"
+          DATE_RANGE="${{ steps.info.outputs.date_range }}"
+
+          claude -p "Generate Issue #$NEXT_ISSUE of Claude & Co. for $TODAY.
+
+          Cover news $DATE_RANGE.
+
+          Follow ALL instructions in CLAUDE.md exactly. Do the following:
+
+          1. Use WebSearch to find recent Anthropic/Claude news and broader tech news for the date range.
+          2. Write the complete newsletter as a self-contained HTML file with inline CSS, following the structure in CLAUDE.md.
+          3. Save the HTML file to newsletters/${TODAY}-newsletter.html using the Write tool.
+          4. Read the current newsletters/index.json, then update it by appending this new issue entry with these fields:
+             - \"issue_number\": $NEXT_ISSUE
+             - \"date\": \"$TODAY\"
+             - \"filename\": \"${TODAY}-newsletter.html\"
+             - \"subject\": (a short subject line for the email, like \"Claude & Co. #$NEXT_ISSUE — [brief headline]\")
+             - \"generated_at\": (current ISO timestamp)
+
+          Do NOT skip any step. Do NOT ask questions — just generate the newsletter." \
+            --allowedTools "WebSearch,WebFetch,Read,Write,Glob,Grep,Edit" \
+            --model claude-sonnet-4-20250514
+
+      - name: Verify newsletter was created
+        run: |
+          TODAY="${{ steps.info.outputs.today }}"
+          if [ ! -f "newsletters/${TODAY}-newsletter.html" ]; then
+            echo "ERROR: Newsletter file was not created"
+            exit 1
+          fi
+          echo "Newsletter generated successfully"
+
+      - name: Send newsletter emails
+        env:
+          GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          RECIPIENT_EMAIL: ${{ secrets.GMAIL_ADDRESS }}
+          SUBSCRIBERS_SHEET_URL: ${{ secrets.SUBSCRIBERS_SHEET_URL }}
+          SIGNUP_FORM_URL: ${{ secrets.SIGNUP_FORM_URL }}
+          NEWSLETTER_BASE_URL: https://selayerturkk.github.io/claude-newsletter/newsletters
+        run: |
+          TODAY="${{ steps.info.outputs.today }}"
+          python3 send_email.py "newsletters/${TODAY}-newsletter.html"
+
+      - name: Commit and push new issue
+        run: |
+          git config user.name "Claude & Co. Bot"
+          git config user.email "actions@github.com"
+          git add newsletters/
+          git commit -m "Add Issue #${{ steps.info.outputs.next_issue }} — ${{ steps.info.outputs.today }}"
+          git push
+
+  # Deploy updated site to GitHub Pages after new issue is pushed
+  deploy-pages:
+    needs: generate-and-send
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main  # Pull the latest commit (with the new issue)
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - id: deployment
+        uses: actions/deploy-pages@v4

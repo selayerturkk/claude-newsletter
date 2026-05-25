@@ -1,0 +1,14 @@
+name: Keep Workflows Alive
+
+on:
+  schedule:
+    # Runs every 50 days — GitHub disables scheduled workflows after 60 days of inactivity
+    - cron: '0 0 1,21 * *'
+
+jobs:
+  keepalive:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Keep alive
+        run: echo "Keeping scheduled workflows active"
