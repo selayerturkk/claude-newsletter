@@ -1,24 +1,18 @@
 #!/usr/bin/env python3
-"""Send the latest newsletter issue via Gmail SMTP."""
+"""Send the latest newsletter issue via Resend API."""
 
 import csv
 import io
 import json
 import os
 import re
-import smtplib
 import sys
 import urllib.request
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
 from pathlib import Path
 
-# ---------------------------------------------------------------------------
-# Load environment from .env (lightweight, no external dependency needed)
-# ---------------------------------------------------------------------------
 
 def load_dotenv(path: str = ".env"):
-    """Minimal .env loader — no third-party dependency required."""
+    """Minimal .env loader."""
     env_path = Path(__file__).parent / path
     if not env_path.exists():
         return
@@ -46,13 +40,7 @@ def get_latest_issue() -> dict | None:
 
 
 def prepare_email_html(html: str, browser_url: str | None = None) -> str:
-    """Prepare newsletter HTML for email delivery.
-
-    - Injects a 'View in browser' banner at the top (if browser_url is set)
-    - Strips <script> tags (JS doesn't run in email clients)
-    - Removes the theme toggle button and progress bar (JS-dependent)
-    """
-
+    """Prepare newsletter HTML for email delivery."""
     # Strip all <script>...</script> blocks
     html = re.sub(r"<script[\s\S]*?</script>", "", html, flags=re.IGNORECASE)
 
@@ -90,11 +78,7 @@ def prepare_email_html(html: str, browser_url: str | None = None) -> str:
 
 
 def fetch_subscribers() -> list[str]:
-    """Fetch subscriber emails from the Google Sheet CSV export.
-
-    Falls back to RECIPIENT_EMAIL from .env if no sheet URL is configured
-    or if the fetch fails.
-    """
+    """Fetch subscriber emails from the Google Sheet CSV export."""
     sheet_url = os.environ.get("SUBSCRIBERS_SHEET_URL", "").strip()
     fallback = os.environ.get("RECIPIENT_EMAIL", "").strip()
     fallback_list = [e.strip() for e in fallback.split(",") if e.strip()] if fallback else []
@@ -113,7 +97,6 @@ def fetch_subscribers() -> list[str]:
             print("WARNING: Subscriber sheet is empty, using fallback recipients")
             return fallback_list
 
-        # Find the email column (look for a header containing "email")
         email_col = None
         for i, col in enumerate(header):
             if "email" in col.lower():
@@ -134,7 +117,6 @@ def fetch_subscribers() -> list[str]:
             print("WARNING: No subscribers in sheet yet, using fallback recipients")
             return fallback_list
 
-        # Always include the owner as a recipient
         for fb in fallback_list:
             if fb not in emails:
                 emails.insert(0, fb)
@@ -147,21 +129,44 @@ def fetch_subscribers() -> list[str]:
         return fallback_list
 
 
+def send_via_resend(api_key: str, from_addr: str, to: str, subject: str, html: str):
+    """Send an email via Resend API."""
+    payload = json.dumps({
+        "from": from_addr,
+        "to": [to],
+        "subject": subject,
+        "html": html,
+    }).encode("utf-8")
+
+    req = urllib.request.Request(
+        "https://api.resend.com/emails",
+        data=payload,
+        headers={
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/json",
+        },
+        method="POST",
+    )
+
+    with urllib.request.urlopen(req, timeout=30) as resp:
+        result = json.loads(resp.read().decode("utf-8"))
+        return result
+
+
 def send_newsletter(html_path: str | None = None):
-    """Send an HTML newsletter file as an email."""
+    """Send an HTML newsletter file via Resend."""
 
     load_dotenv()
 
-    smtp_user = os.environ.get("GMAIL_ADDRESS")
-    smtp_pass = os.environ.get("GMAIL_APP_PASSWORD")
-    sender_name = os.environ.get("SENDER_NAME", "Claude & Co.")
+    resend_api_key = os.environ.get("RESEND_API_KEY")
+    from_addr = os.environ.get("FROM_EMAIL", "Claude & Co. <onboarding@resend.dev>")
     base_url = os.environ.get("NEWSLETTER_BASE_URL", "").strip().rstrip("/")
 
     recipients = fetch_subscribers()
 
-    if not all([smtp_user, smtp_pass]) or not recipients:
-        print("ERROR: Missing credentials or no recipients. Set GMAIL_ADDRESS, "
-              "GMAIL_APP_PASSWORD, and either SUBSCRIBERS_SHEET_URL or RECIPIENT_EMAIL in .env")
+    if not resend_api_key or not recipients:
+        print("ERROR: Missing RESEND_API_KEY or no recipients configured.")
+        print("Set RESEND_API_KEY and either SUBSCRIBERS_SHEET_URL or RECIPIENT_EMAIL.")
         sys.exit(1)
 
     # Determine which file to send
@@ -180,34 +185,24 @@ def send_newsletter(html_path: str | None = None):
 
     html_content = newsletter_file.read_text(encoding="utf-8")
 
-    # Build the browser URL (if base URL is configured)
+    # Build the browser URL
     browser_url = f"{base_url}/{newsletter_file.name}" if base_url else None
 
     # Prepare email-safe HTML
     email_html = prepare_email_html(html_content, browser_url)
 
-    # Extract a subject line from the issue index or the filename
+    # Extract subject line
     latest = get_latest_issue()
     subject = latest["subject"] if latest and latest.get("subject") else f"Claude & Co. — {newsletter_file.stem}"
 
-    # Plain-text fallback
-    plain = ("This newsletter is best viewed in HTML. "
-             "If you can't see it, open the attached HTML file.")
-
-    # Send to each subscriber individually (BCC-style, each gets their own copy)
-    print(f"Connecting to Gmail SMTP...")
-    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
-        server.login(smtp_user, smtp_pass)
-
-        for addr in recipients:
-            msg = MIMEMultipart("alternative")
-            msg["From"] = f"{sender_name} <{smtp_user}>"
-            msg["To"] = addr
-            msg["Subject"] = subject
-            msg.attach(MIMEText(plain, "plain"))
-            msg.attach(MIMEText(email_html, "html"))
-            server.send_message(msg)
-            print(f"  Sent to {addr}")
+    # Send to each subscriber
+    print("Sending via Resend API...")
+    for addr in recipients:
+        try:
+            result = send_via_resend(resend_api_key, from_addr, addr, subject, email_html)
+            print(f"  Sent to {addr} (id: {result.get('id', 'unknown')})")
+        except Exception as e:
+            print(f"  FAILED to send to {addr}: {e}")
 
     print(f"Newsletter delivered to {len(recipients)} recipient(s): {newsletter_file.name}")
     if browser_url:
@@ -215,6 +210,5 @@ def send_newsletter(html_path: str | None = None):
 
 
 if __name__ == "__main__":
-    # Optional: pass an HTML file path as argument
     path_arg = sys.argv[1] if len(sys.argv) > 1 else None
     send_newsletter(path_arg)
