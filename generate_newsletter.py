@@ -3,7 +3,9 @@
 
 import json
 import os
+import re
 import sys
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -33,18 +35,8 @@ def main():
     else:
         date_range = f"the past 7 days (up to and including {today})"
 
-    # Load CLAUDE.md for instructions
+    # Load CLAUDE.md for instructions (used as system prompt)
     claude_md = Path("CLAUDE.md").read_text()
-
-    # Load only the CSS/style block from the reference newsletter to save tokens
-    ref_path = Path("newsletters/2026-05-22-newsletter.html")
-    ref_css = ""
-    if ref_path.exists():
-        ref_html = ref_path.read_text()
-        style_start = ref_html.find("<style>")
-        style_end = ref_html.find("</style>")
-        if style_start != -1 and style_end != -1:
-            ref_css = ref_html[style_start : style_end + len("</style>")]
 
     system_prompt = f"""You are a newsletter generator. Follow these instructions exactly:
 
@@ -56,41 +48,49 @@ IMPORTANT: Output ONLY the raw HTML for the newsletter. No markdown fences, no e
 
 Cover news {date_range}.
 
-First, search the web for recent Anthropic/Claude news and broader tech news for this date range. Then write the complete newsletter as a self-contained HTML file with inline CSS, following the structure and style guide in the instructions.
+Search the web for recent Anthropic/Claude news and broader tech news for this date range. Then write the complete newsletter as a self-contained HTML file with inline CSS, following the structure and style guide in the system instructions exactly.
 
-Use this exact CSS style block from the reference newsletter:
-
-{ref_css}
-
-Generate the new issue now. Output only the HTML."""
+Output only the HTML."""
 
     client = anthropic.Anthropic(api_key=api_key)
 
     print(f"Generating Issue #{next_issue} for {today}...")
     print(f"Covering news {date_range}")
 
-    # Call the API with web search enabled (server-side tool, no client loop needed)
-    messages = [{"role": "user", "content": user_prompt}]
+    # Retry with backoff for rate limits
+    max_retries = 3
+    for attempt in range(max_retries):
+        try:
+            messages = [{"role": "user", "content": user_prompt}]
 
-    response = client.messages.create(
-        model="claude-sonnet-4-20250514",
-        max_tokens=16000,
-        system=system_prompt,
-        tools=[{"type": "web_search_20250305", "name": "web_search", "max_uses": 5}],
-        messages=messages,
-    )
+            response = client.messages.create(
+                model="claude-sonnet-4-20250514",
+                max_tokens=16000,
+                system=system_prompt,
+                tools=[{"type": "web_search_20250305", "name": "web_search", "max_uses": 5}],
+                messages=messages,
+            )
 
-    # Handle pause_turn — the model may need to continue after running out of iterations
-    while response.stop_reason == "pause_turn":
-        print("Model paused, continuing...")
-        messages.append({"role": "assistant", "content": response.content})
-        response = client.messages.create(
-            model="claude-sonnet-4-20250514",
-            max_tokens=16000,
-            system=system_prompt,
-            tools=[{"type": "web_search_20250305", "name": "web_search", "max_uses": 5}],
-            messages=messages,
-        )
+            # Handle pause_turn
+            while response.stop_reason == "pause_turn":
+                print("Model paused, continuing...")
+                messages.append({"role": "assistant", "content": response.content})
+                response = client.messages.create(
+                    model="claude-sonnet-4-20250514",
+                    max_tokens=16000,
+                    system=system_prompt,
+                    tools=[{"type": "web_search_20250305", "name": "web_search", "max_uses": 5}],
+                    messages=messages,
+                )
+            break  # Success
+
+        except anthropic.RateLimitError as e:
+            if attempt < max_retries - 1:
+                wait = 65 * (attempt + 1)  # 65s, 130s, 195s
+                print(f"Rate limited, waiting {wait}s before retry {attempt + 2}/{max_retries}...")
+                time.sleep(wait)
+            else:
+                raise
 
     # Extract final HTML from response
     html_content = ""
@@ -125,9 +125,6 @@ Generate the new issue now. Output only the HTML."""
         "subject": f"Claude & Co. #{next_issue}",
         "generated_at": datetime.now(timezone.utc).isoformat(),
     }
-
-    # Try to extract a better subject from the HTML title
-    import re
 
     title_match = re.search(r"<title>(.*?)</title>", html_content)
     if title_match:
