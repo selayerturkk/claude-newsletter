@@ -144,6 +144,7 @@ def send_via_resend(api_key: str, from_addr: str, to: str, subject: str, html: s
         headers={
             "Authorization": f"Bearer {api_key}",
             "Content-Type": "application/json",
+            "User-Agent": "ClaudeAndCo/1.0",
         },
         method="POST",
     )
