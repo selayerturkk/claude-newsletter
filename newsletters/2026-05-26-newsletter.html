@@ -1,630 +1,517 @@
-<!DOCTYPE html>
+I'll search for recent Anthropic/Claude news and broader tech news for May 26, 2026, then generate Issue #5 of Claude & Co.<!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Claude & Co. | Issue #4 | May 26, 2026</title>
-  
-  <style>
-  /* Fonts */
-  @font-face { font-family:'TiemposText'; src:url('https://www.anthropic.com/_next/static/media/TiemposText_Regular-s.p.7f1d46d6.woff2') format('woff2'); font-weight:400; font-style:normal; font-display:swap; }
-  @font-face { font-family:'TiemposText'; src:url('https://www.anthropic.com/_next/static/media/TiemposText_RegularItalic-s.p.1a798fcf.woff2') format('woff2'); font-weight:400; font-style:italic; font-display:swap; }
-  @font-face { font-family:'TiemposText'; src:url('https://www.anthropic.com/_next/static/media/TiemposText_Medium-s.p.520d99f8.woff2') format('woff2'); font-weight:500; font-style:normal; font-display:swap; }
-  @font-face { font-family:'StyreneA'; src:url('https://www.anthropic.com/_next/static/media/StyreneA_Regular_Web-s.p.429c699d.woff2') format('woff2'); font-weight:400; font-style:normal; font-display:swap; }
-  @font-face { font-family:'StyreneA'; src:url('https://www.anthropic.com/_next/static/media/StyreneA_Medium_Web-s.p.e5135f7e.woff2') format('woff2'); font-weight:500; font-style:normal; font-display:swap; }
-  @font-face { font-family:'StyreneB'; src:url('https://www.anthropic.com/_next/static/media/StyreneB_Regular_Web-s.p.cb3cc1a3.woff2') format('woff2'); font-weight:400; font-style:normal; font-display:swap; }
-  @font-face { font-family:'StyreneB'; src:url('https://www.anthropic.com/_next/static/media/StyreneB_Medium_Web-s.p.88fa5a67.woff2') format('woff2'); font-weight:500; font-style:normal; font-display:swap; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude & Co. - Issue #5</title>
+    <style>
+        @font-face {
+            font-family: 'TiemposText';
+            src: url('https://www.anthropic.com/_next/static/media/TiemposText_Regular.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'TiemposText';
+            src: url('https://www.anthropic.com/_next/static/media/TiemposText_RegularItalic.woff2') format('woff2');
+            font-weight: 400;
+            font-style: italic;
+        }
+        @font-face {
+            font-family: 'TiemposText';
+            src: url('https://www.anthropic.com/_next/static/media/TiemposText_Medium.woff2') format('woff2');
+            font-weight: 500;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'StyreneA';
+            src: url('https://www.anthropic.com/_next/static/media/StyreneA_Regular.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'StyreneA';
+            src: url('https://www.anthropic.com/_next/static/media/StyreneA_Medium.woff2') format('woff2');
+            font-weight: 500;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'StyreneB';
+            src: url('https://www.anthropic.com/_next/static/media/StyreneB_Regular.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'StyreneB';
+            src: url('https://www.anthropic.com/_next/static/media/StyreneB_Medium.woff2') format('woff2');
+            font-weight: 500;
+            font-style: normal;
+        }
 
-  /* Theme tokens — Claude palette */
-  :root, [data-theme="light"] {
-    --bg-outer: #F4F3EE;
-    --bg-container: #FFFFFF;
-    --bg-callout: #F4F3EE;
-    --bg-footer: #F4F3EE;
-    --text-primary: #2f2f2b;
-    --text-secondary: #4a4a44;
-    --text-muted: #B1ADA1;
-    --text-faint: #c5c1b8;
-    --accent: #C15F3C;
-    --border: rgba(177,173,161,0.3);
-    --link-underline: rgba(47,47,43,0.3);
-    --toggle-bg: rgba(47,47,43,0.06);
-    --toggle-hover: rgba(47,47,43,0.12);
-    --toggle-icon-show-sun: none;
-    --toggle-icon-show-moon: block;
-  }
-  [data-theme="dark"] {
-    --bg-outer: #2f2f2b;
-    --bg-container: #3a3a36;
-    --bg-callout: #454540;
-    --bg-footer: #2f2f2b;
-    --text-primary: #F4F3EE;
-    --text-secondary: #d5d3cb;
-    --text-muted: #B1ADA1;
-    --text-faint: #7a776e;
-    --accent: #C15F3C;
-    --border: rgba(244,243,238,0.1);
-    --link-underline: rgba(244,243,238,0.3);
-    --toggle-bg: rgba(244,243,238,0.06);
-    --toggle-hover: rgba(244,243,238,0.12);
-    --toggle-icon-show-sun: block;
-    --toggle-icon-show-moon: none;
-  }
+        :root[data-theme="light"] {
+            --bg-outer: #F4F3EE;
+            --bg-container: #FFFFFF;
+            --bg-callout: #F4F3EE;
+            --text-primary: #2f2f2b;
+            --text-secondary: #4a4a44;
+            --text-muted: #B1ADA1;
+            --text-faint: #c5c1b8;
+            --accent: #C15F3C;
+            --border: rgba(177,173,161,0.3);
+            --link-underline: rgba(47,47,43,0.3);
+        }
 
-  /* Base */
-  body {
-    margin: 0; padding: 0;
-    background-color: var(--bg-outer);
-    font-family: 'TiemposText', Georgia, 'Times New Roman', serif;
-    color: var(--text-primary);
-    line-height: 1.5; font-size: 17px; letter-spacing: -0.01em;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
+        :root[data-theme="dark"] {
+            --bg-outer: #2f2f2b;
+            --bg-container: #3a3a36;
+            --bg-callout: #454540;
+            --text-primary: #F4F3EE;
+            --text-secondary: #d5d3cb;
+            --text-muted: #B1ADA1;
+            --text-faint: #7a776e;
+            --accent: #C15F3C;
+            --border: rgba(244,243,238,0.1);
+            --link-underline: rgba(244,243,238,0.3);
+        }
 
-  /* Themed elements */
-  .outer-wrap { background-color: var(--bg-outer); transition: background-color 0.3s ease; }
-  .container {
-    background-color: var(--bg-container);
-    transition: background-color 0.3s ease;
-    max-width: 680px !important;
-    width: 100% !important;
-    overflow: visible !important;
-  }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  /* Responsive */
-  @media screen and (min-width: 740px) {
-    .container { max-width: 680px !important; }
-    .content-pad { padding-left: 48px !important; padding-right: 48px !important; }
-    .title-main { font-size: 38px !important; }
-    .intro-text { font-size: 17px !important; }
-    .heading-lg { font-size: 25px !important; }
-    .heading-md { font-size: 21px !important; }
-    .section-gap { padding-top: 24px !important; padding-bottom: 24px !important; }
-    .section-content { padding-top: 40px !important; padding-bottom: 40px !important; }
-  }
-  @media screen and (max-width: 480px) {
-    .container { margin: 0 12px !important; }
-    .content-pad { padding-left: 24px !important; padding-right: 24px !important; }
-    .title-main { font-size: 30px !important; }
-  }
-  .header-border { border-bottom: 1px solid var(--border); }
-  .meta-text { color: var(--text-muted); }
-  .title-text { color: var(--text-primary); transition: color 0.3s ease; }
-  .body-text { color: var(--text-primary); transition: color 0.3s ease; }
-  .secondary-text { color: var(--text-secondary); transition: color 0.3s ease; }
-  .accent-text { color: var(--accent); }
-  .faint-text { color: var(--text-faint); }
-  .section-label { color: var(--accent); border-bottom: 1px solid var(--border); }
-  .divider { border-top: 1px solid var(--border); }
-  .section-gap { padding-top: 20px !important; padding-bottom: 20px !important; }
-  .callout { background-color: var(--bg-callout); transition: background-color 0.3s ease; }
-  .footer { background-color: var(--bg-footer); border-top: 1px solid var(--border); transition: background-color 0.3s ease; }
-  .link { color: var(--text-primary); text-decoration: underline; text-decoration-color: var(--link-underline); text-underline-offset: 2px; transition: color 0.3s ease; }
-  .link:hover { text-decoration-color: var(--text-primary); }
+        body {
+            font-family: 'TiemposText', Georgia, 'Times New Roman', serif;
+            font-size: 16px;
+            line-height: 1.5;
+            letter-spacing: -0.01em;
+            color: var(--text-primary);
+            background-color: var(--bg-outer);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
 
-  /* Progress bar */
-  .progress-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 3px;
-    width: 0%;
-    background: var(--accent);
-    z-index: 10000;
-    transition: width 0.1s linear;
-  }
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background-color: var(--accent);
+            z-index: 1000;
+            width: 0%;
+            transition: width 0.1s ease;
+        }
 
-  /* Pullquote hook */
-  .hook {
-    padding: 28px 48px 24px;
-  }
-  .hook-box {
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 28px 32px;
-    background-color: var(--bg-callout);
-    transition: background-color 0.3s ease, border-color 0.3s ease;
-  }
-  .hook-quote {
-    font-family: 'TiemposText', Georgia, 'Times New Roman', serif;
-    font-size: 20px;
-    font-weight: 400;
-    font-style: italic;
-    letter-spacing: -0.01em;
-    line-height: 1.4;
-    color: var(--text-primary);
-    margin: 0 0 12px;
-    transition: color 0.3s ease;
-  }
-  .hook-sub {
-    font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: 13px;
-    color: var(--text-muted);
-    margin: 0;
-    letter-spacing: -0.01em;
-    line-height: 1.45;
-  }
-  @media screen and (min-width: 740px) {
-    .hook-quote { font-size: 22px !important; }
-  }
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            background-color: var(--bg-container);
+            padding: 48px;
+            min-height: 100vh;
+        }
 
-  /* Reading list */
-  .reading-item {
-    display: flex;
-    gap: 12px;
-    align-items: baseline;
-    padding: 10px 0;
-    border-top: 1px solid var(--border);
-  }
-  .reading-tag {
-    font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    font-weight: 500;
-    color: var(--accent);
-    white-space: nowrap;
-    min-width: 52px;
-  }
-  .reading-desc {
-    font-family: 'TiemposText', Georgia, 'Times New Roman', serif;
-    font-size: 15px;
-    color: var(--text-secondary);
-    line-height: 1.45;
-    transition: color 0.3s ease;
-  }
-  .reading-desc a { color: var(--text-primary); text-decoration: underline; text-decoration-color: var(--link-underline); text-underline-offset: 2px; }
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background-color: var(--bg-callout);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+            transition: all 0.2s ease;
+        }
 
-  /* Closing PM blurb */
-  .closing-blurb {
-    border-top: 1px solid var(--border);
-    padding-top: 28px;
-    margin-top: 8px;
-  }
-  .closing-label {
-    font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    font-weight: 500;
-    color: var(--accent);
-    margin: 0 0 10px;
-  }
-  .closing-text {
-    font-family: 'TiemposText', Georgia, 'Times New Roman', serif;
-    font-size: 16px;
-    line-height: 1.55;
-    color: var(--text-primary);
-    margin: 0;
-    transition: color 0.3s ease;
-  }
+        .theme-toggle:hover {
+            background-color: var(--text-muted);
+        }
 
-  /* Toggle button */
-  .theme-toggle {
-    position: fixed; top: 20px; right: 20px; z-index: 999;
-    width: 40px; height: 40px;
-    background: var(--toggle-bg);
-    border: 1px solid var(--border);
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    transition: background 0.2s ease;
-    padding: 0;
-  }
-  .theme-toggle:hover { background: var(--toggle-hover); }
-  .theme-toggle svg { width: 18px; height: 18px; }
-  .theme-toggle .icon-sun { display: var(--toggle-icon-show-sun); color: var(--text-primary); }
-  .theme-toggle .icon-moon { display: var(--toggle-icon-show-moon); color: var(--text-primary); }
+        .theme-toggle svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--text-primary);
+        }
 
-  /* Glossary toggle */
-  .glossary-toggle {
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    overflow: hidden;
-    transition: border-color 0.3s ease;
-  }
-  .glossary-toggle summary {
-    font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: 12px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    font-weight: 500;
-    color: var(--accent);
-    cursor: pointer;
-    padding: 14px 20px;
-    list-style: none;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    user-select: none;
-  }
-  .glossary-toggle summary::-webkit-details-marker { display: none; }
-  .glossary-toggle summary::before {
-    content: '+';
-    font-size: 16px;
-    font-weight: 400;
-    color: var(--accent);
-    transition: transform 0.2s ease;
-    display: inline-block;
-    width: 16px;
-    text-align: center;
-  }
-  .glossary-toggle[open] summary::before {
-    content: '\2212';
-  }
-  .glossary-content {
-    padding: 0 20px 16px;
-  }
-  .glossary-item {
-    display: flex;
-    gap: 12px;
-    padding: 8px 0;
-    border-top: 1px solid var(--border);
-    font-size: 14px;
-    line-height: 1.5;
-  }
-  .glossary-term {
-    font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-weight: 500;
-    color: var(--text-primary);
-    white-space: nowrap;
-    min-width: 110px;
-    font-size: 13px;
-    letter-spacing: -0.01em;
-    transition: color 0.3s ease;
-  }
-  .glossary-def {
-    font-family: 'TiemposText', Georgia, 'Times New Roman', serif;
-    color: var(--text-secondary);
-    transition: color 0.3s ease;
-  }
+        .newsletter-title {
+            font-family: 'StyreneB', 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 36px;
+            font-weight: 500;
+            line-height: 0.95;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
 
-  /* Inline term tooltips */
-  .term {
-    border-bottom: 1px dotted var(--accent);
-    cursor: help;
-    color: inherit;
-    text-decoration: none;
-  }
-  .term-tip {
-    position: fixed;
-    visibility: hidden;
-    opacity: 0;
-    background-color: var(--text-primary);
-    color: var(--bg-container);
-    font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: 13px;
-    line-height: 1.4;
-    letter-spacing: 0;
-    padding: 10px 16px;
-    border-radius: 6px;
-    width: 340px;
-    max-width: 90vw;
-    white-space: normal;
-    z-index: 9999;
-    pointer-events: none;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.18);
-    transition: opacity 0.15s ease, visibility 0.15s ease;
-  }
-  .term-tip.visible {
-    visibility: visible;
-    opacity: 1;
-  }
-  .term-tip::after {
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    border: 5px solid transparent;
-    border-top-color: var(--text-primary);
-  }
-  </style>
+        .issue-info {
+            font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .tagline {
+            font-style: italic;
+            color: var(--text-muted);
+            margin-bottom: 36px;
+        }
+
+        .section {
+            margin-bottom: 36px;
+            padding-bottom: 36px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .section-label {
+            font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 11px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
+
+        .section-heading {
+            font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 21px;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .hook-box {
+            background-color: var(--bg-callout);
+            border-radius: 4px;
+            padding: 20px;
+            margin: 24px 0;
+            border-left: 4px solid var(--accent);
+        }
+
+        .hook-quote {
+            font-style: italic;
+            font-size: 18px;
+            line-height: 1.4;
+            margin-bottom: 12px;
+        }
+
+        .hook-also {
+            font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .hook-list {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .jargon-decoder {
+            margin: 24px 0;
+        }
+
+        .jargon-decoder summary {
+            font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            cursor: pointer;
+            margin-bottom: 12px;
+            list-style: none;
+        }
+
+        .jargon-decoder summary::before {
+            content: "▶ ";
+            transition: transform 0.2s ease;
+        }
+
+        .jargon-decoder[open] summary::before {
+            transform: rotate(90deg);
+        }
+
+        .jargon-list {
+            background-color: var(--bg-callout);
+            border-radius: 4px;
+            padding: 16px;
+            margin-top: 8px;
+        }
+
+        .jargon-item {
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .jargon-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .jargon-term {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .term {
+            position: relative;
+            border-bottom: 1px dotted var(--text-muted);
+            cursor: help;
+        }
+
+        .term-tip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--bg-callout);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 8px 12px;
+            font-size: 12px;
+            white-space: nowrap;
+            z-index: 10;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+            margin-bottom: 4px;
+        }
+
+        .term:hover .term-tip,
+        .term:focus .term-tip {
+            opacity: 1;
+        }
+
+        .callout {
+            background-color: var(--bg-callout);
+            border-radius: 4px;
+            padding: 16px 20px;
+            margin: 16px 0;
+        }
+
+        a {
+            color: var(--text-primary);
+            text-decoration: underline;
+            text-decoration-color: var(--link-underline);
+            text-underline-offset: 2px;
+        }
+
+        a:hover {
+            text-decoration-color: var(--accent);
+        }
+
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 16px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .footer {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            font-size: 14px;
+            color: var(--text-secondary);
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 24px;
+            }
+            
+            .newsletter-title {
+                font-size: 28px;
+            }
+            
+            .section-heading {
+                font-size: 18px;
+            }
+        }
+    </style>
 </head>
-
 <body>
-  <div class="progress-bar" id="progress-bar"></div>
-  
-  <button class="theme-toggle" onclick="toggleTheme()" type="button" aria-label="Toggle theme">
-    <svg class="icon-sun" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
-    </svg>
-    <svg class="icon-moon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
-    </svg>
-  </button>
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <svg class="sun-icon">
+            <path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+        </svg>
+        <svg class="moon-icon" style="display: none;">
+            <path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+        </svg>
+    </button>
 
-  <div class="outer-wrap">
-    <div class="container" style="margin: 0 auto;">
-      
-      <!-- Header -->
-      <header class="section-gap content-pad header-border">
-        <div style="font-family: 'StyreneB', 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 36px; font-weight: 500; line-height: 0.95; margin: 0 0 8px; letter-spacing: -0.02em;" class="title-main title-text">
-          Claude & Co.
-        </div>
-        <div style="font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 13px; margin: 0;" class="meta-text">
-          Issue #4 • May 26, 2026 • Your weekly guide to Claude and the AI ecosystem
-        </div>
-      </header>
+    <div class="container">
+        <header>
+            <h1 class="newsletter-title">Claude & Co.</h1>
+            <div class="issue-info">Issue #5 • May 26, 2026</div>
+            <div class="tagline">Your insider guide to AI's frontier</div>
+        </header>
 
-      <!-- Intro -->
-      <section class="content-pad section-gap">
-        <div class="intro-text body-text">
-          It's been a quiet Sunday for Claude's infrastructure—no major incidents reported today, but the broader AI world is anything but still. From Cursor's Composer 2.5 delivering frontier-level coding performance at a fraction of the cost to Anthropic's firm stance on keeping Claude ad-free, this week's developments shape how AI assistants will serve users and businesses. Here's what's moving the needle in AI product development.
-        </div>
-      </section>
+        <section>
+            <p>Welcome back to Claude & Co. Today marks a singular moment in AI development: We've made a choice: Claude will remain ad-free. We explain why advertising incentives are incompatible with a genuinely helpful AI assistant, and how we plan to expand access without compromising user trust. Meanwhile, Google is rolling out its latest version of Gemini and a new artificial intelligence model designed to simulate the physical world, as the search giant races to keep pace in model development while also providing more agentic services to its massive user base. The company made the announcements at its annual Google I/O developer conference on Tuesday, gaining an audience for new product debuts at a time when the market has been focused on the soaring valuations of OpenAI and Anthropic, which are both gearing up for IPOs as soon as this year.</p>
 
-      <!-- Hook Pullquote -->
-      <div class="hook">
-        <div class="hook-box">
-          <p class="hook-quote">
-            "Cursor is no longer just an IDE wrapper around frontier models from OpenAI and Anthropic. It's a model lab that happens to make an editor."
-          </p>
-          <p class="hook-sub">
-            <strong>Also in this issue:</strong> Anthropic expands security tools, Google showcases Gemini 3.5 at I/O, and SAP integrates Claude across enterprise workflows.
-          </p>
-        </div>
-      </div>
+            <div class="hook-box">
+                <div class="hook-quote">
+                    "AI is no longer just a chatbot novelty—whether you're a tech founder in Austin, a marketer in New York, or a healthcare administrator in Chicago, understanding these shifts isn't optional—it's essential."
+                </div>
+                <div class="hook-also">Also in this issue:</div>
+                <div class="hook-list">
+                    Claude Security launches in public beta • Google announces Gemini Spark agents • Stanford's AI Index reveals $172B consumer surplus
+                </div>
+            </div>
+        </section>
 
-      <!-- Jargon Decoder -->
-      <section class="content-pad section-gap">
-        <details class="glossary-toggle">
-          <summary>Jargon Decoder</summary>
-          <div class="glossary-content">
-            <div class="glossary-item">
-              <div class="glossary-term">Reinforcement Learning</div>
-              <div class="glossary-def">Training method where models learn by receiving rewards for successful task completion</div>
+        <details class="jargon-decoder">
+            <summary>Jargon Decoder</summary>
+            <div class="jargon-list">
+                <div class="jargon-item"><span class="jargon-term">API:</span> Application Programming Interface—the way software talks to other software</div>
+                <div class="jargon-item"><span class="jargon-term">Agentic:</span> AI that can take actions and make decisions on its own, not just respond to prompts</div>
+                <div class="jargon-item"><span class="jargon-term">Rate limits:</span> How much you can use an AI service before hitting usage caps</div>
+                <div class="jargon-item"><span class="jargon-term">Self-hosted sandboxes:</span> Running AI code in your own secure environment instead of the cloud</div>
+                <div class="jargon-item"><span class="jargon-term">MCP:</span> Model Context Protocol—a way for AI to connect to external tools and data</div>
+                <div class="jargon-item"><span class="jargon-term">Consumer surplus:</span> The value users get above what they pay for a service</div>
+                <div class="jargon-item"><span class="jargon-term">IPO:</span> Initial Public Offering—when a private company goes public on the stock market</div>
             </div>
-            <div class="glossary-item">
-              <div class="glossary-term">Self-Hosted Sandbox</div>
-              <div class="glossary-def">Running code execution environment on your own infrastructure instead of the vendor's servers</div>
-            </div>
-            <div class="glossary-item">
-              <div class="glossary-term">MCP</div>
-              <div class="glossary-def">Model Context Protocol—a standard for connecting AI models to external tools and data</div>
-            </div>
-            <div class="glossary-item">
-              <div class="glossary-term">SWE-Bench</div>
-              <div class="glossary-def">Popular benchmark measuring how well AI models can solve real-world software engineering problems</div>
-            </div>
-            <div class="glossary-item">
-              <div class="glossary-term">Token Pricing</div>
-              <div class="glossary-def">Cost model where you pay per unit of text processed, typically per million input/output tokens</div>
-            </div>
-            <div class="glossary-item">
-              <div class="glossary-term">Agentic AI</div>
-              <div class="glossary-def">AI systems that can autonomously plan, use tools, and execute multi-step tasks with minimal human guidance</div>
-            </div>
-            <div class="glossary-item">
-              <div class="glossary-term">Mythos</div>
-              <div class="glossary-def">Anthropic's unreleased model designed for cybersecurity that can discover software vulnerabilities</div>
-            </div>
-          </div>
         </details>
-      </section>
 
-      <!-- Anthropic Product News -->
-      <section class="section-content content-pad">
-        <div style="font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500; margin: 0 0 24px; padding-bottom: 8px;" class="section-label">
-          Anthropic Product News
-        </div>
+        <section class="section">
+            <div class="section-label">Anthropic Product News</div>
+            <h2 class="section-heading">Claude Goes Enterprise with Major Platform Expansion</h2>
+            
+            <p>Claude expands its developer platform with higher Claude Code and Opus API limits plus new Claude Managed Agents capabilities, including dreaming, multiagent orchestration, outcomes, and webhooks. The biggest news: Anthropic announced increased rate limits for developers on Claude Code and the API. Doubling Claude Code five hour limit for Pro, Max, Enterprise customers.</p>
 
-        <h2 style="font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 21px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.3; margin: 0 0 16px;" class="heading-md body-text">
-          Claude Stays Ad-Free, Expands Platform Features
-        </h2>
+            <p>But there's a catch. Beginning June 15, Anthropic will separate programmatic Claude usage from standard chat subscription limits, introducing a dedicated monthly credit system, billed at API-style rates, for tools including its Agent SDK, GitHub Actions, and third-party frameworks such as OpenClaw. The monthly credit for programmatic usage will depend on a user's existing Claude subscription tier and generally mirror its monthly price, with Pro users receiving $20 in credits, Max 5x users $100, and Max 20x users $200.</p>
 
-        <p class="body-text">
-          Anthropic made a clear choice this week: Claude will remain ad-free. The company explained why advertising incentives are incompatible with a genuinely helpful AI assistant, and how they plan to expand access without compromising user trust. This stance contrasts sharply with OpenAI's new self-serve ad platform inside ChatGPT, which signals a push toward commercialization with tighter API pricing tiers and new enterprise SLAs.
-        </p>
+            <p>The enterprise push continues with Claude Security in public beta and new cyber verification tools for eligible security teams, helping scan codebases, triage vulnerabilities, and generate fixes while sharing research and support for open-source defenders. Anthropic also announced self-hosted <span class="term" tabindex="0">sandboxes<span class="term-tip">Running AI code in your own secure environment</span></span> is available in public beta and MCP tunnels in research preview. With self-hosted sandboxes, you keep sensitive files, packages, and services in your own infrastructure or with a managed sandbox provider.</p>
 
-        <p class="body-text">
-          On the development front, Claude Platform launched self-hosted sandboxes in public beta, allowing organizations to keep sensitive files and services within their own infrastructure while agent orchestration stays on Anthropic's servers. The platform also expanded Claude Managed Agents with new capabilities including dreaming, multiagent orchestration, outcomes, and webhooks.
-        </p>
+            <p>On the legal front, Claude releases 20+ new legal MCP connectors and 12 practice-area plugins, expanding how law firms and in-house teams work across research, contracts, discovery, matter management, and legal aid. Earlier this year we released our first legal plugin, and in the months since, legal professionals have become the most engaged Claude Cowork users of any knowledge-work function.</p>
 
-        <p class="body-text">
-          Anthropic expanded Project Glasswing with Claude Security in public beta and committed to scanning any open-source packages they adopt, supporting maintainers through Claude for Open Source. The timing aligns with growing concern about AI-accelerated vulnerability discovery—the company noted that models as capable as Mythos Preview will soon be developed by many AI companies, and no company has yet developed sufficient safeguards to prevent misuse.
-        </p>
-      </section>
+            <p>For small businesses, Anthropic launched Claude for Small Business—a package of connectors and ready-to-run workflows that put Claude inside the tools small businesses depend on. Claude for Small Business is a toggle install that puts Claude to work inside the tools small business owners already use: Intuit Quickbooks, PayPal, HubSpot, Canva, Docusign, Google Workspace, and Microsoft 365.</p>
+        </section>
 
-      <!-- Feature Deep-Dive -->
-      <section class="section-content content-pad">
-        <div style="font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500; margin: 0 0 24px; padding-bottom: 8px;" class="section-label">
-          Feature Deep-Dive
-        </div>
+        <section class="section">
+            <div class="section-label">Feature Deep-Dive</div>
+            <h2 class="section-heading">Understanding Claude's "Dreaming" Feature</h2>
 
-        <h2 style="font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 21px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.3; margin: 0 0 16px;" class="heading-md body-text">
-          Understanding Claude's Dreaming Feature
-        </h2>
+            <p>Claude Code agents write notes to themselves, recording and saving useful information about specific tasks. When another coding agent later starts to work on the same code, it can use the notes to get up to speed faster and learn from any errors that previous agents may have made.</p>
 
-        <p class="body-text">
-          Claude Code's new "dreaming" feature represents a fundamental shift in how coding agents learn and improve. Agents write notes to themselves about specific tasks, and when another agent works on the same code later, it can use these notes to get up to speed faster and learn from previous errors.
-        </p>
+            <p>Dreaming is a system that Claude Code uses to read through all these notes and consolidate the information they contain, spotting patterns and common issues across different tasks. In theory, dreaming should help Claude Code learn about a particular code base and get better and better at working on it.</p>
 
-        <p class="body-text">
-          The dreaming system consolidates information from all these notes, spotting patterns and common issues across different tasks. In theory, this should help Claude Code learn about a particular codebase and get better at working on it over time. Think of it as creating institutional memory for your development workflow.
-        </p>
+            <div class="callout">
+                <strong>How to use it:</strong> Dreaming happens automatically in Claude Code when working on projects. The system tracks your codebase patterns, common errors, and successful solutions. Over time, subsequent coding sessions become more efficient as Claude builds institutional knowledge about your specific project.
+            </div>
 
-        <p class="body-text">
-          <strong>How to use it:</strong> Dreaming works automatically in <span class="term" tabindex="0">Claude Code<span class="term-tip">Anthropic's AI coding assistant that can write, debug, and refactor code across multiple files</span></span>—no setup required. As you work on projects, agents automatically capture insights about your codebase architecture, common debugging patterns, and successful approaches. Future coding sessions benefit from this accumulated knowledge, leading to more contextually appropriate suggestions and faster problem-solving.
-        </p>
+            <p>The implications are significant. "I think that right now Claude is probably as good as a midlevel engineer at writing code," she added. "I think that right now Claude is probably as good as a midlevel engineer at writing code," she added. As dreaming improves, we're approaching a world where AI assistants don't just write code—they remember and learn from every project they touch.</p>
+        </section>
 
-        <p class="body-text">
-          <strong>Why it matters:</strong> This addresses a core limitation of stateless AI interactions. Instead of every coding session starting from scratch, your AI assistant develops familiarity with your specific codebase, team patterns, and project constraints. For teams shipping frequently, this could significantly reduce the time spent bringing AI tools up to speed on each task.
-        </p>
-      </section>
+        <section class="section">
+            <div class="section-label">Broader Tech News</div>
+            <h2 class="section-heading">Google I/O Signals All-In AI Strategy</h2>
 
-      <!-- Broader Tech News -->
-      <section class="section-content content-pad">
-        <div style="font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500; margin: 0 0 24px; padding-bottom: 8px;" class="section-label">
-          Broader Tech News
-        </div>
+            <p>On the agentic AI front, Google announced Gemini Spark, a new general-purpose AI agent in the Gemini app that can reason across information in connected apps. Google said it wants to help users navigate their digital lives by taking "action on your behalf while under your direction." Gemini Spark is in beta and will be available first to trusted testers and Google AI Ultra subscribers, starting next week.</p>
 
-        <h2 style="font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 21px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.3; margin: 0 0 16px;" class="heading-md body-text">
-          Cursor Composer 2.5 Reshapes Coding Economics
-        </h2>
+            <p>The search revolution begins: Now, it is set to undergo a radical transformation to fully incorporate artificial intelligence. The company announced on Tuesday that the search bar will be "completely reimagined with AI," calling it the biggest change in more than 25 years. Google's head of Search, Liz Reid, announced you could send an alert to track market movements with specific parameters, and the agent will map out a monitoring plan, including tools and data access. It will then keep track of those changes and let you know when conditions are met. Google also announced an AI agent, Gemini Spark, that can work on tasks in the background, even when the user closes their laptop or phone.</p>
 
-        <p class="body-text">
-          Cursor released Composer 2.5, scoring 62 on the Coding Agent Index—a 14-point gain over Composer 2. This puts it in third place behind only Claude Opus 4.7 in Claude Code (66) and GPT-5.5 in Codex (65), while costing roughly 10x less than these alternatives.
-        </p>
+            <p>Among the biggest announcements was the launch of Gemini Omni, a new AI model designed to combine Gemini's reasoning capabilities with advanced content creation tools. The first version, Gemini Omni Flash, will allow users to generate and edit videos using combinations of text, images, audio and video prompts.</p>
 
-        <p class="body-text">
-          Built on Moonshot AI's Kimi K2.5 with additional reinforcement learning, synthetic training, and behavioral improvements, Composer 2.5 offers industry-disruptive pricing: $0.5 per million input tokens and $2.5 per million output tokens for the standard version, with a fast variant at $3.0/$15.0 respectively. The emerging pattern: teams use Composer 2.5 as the default for everyday coding inside Cursor, reaching for Opus 4.7 only for complex architectural reasoning.
-        </p>
+            <p>Meanwhile, the Stanford AI Index dropped some eye-opening data. In the span of a single year, American consumers extracted roughly $56 billion more value from generative AI tools than they did the year before. That figure comes from Stanford University's 2026 AI Index Report, which presents modeled estimates showing that aggregate U.S. consumer surplus from chatbots, image generators, and coding assistants climbed from about $116 billion to $172 billion between 2024 and 2025.</p>
 
-        <h3 style="font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 500; letter-spacing: -0.02em; margin: 24px 0 12px;" class="body-text">
-          Google I/O 2026 Highlights
-        </h3>
+            <p>But there's a cost: AI data center power capacity rose to 29.6 GW, or about what it takes to power the entire state of New York at peak demand, and annual GPT-4o inference water use alone may exceed the drinking water needs of 1.2 million people. For perspective, the cumulative power demand of all-in AI systems is comparable to the national electricity consumption of Switzerland or Austria.</p>
+        </section>
 
-        <p class="body-text">
-          Google launched Gemini 3.5 Flash as the first model in the new Gemini 3.5 family, already powering Google Search AI Mode and AI Overviews. The company also unveiled Gemini Omni, combining reasoning with content creation tools, allowing users to generate and edit videos using text, images, audio and video prompts through the Gemini app and YouTube Shorts.
-        </p>
+        <section class="section">
+            <div class="section-label">The Bigger Picture</div>
+            <h2 class="section-heading">The End of Free AI?</h2>
 
-        <p class="body-text">
-          Google Cloud CEO Thomas Kurian confirmed that Gemini will power a more personalized Siri launching later in 2026, with Apple paying approximately $1 billion annually for a custom 1.2 trillion parameter Gemini model. This Apple-Google AI partnership represents the most consequential deal in consumer technology since Apple made Google the default search engine, bringing Gemini to two billion Apple devices.
-        </p>
+            <p>This week's news reveals a fundamental shift in the AI landscape. Anthropic's ad-free commitment positions it against the monetization strategies that defined Web 2.0, while the move to <span class="term" tabindex="0">metered usage<span class="term-tip">Pay-as-you-go pricing instead of flat subscriptions</span></span> for programmatic access signals maturation of the AI market. Google's all-in AI strategy for search and productivity tools shows the stakes: whoever controls the AI interface controls user behavior.</p>
 
-        <h3 style="font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 500; letter-spacing: -0.02em; margin: 24px 0 12px;" class="body-text">
-          Enterprise AI Adoption Accelerates
-        </h3>
+            <p>Developers and enterprises soon have to start treating programmatic AI usage less like a bundled software subscription and more like a metered cloud service with its own operational and financial controls. Paul Chada, co-founder of agentic AI startup Doozer AI, also advised developers to start focusing more aggressively on efficiency and cost discipline when designing AI agents and automation workflows. "Stop optimizing for the subsidy and start optimizing for the token."</p>
 
-        <p class="body-text">
-          Anthropic and PwC announced an expanded strategic alliance, with PwC rolling out Claude Code and Cowork starting with U.S. teams and establishing a joint Center of Excellence to train 30,000 professionals. SAP and Anthropic revealed plans to embed Claude as a primary reasoning capability across SAP's AI-enabled solution portfolio, powered by Joule agents.
-        </p>
+            <p>For aspiring PMs and CS students, the lesson is clear: the era of "build fast, optimize later" in AI is ending. The companies that thrive will be those that understand both the technical capabilities and economic realities of AI deployment at scale.</p>
+        </section>
 
-        <p class="body-text">
-          NextEra Energy announced a $67 billion acquisition of Dominion Energy—the largest utility merger in US history—with explicit acknowledgment that AI-driven power demand is the primary rationale, signaling America's power infrastructure is being rebuilt around AI data center requirements.
-        </p>
-      </section>
+        <section class="section">
+            <div class="section-label">Reading / Watching / Listening</div>
+            
+            <ul>
+                <li><a href="https://www.anthropic.com/news/claude-for-small-business">Introducing Claude for Small Business</a> - Anthropic's comprehensive plan to democratize AI for small businesses through direct integrations</li>
+                <li><a href="https://hai.stanford.edu/news/inside-the-ai-index-12-takeaways-from-the-2026-report">Stanford AI Index 2026: 12 Key Takeaways</a> - Data-driven insights into AI's $172B consumer surplus and environmental costs</li>
+                <li><a href="https://www.technologyreview.com/2026/05/21/1137735/anthropics-code-with-claude-showed-off-codings-future-whether-you-like-it-or-not/">Anthropic's Code with Claude Conference Coverage</a> - MIT Technology Review's take on the future of AI-assisted programming</li>
+                <li><a href="https://time.com/article/2026/05/20/google-search-ai-internet/">Google's AI Search Revolution</a> - TIME explores how Google's AI integration will reshape internet usage</li>
+                <li><a href="https://www.anthropic.com/news/pwc-expanded-partnership">PwC Strategic Alliance with Anthropic</a> - How professional services firms are rebuilding around AI-first workflows</li>
+            </ul>
+        </section>
 
-      <!-- The Bigger Picture -->
-      <div class="content-pad">
-        <div class="closing-blurb">
-          <div class="closing-label">The Bigger Picture</div>
-          <p class="closing-text">
-            This week's developments reveal a maturing AI ecosystem where differentiation comes from business model choices, not just model capabilities. Anthropic's ad-free commitment and Cursor's cost-efficiency breakthrough suggest that sustainable AI products will win through alignment with user interests, not just raw performance. For aspiring PMs, the lesson is clear: as AI capabilities commoditize, your competitive moat lies in how you structure incentives, price access, and integrate AI into workflows that users actually want to adopt. The companies getting this right are those thinking beyond "better models" to "better products."
-          </p>
-        </div>
-      </div>
-
-      <!-- Reading / Watching / Listening -->
-      <section class="section-content content-pad">
-        <div style="font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500; margin: 0 0 24px; padding-bottom: 8px;" class="section-label">
-          Reading / Watching / Listening
-        </div>
-
-        <div class="reading-item">
-          <div class="reading-tag">READ</div>
-          <div class="reading-desc">
-            <a href="https://www.technologyreview.com/2026/05/21/1137735/anthropics-code-with-claude-showed-off-codings-future-whether-you-like-it-or-not/" class="link">Anthropic's Code with Claude showed off coding's future—whether you like it or not</a> — MIT Technology Review's deep dive into how AI coding tools are reshaping software development velocity and engineering management.
-          </div>
-        </div>
-
-        <div class="reading-item">
-          <div class="reading-tag">READ</div>
-          <div class="reading-desc">
-            <a href="https://cursor.com/blog/composer-2-5" class="link">Introducing Composer 2.5</a> — Cursor's technical blog post detailing their reinforcement learning approach and the training challenges of building competitive coding models.
-          </div>
-        </div>
-
-        <div class="reading-item">
-          <div class="reading-tag">READ</div>
-          <div class="reading-desc">
-            <a href="https://simonwillison.net/2026/May/6/code-w-claude-2026/" class="link">Live blog: Code w/ Claude 2026</a> — Simon Willison's detailed coverage of Anthropic's developer conference with practical insights on agent orchestration and model selection strategies.
-          </div>
-        </div>
-
-        <div class="reading-item">
-          <div class="reading-tag">WATCH</div>
-          <div class="reading-desc">
-            <a href="https://www.anthropic.com/events" class="link">Code w/ Claude keynote recordings</a> — Anthropic's official recordings from their San Francisco and London developer conferences, now available on YouTube with technical deep-dives on agent workflows.
-          </div>
-        </div>
-
-        <div class="reading-item">
-          <div class="reading-tag">READ</div>
-          <div class="reading-desc">
-            <a href="https://blog.mean.ceo/anthropic-claude-news-may-2026/" class="link">Anthropic Claude News | May, 2026 (STARTUP EDITION)</a> — A founder's perspective on how Claude's expansion into creative workflows and security tools affects startup infrastructure and risk management.
-          </div>
-        </div>
-      </section>
-
-      <!-- Footer -->
-      <footer class="footer section-content content-pad">
-        <div style="font-family: 'TiemposText', Georgia, 'Times New Roman', serif; font-size: 15px; line-height: 1.5; margin-bottom: 16px;" class="secondary-text">
-          Thanks for reading Claude & Co. If this issue was useful, share it with someone building with AI.
-        </div>
-        
-        <div style="font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 13px; margin-bottom: 12px;" class="secondary-text">
-          <a href="https://forms.gle/pJGxqX6CKyVA9Km99" class="link">Subscribe to future issues</a> • <a href="#" class="link">View archive</a>
-        </div>
-        
-        <div style="font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 11px;" class="faint-text">
-          This newsletter is written by Claude and curated for accuracy. Views expressed don't represent Anthropic's official positions.
-        </div>
-      </footer>
-
+        <footer class="footer">
+            <p>That's a wrap on Issue #5. Share this newsletter with colleagues who need to stay ahead of the AI curve.</p>
+            <p><a href="https://forms.gle/pJGxqX6CKyVA9Km99">Subscribe to Claude & Co.</a> | <a href="#">Archive</a></p>
+            <p><small>This newsletter is AI-generated with human oversight. Views expressed are for informational purposes.</small></p>
+        </footer>
     </div>
-  </div>
 
-  <script>
-    // Progress bar
-    function updateProgressBar() {
-      const scrollTop = window.pageYOffset;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const scrolled = (scrollTop / docHeight) * 100;
-      document.getElementById('progress-bar').style.width = scrolled + '%';
-    }
-    window.addEventListener('scroll', updateProgressBar);
-
-    // Theme toggle
-    function toggleTheme() {
-      const html = document.documentElement;
-      const currentTheme = html.getAttribute('data-theme');
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      html.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
-    }
-
-    // Load saved theme
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-
-    // Tooltip functionality
-    function setupTooltips() {
-      const terms = document.querySelectorAll('.term');
-      terms.forEach(term => {
-        const tip = term.querySelector('.term-tip');
-        
-        function showTooltip(e) {
-          const rect = term.getBoundingClientRect();
-          tip.style.left = rect.left + (rect.width / 2) - (tip.offsetWidth / 2) + 'px';
-          tip.style.top = rect.top - tip.offsetHeight - 10 + 'px';
-          
-          // Keep tooltip in viewport
-          const tipRect = tip.getBoundingClientRect();
-          if (tipRect.left < 10) {
-            tip.style.left = '10px';
-          } else if (tipRect.right > window.innerWidth - 10) {
-            tip.style.left = window.innerWidth - tip.offsetWidth - 10 + 'px';
-          }
-          
-          tip.classList.add('visible');
+    <script>
+        // Reading progress bar
+        function updateProgressBar() {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.body.offsetHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            document.getElementById('progressBar').style.width = scrollPercent + '%';
         }
-        
-        function hideTooltip() {
-          tip.classList.remove('visible');
-        }
-        
-        term.addEventListener('mouseenter', showTooltip);
-        term.addEventListener('mouseleave', hideTooltip);
-        term.addEventListener('focus', showTooltip);
-        term.addEventListener('blur', hideTooltip);
-      });
-    }
 
-    document.addEventListener('DOMContentLoaded', setupTooltips);
-  </script>
+        window.addEventListener('scroll', updateProgressBar);
+
+        // Theme toggle
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            const sunIcon = document.querySelector('.sun-icon');
+            const moonIcon = document.querySelector('.moon-icon');
+            
+            if (newTheme === 'dark') {
+                sunIcon.style.display = 'none';
+                moonIcon.style.display = 'block';
+            } else {
+                sunIcon.style.display = 'block';
+                moonIcon.style.display = 'none';
+            }
+        }
+
+        // Load saved theme
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            
+            const sunIcon = document.querySelector('.sun-icon');
+            const moonIcon = document.querySelector('.moon-icon');
+            
+            if (savedTheme === 'dark') {
+                sunIcon.style.display = 'none';
+                moonIcon.style.display = 'block';
+            }
+        });
+    </script>
 </body>
 </html>
