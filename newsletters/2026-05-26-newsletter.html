@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Claude & Co. - Issue #2</title>
-
+  <title>Claude & Co. — Issue #3: Racing at the Frontier</title>
+  
   <style>
   /* Fonts */
   @font-face { font-family:'TiemposText'; src:url('https://www.anthropic.com/_next/static/media/TiemposText_Regular-s.p.7f1d46d6.woff2') format('woff2'); font-weight:400; font-style:normal; font-display:swap; }
@@ -324,317 +324,266 @@
 </style>
 </head>
 
-<body>
+<body class="outer-wrap">
   <div class="progress-bar"></div>
   
-  <button class="theme-toggle" onclick="toggleTheme()">
-    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <circle cx="12" cy="12" r="5"/>
-      <path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72 1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42m12.72-12.72 1.42-1.42"/>
+  <button class="theme-toggle" aria-label="Toggle dark mode">
+    <svg class="icon-sun" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
     </svg>
-    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    <svg class="icon-moon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
     </svg>
   </button>
 
-  <div class="outer-wrap">
-    <div class="container" style="margin: 0 auto;">
-      
-      <!-- Header -->
-      <div class="content-pad section-gap header-border">
-        <div style="text-align: center;">
-          <div class="title-main" style="font-family: 'StyreneB', 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 36px; font-weight: 500; line-height: 0.95; letter-spacing: -0.02em; color: var(--text-primary); margin: 0;">Claude & Co.</div>
-          <div style="font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500; color: var(--text-muted); margin: 8px 0 0;">Issue #2 • May 26, 2026</div>
-          <div style="font-family: 'TiemposText', Georgia, serif; font-style: italic; color: var(--text-secondary); margin: 6px 0 0; font-size: 14px;">When AI meets scale, everything changes faster</div>
-        </div>
-      </div>
-
-      <!-- Intro -->
-      <div class="content-pad section-gap">
-        <div class="body-text intro-text">
-          It's been a whirlwind four days since our first issue. <a href="#" class="link">Anthropic's Code w/ Claude conference</a> showcased developers shipping entire pull requests written by AI, while the company quietly expanded into enterprise partnerships worth billions. Meanwhile, the government is racing to understand what happens when models like Claude Mythos can find decades-old vulnerabilities faster than human experts.
-        </div>
-      </div>
-
-      <!-- Hook -->
-      <div class="hook">
-        <div class="hook-box">
-          <div class="hook-quote">
-            The distance between idea and production software is narrowing—and some teams are getting 70% of their delivery time back.
-          </div>
-          <div class="hook-sub">
-            <strong>Also in this issue:</strong> Claude for Small Business launches nationwide, API pricing gets more complex, and cybersecurity stocks rally as Claude Mythos finds 10,000+ critical vulnerabilities
-          </div>
-        </div>
-      </div>
-
-      <!-- Jargon Decoder -->
-      <div class="content-pad section-gap">
-        <details class="glossary-toggle">
-          <summary>Jargon Decoder</summary>
-          <div class="glossary-content">
-            <div class="glossary-item">
-              <div class="glossary-term">Agentic AI</div>
-              <div class="glossary-def">AI systems that can plan, use tools, and work toward goals over time rather than just respond to single prompts</div>
-            </div>
-            <div class="glossary-item">
-              <div class="glossary-term">Zero-day</div>
-              <div class="glossary-def">A software vulnerability that was previously unknown and unpatched</div>
-            </div>
-            <div class="glossary-item">
-              <div class="glossary-term">Rate limits</div>
-              <div class="glossary-def">Maximum number of API requests you can make per minute or hour</div>
-            </div>
-            <div class="glossary-item">
-              <div class="glossary-term">Batch API</div>
-              <div class="glossary-def">Processing multiple requests at once for cost savings, trading speed for cheaper rates</div>
-            </div>
-            <div class="glossary-item">
-              <div class="glossary-term">Prompt caching</div>
-              <div class="glossary-def">Saving repeated parts of prompts to reduce costs on subsequent uses</div>
-            </div>
-            <div class="glossary-item">
-              <div class="glossary-term">CVE</div>
-              <div class="glossary-def">Common Vulnerabilities and Exposures—official IDs for security flaws</div>
-            </div>
-            <div class="glossary-item">
-              <div class="glossary-term">SWE-bench</div>
-              <div class="glossary-def">A benchmark that tests AI models on real software engineering tasks</div>
-            </div>
-          </div>
-        </details>
-      </div>
-
-      <!-- Anthropic Product News -->
-      <div class="content-pad section-content">
-        <div class="section-label" style="font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500; padding: 0 0 16px; margin: 0 0 20px;">Anthropic Product News</div>
-        
-        <div class="heading-md" style="font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 21px; font-weight: 500; letter-spacing: -0.02em; margin: 0 0 16px;">Claude Code Gets "Dreaming" and Major Rate Limit Boosts</div>
-        
-        <div class="body-text" style="margin-bottom: 20px;">
-          Claude expands its developer platform with higher Claude Code and Opus API limits plus new Claude Managed Agents capabilities, including dreaming, multiagent orchestration, outcomes, and webhooks. The <span class="term" tabindex="0">rate limits<span class="term-tip">Maximum number of API requests you can make per minute or hour</span></span> doubled for Pro, Max, and Enterprise customers, while "We're partnering with SpaceX to use all of the capacity of their Colossus data center" suggests serious infrastructure expansion.
-        </div>
-        
-        <div class="body-text" style="margin-bottom: 20px;">
-          The "dreaming" feature is particularly interesting: Claude Code agents write notes to themselves, recording and saving useful information about specific tasks. When another coding agent later starts to work on the same code, it can use the notes to get up to speed faster and learn from any errors that previous agents may have made. Dreaming is a system that Claude Code uses to read through all these notes and consolidate the information they contain, spotting patterns and common issues across different tasks.
-        </div>
-
-        <div class="heading-md" style="font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 21px; font-weight: 500; letter-spacing: -0.02em; margin: 32px 0 16px;">API Pricing Stays Flat, But Usage Costs May Rise</div>
-        
-        <div class="body-text" style="margin-bottom: 20px;">
-          As of May 2026 per Anthropic's pricing page: Claude Haiku 4.5 at $1.00 input / $5.00 output, Claude Sonnet 4.6 at $3.00 / $15.00, and Claude Opus 4.7 at $5.00 / $25.00. But there's a catch: Opus 4.7 ships with a new tokenizer that can produce up to 35% more tokens for the same input text. Your bill per request could increase even though the rate card didn't change.
-        </div>
-
-        <div class="body-text" style="margin-bottom: 20px;">
-          More importantly, Beginning June 15, Anthropic will separate programmatic Claude usage from standard chat subscription limits, introducing a dedicated monthly credit system, billed at API-style rates, for tools including its Agent SDK, GitHub Actions, and third-party frameworks such as OpenClaw. The monthly credit for programmatic usage will depend on a user's existing Claude subscription tier and generally mirror its monthly price, with Pro users receiving $20 in credits, Max 5x users $100, and Max 20x users $200.
-        </div>
-
-        <div class="heading-md" style="font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 21px; font-weight: 500; letter-spacing: -0.02em; margin: 32px 0 16px;">Claude for Small Business Goes Nationwide</div>
-        
-        <div class="body-text" style="margin-bottom: 20px;">
-          We're launching Claude for Small Business—a package of connectors and ready-to-run workflows that put Claude inside the tools small businesses depend on—to help small business owners take full advantage of AI and cross off items on the to-do list. The platform integrates with Intuit Quickbooks, PayPal, HubSpot, Canva, Docusign, Google Workspace, and Microsoft 365.
-        </div>
-
-        <div class="body-text" style="margin-bottom: 20px;">
-          Starting May 14 in Chicago, we're taking Claude for Small Business on the road. The tour is a free, half-day live AI fluency training and hands-on workshop for 100 local small business leaders per stop. Spring stops include Chicago, Tulsa, Dallas, Baltimore, and Salt Lake City, with more cities coming this fall.
-        </div>
-      </div>
-
-      <!-- Feature Deep-Dive -->
-      <div class="content-pad section-content">
-        <div class="section-label" style="font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500; padding: 0 0 16px; margin: 0 0 20px;">Feature Deep-Dive</div>
-        
-        <div class="heading-md" style="font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 21px; font-weight: 500; letter-spacing: -0.02em; margin: 0 0 16px;">How to Cut Your Claude Bills by 95% with Batch API + Caching</div>
-        
-        <div class="body-text" style="margin-bottom: 20px;">
-          If you're running Claude at scale, you're probably overpaying. The combination of <span class="term" tabindex="0">batch processing<span class="term-tip">Processing multiple requests at once for cost savings, trading speed for cheaper rates</span></span> and <span class="term" tabindex="0">prompt caching<span class="term-tip">Saving repeated parts of prompts to reduce costs on subsequent uses</span></span> can reduce costs by up to 95%, but most developers aren't using them effectively.
-        </div>
-        
-        <div class="body-text" style="margin-bottom: 20px;">
-          <strong>Step 1: Enable Prompt Caching</strong><br>
-          Prompt caching cuts cached input by 90%. If you're sending the same system prompt, tool schemas, or reference documents repeatedly, cache them. Anthropic prompt caching charges cache writes and cache reads separately: A cache hit costs 10% of the standard input price. Use prompt caching for repeated system prompts, tool schemas, long reference documents, and stable conversation history.
-        </div>
-        
-        <div class="body-text" style="margin-bottom: 20px;">
-          <strong>Step 2: Use Batch API for Non-Urgent Work</strong><br>
-          Batch processing is 50% off. Anthropic's Message Batches API gives a 50% discount on input and output tokens for asynchronous workloads: Batch processing and prompt caching can be combined, so high-volume jobs with repeated context should use both when latency is not critical.
-        </div>
-        
-        <div class="body-text" style="margin-bottom: 20px;">
-          <strong>Step 3: Route by Complexity</strong><br>
-          Claude Haiku pricing at $1/$5 per MTok is 5x cheaper than Claude Sonnet pricing at $3/$15, and 25x cheaper than Claude Opus pricing at $5/$25. Start simple tasks on Haiku, escalate to Sonnet for general coding, and reserve Opus for complex reasoning.
-        </div>
-        
-        <div class="body-text">
-          <strong>Real Example:</strong> A team processing 50,000 documents monthly at Claude Haiku 4.5 pricing: $200/month standard, $100/month batch. Same outputs. Half the invoice. With prompt caching on top, you could get this down to $30-50/month.
-        </div>
-      </div>
-
-      <!-- Broader Tech News -->
-      <div class="content-pad section-content">
-        <div class="section-label" style="font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500; padding: 0 0 16px; margin: 0 0 20px;">Broader Tech News</div>
-        
-        <div class="heading-md" style="font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 21px; font-weight: 500; letter-spacing: -0.02em; margin: 0 0 16px;">Claude Mythos Finds 10,000+ Critical Vulnerabilities</div>
-        
-        <div class="body-text" style="margin-bottom: 20px;">
-          The headline figure: more than 10,000 high- or critical-severity vulnerabilities identified across the most widely used software on the internet, accumulated by roughly 50 partner organizations deploying Claude Mythos Preview in controlled, defensive security workflows. The most striking example: Mythos Preview fully autonomously identified and then exploited a 17-year-old remote code execution vulnerability in FreeBSD that allows anyone to gain root on a machine running NFS.
-        </div>
-        
-        <div class="body-text" style="margin-bottom: 20px;">
-          Claude Security launched in public beta on May 22, 2026 for Claude Enterprise customers. It uses Claude Opus 4.7 to scan code repositories for vulnerabilities and generate proposed fixes. But the real story is what happens when AI gets this good at finding bugs—cybersecurity companies that everyone thought would be hurt are now rallying. As of May 21, HACK was up 17.27% month-to-date, the largest monthly rate of change on its chart since the fund launched in November 2014. BUG was up 26.14% month-to-date, the largest monthly gain in its history since inception in October 2019.
-        </div>
-
-        <div class="heading-md" style="font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 21px; font-weight: 500; letter-spacing: -0.02em; margin: 32px 0 16px;">Government Moves Into AI Oversight</div>
-        
-        <div class="body-text" style="margin-bottom: 20px;">
-          The Center for AI Standards and Innovation on Tuesday announced agreements with Google DeepMind, Microsoft and Elon Musk's xAI that will allow the U.S. government to evaluate artificial intelligence models before they are publicly available. CAISI, which sits under the U.S. Department of Commerce, will "conduct pre-deployment evaluations and targeted research to better assess frontier AI capabilities and advance the state of AI security."
-        </div>
-
-        <div class="body-text" style="margin-bottom: 20px;">
-          Meanwhile, The companies involved in the deal: Elon Musk's SpaceX, ChatGPT-maker OpenAI, Google, Microsoft, Nvidia, Amazon Web Services, Oracle and Reflection. The Pentagon has existing AI contracts with several companies, including Palantir and OpenAI. Notably absent from this list: Anthropic, which continues to face government pressure over Claude Mythos capabilities.
-        </div>
-
-        <div class="heading-md" style="font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 21px; font-weight: 500; letter-spacing: -0.02em; margin: 32px 0 16px;">Major Enterprise Partnerships Signal AI-First Future</div>
-        
-        <div class="body-text" style="margin-bottom: 20px;">
-          PwC will roll out Claude Code and Cowork starting with U.S. teams and expanding toward a global workforce of hundreds of thousands of professionals. The companies are establishing a joint Center of Excellence and a program to train and certify 30,000 PwC professionals on Claude. Insurance underwriting that took 10 weeks now takes 10 days. Security work that took hours now takes minutes.
-        </div>
-        
-        <div class="body-text">
-          Similarly, every one of KPMG's 276,000+ employees globally will gain access to Claude. These aren't pilot programs—they're complete organizational transformations around AI-native workflows.
-        </div>
-      </div>
-
-      <!-- Closing blurb -->
-      <div class="content-pad section-content">
-        <div class="closing-blurb">
-          <div class="closing-label">The Bigger Picture</div>
-          <div class="closing-text">
-            We're watching the end of "AI as a feature" and the beginning of "AI as infrastructure." When "Claude is probably as good as a midlevel engineer at writing code," and enterprises are betting hundreds of thousands of employees on AI workflows, the question isn't whether AI will change how we work—it's how fast your organization can adapt. The teams getting ahead aren't waiting for perfect models; they're building operational muscle around the tools available today. That's the difference between riding the wave and getting swept away by it.
-          </div>
-        </div>
-      </div>
-
-      <!-- Reading List -->
-      <div class="content-pad section-content">
-        <div class="section-label" style="font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500; padding: 0 0 16px; margin: 0 0 20px;">Reading / Watching / Listening</div>
-        
-        <div class="reading-item">
-          <div class="reading-tag">Read</div>
-          <div class="reading-desc">
-            <a href="https://www.technologyreview.com/2026/05/21/1137735/anthropics-code-with-claude-showed-off-codings-future-whether-you-like-it-or-not/" class="link">Anthropic's Code with Claude showed off coding's future—whether you like it or not</a> - MIT Technology Review's deep dive into what happens when half the room ships AI-written code without reading it
-          </div>
-        </div>
-        
-        <div class="reading-item">
-          <div class="reading-tag">Watch</div>
-          <div class="reading-desc">
-            <a href="https://simonwillison.net/2026/May/6/code-w-claude-2026/" class="link">Simon Willison's live blog of Code w/ Claude 2026</a> - Real-time notes from Anthropic's developer conference, including the SpaceX Colossus partnership reveal
-          </div>
-        </div>
-        
-        <div class="reading-item">
-          <div class="reading-tag">Read</div>
-          <div class="reading-desc">
-            <a href="https://red.anthropic.com/2026/mythos-preview/" class="link">Claude Mythos Preview technical report</a> - Anthropic's detailed breakdown of Mythos finding a 17-year-old FreeBSD vulnerability and what it means for cybersecurity
-          </div>
-        </div>
-        
-        <div class="reading-item">
-          <div class="reading-tag">Read</div>
-          <div class="reading-desc">
-            <a href="https://www.anthropic.com/glasswing" class="link">Project Glasswing: Securing critical software for the AI era</a> - Anthropic's initiative to use Claude Mythos for defensive cybersecurity, with quotes from AWS, Microsoft, and Cisco
-          </div>
-        </div>
-        
-        <div class="reading-item">
-          <div class="reading-tag">Guide</div>
-          <div class="reading-desc">
-            <a href="https://www.cloudzero.com/blog/claude-api-pricing/" class="link">Anthropic Claude API Pricing In 2026: Every Model, Token Rate, And Cost Lever</a> - Comprehensive guide to Claude pricing optimization with real cost scenarios
-          </div>
-        </div>
-      </div>
-
-      <!-- Footer -->
-      <div class="footer content-pad section-gap" style="margin-top: 48px;">
-        <div style="font-family: 'TiemposText', Georgia, serif; font-size: 14px; color: var(--text-secondary); line-height: 1.55; margin-bottom: 16px;">
-          Thanks for reading Claude & Co. If you found this useful, <a href="https://forms.gle/pJGxqX6CKyVA9Km99" class="link">share the signup link</a> with someone who'd appreciate AI industry insights.
-        </div>
-        <div style="font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 11px; color: var(--text-faint); line-height: 1.45;">
-          <a href="#" class="link">Newsletter archive</a> • This newsletter is AI-generated and for informational purposes only
-        </div>
-      </div>
+  <div class="container" style="margin: 0 auto;">
     
+    <!-- Header -->
+    <div class="content-pad" style="padding: 52px 48px 36px;">
+      <div class="header-border" style="padding-bottom: 20px;">
+        <h1 class="title-main title-text" style="font-family: 'StyreneB', 'StyreneA', sans-serif; font-size: 36px; font-weight: 500; line-height: 0.95; letter-spacing: -0.02em; margin: 0 0 8px;">Claude & Co.</h1>
+        <div style="font-family: 'StyreneA', sans-serif; font-size: 12px; font-weight: 400; color: var(--text-muted); letter-spacing: 0.1em;">
+          ISSUE #3 · MAY 26, 2026 · RACING AT THE FRONTIER
+        </div>
+      </div>
+    </div>
+
+    <!-- Intro -->
+    <div class="content-pad section-content">
+      <p class="intro-text body-text" style="margin: 0; line-height: 1.55;">
+        The AI race just hit a new gear this week, with talent defections, partnership announcements, and security pivots reshaping the landscape. From a major hiring coup at Anthropic to enterprise expansions and regulatory tensions, here's what you need to know about the week that changed the competitive dynamics in AI.
+      </p>
+    </div>
+
+    <!-- Hook -->
+    <div class="hook">
+      <div class="hook-box">
+        <p class="hook-quote">"I think the next few years at the frontier of LLMs will be especially formative"—and Andrej Karpathy just voted with his feet by leaving his independent AI education startup to join Anthropic's pre-training team.</p>
+        <p class="hook-sub"><strong>Also in this issue:</strong> Claude Security enters public beta, SAP makes Claude central to enterprise operations, and the U.S. government postpones AI oversight after Big Tech pushback.</p>
+      </div>
+    </div>
+
+    <!-- Jargon Decoder -->
+    <div class="content-pad section-gap">
+      <details class="glossary-toggle">
+        <summary>Jargon Decoder</summary>
+        <div class="glossary-content">
+          <div class="glossary-item">
+            <div class="glossary-term">Pre-training</div>
+            <div class="glossary-def">The foundational training phase where models learn language patterns from massive datasets</div>
+          </div>
+          <div class="glossary-item">
+            <div class="glossary-term">MCP</div>
+            <div class="glossary-def">Model Context Protocol — Anthropic's standard for connecting AI systems to external tools</div>
+          </div>
+          <div class="glossary-item">
+            <div class="glossary-term">Managed Agents</div>
+            <div class="glossary-def">Cloud-hosted AI assistants that can perform multi-step tasks autonomously</div>
+          </div>
+          <div class="glossary-item">
+            <div class="glossary-term">Self-hosted sandboxes</div>
+            <div class="glossary-def">Secure environments where companies can run AI agents on their own infrastructure</div>
+          </div>
+          <div class="glossary-item">
+            <div class="glossary-term">Recursive self-improvement</div>
+            <div class="glossary-def">AI systems capable of improving their own training and development processes</div>
+          </div>
+          <div class="glossary-item">
+            <div class="glossary-term">API limits</div>
+            <div class="glossary-def">Usage caps on how many requests developers can make to AI services per time period</div>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <!-- Anthropic Product News -->
+    <div class="content-pad section-content">
+      <div class="section-label" style="font-family: 'StyreneA', sans-serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500; margin: 0 0 24px; padding-bottom: 8px;">Anthropic Product News</div>
+      
+      <h2 class="heading-lg title-text" style="font-family: 'StyreneA', sans-serif; font-size: 23px; font-weight: 500; letter-spacing: -0.02em; margin: 0 0 16px; line-height: 1.2;">Industry Veteran Joins Pre-Training Team</h2>
+      <p class="body-text" style="margin: 0 0 20px;">
+        Andrej Karpathy, one of the best-known AI researchers in the world and a founding member of OpenAI, announced Tuesday that he's joining rival AI lab Anthropic. Karpathy will start this week on Anthropic's pre-training team, which is responsible for the massive training runs that give Claude its core knowledge and capabilities, where he'll build a team focused on using Claude to accelerate pre-training research. This represents a significant step toward <span class="term" tabindex="0">recursive self-improvement<span class="term-tip">AI systems capable of improving their own training and development processes</span></span>, where AI helps design the next generation of AI.
+      </p>
+
+      <h3 class="heading-md title-text" style="font-family: 'StyreneA', sans-serif; font-size: 19px; font-weight: 500; letter-spacing: -0.02em; margin: 24px 0 12px; line-height: 1.25;">Claude Security Goes Public</h3>
+      <p class="body-text" style="margin: 0 0 20px;">
+        Anthropic expanded Project Glasswing with Claude Security in public beta and new cyber verification tools for eligible security teams, helping scan codebases, triage vulnerabilities, and generate fixes while sharing research and support for open-source defenders. The move comes as the company introduces Claude Mythos, a security-focused model that can find software vulnerabilities at a level beyond many human experts.
+      </p>
+
+      <h3 class="heading-md title-text" style="font-family: 'StyreneA', sans-serif; font-size: 19px; font-weight: 500; letter-spacing: -0.02em; margin: 24px 0 12px; line-height: 1.25;">Platform Expansion</h3>
+      <p class="body-text" style="margin: 0 0 20px;">
+        Claude expanded its developer platform with higher Claude Code and Opus API limits plus new Claude Managed Agents capabilities, including dreaming, multiagent orchestration, outcomes, and webhooks. Self-hosted sandboxes arrive as a public beta feature, while MCP tunnels allow Claude Managed Agents users to route services through a private network. Claude also released 20+ new legal MCP connectors and 12 practice-area plugins, expanding how law firms and in-house teams work across research, contracts, discovery, matter management, and legal aid.
+      </p>
+
+      <h3 class="heading-md title-text" style="font-family: 'StyreneA', sans-serif; font-size: 19px; font-weight: 500; letter-spacing: -0.02em; margin: 24px 0 12px; line-height: 1.25;">Enterprise Partnerships</h3>
+      <p class="body-text" style="margin: 0 0 16px;">
+        SAP and Anthropic announced plans to expand their collaboration to deliver advanced AI solutions to enterprise customers, making Claude a primary reasoning and agentic capability embedded across SAP's AI-enabled solution portfolio, unveiled at SAP Sapphire. The integration will enable Claude to handle complex business tasks across finance, HR, procurement, and supply chain management.
+      </p>
+    </div>
+
+    <!-- Feature Deep-Dive -->
+    <div class="content-pad section-content">
+      <div class="section-label" style="font-family: 'StyreneA', sans-serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500; margin: 0 0 24px; padding-bottom: 8px;">Feature Deep-Dive</div>
+      
+      <h2 class="heading-lg title-text" style="font-family: 'StyreneA', sans-serif; font-size: 23px; font-weight: 500; letter-spacing: -0.02em; margin: 0 0 16px; line-height: 1.2;">Understanding Self-Hosted Sandboxes</h2>
+      
+      <p class="body-text" style="margin: 0 0 20px;">
+        <span class="term" tabindex="0">Self-hosted sandboxes<span class="term-tip">Secure environments where companies can run AI agents on their own infrastructure</span></span> represent a crucial step in enterprise AI adoption. Here's what they actually do and why they matter:
+      </p>
+      
+      <p class="body-text" style="margin: 0 0 16px;">
+        <strong>What they solve:</strong> Traditional cloud-based AI agents execute code and access data on the provider's infrastructure. For enterprises with sensitive data or strict compliance requirements, this creates security and governance challenges.
+      </p>
+      
+      <p class="body-text" style="margin: 0 0 16px;">
+        <strong>How they work:</strong> With self-hosted sandboxes, you keep sensitive files, packages, and services in your own infrastructure while the agent loop that handles orchestration stays on Anthropic's infrastructure. Inside your perimeter, network policies, audit logging, and security tooling are already in place, and files and repositories don't leave.
+      </p>
+      
+      <p class="body-text" style="margin: 0 0 16px;">
+        <strong>Why it matters:</strong> This hybrid approach lets enterprises get the benefits of advanced AI agents without compromising on data security or compliance. You control compute resources, runtime environments, and data access while still leveraging Anthropic's agent orchestration capabilities.
+      </p>
+      
+      <p class="body-text" style="margin: 0 0 16px;">
+        <strong>Getting started:</strong> You can bring any sandbox client or start with supported providers like Cloudflare, which runs sandboxes at scale using microVMs. Anthropic provides docs, cookbooks for setup, and deployment tools in the Claude Console.
+      </p>
+    </div>
+
+    <!-- Broader Tech News -->
+    <div class="content-pad section-content">
+      <div class="section-label" style="font-family: 'StyreneA', sans-serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500; margin: 0 0 24px; padding-bottom: 8px;">Broader Tech News</div>
+      
+      <h3 class="heading-md title-text" style="font-family: 'StyreneA', sans-serif; font-size: 19px; font-weight: 500; letter-spacing: -0.02em; margin: 0 0 12px; line-height: 1.25;">Regulatory Pushback</h3>
+      <p class="body-text" style="margin: 0 0 20px;">
+        President Trump postponed a planned AI executive order after last-minute pressure from tech leaders, including Elon Musk and Mark Zuckerberg. The order would have asked leading AI companies to voluntarily share advanced models with the government before release for security testing. The delay shows how much influence Silicon Valley still has over Washington's AI policy, with the fight now focused on whether oversight slows U.S. competitiveness against China.
+      </p>
+
+      <h3 class="heading-md title-text" style="font-family: 'StyreneA', sans-serif; font-size: 19px; font-weight: 500; letter-spacing: -0.02em; margin: 24px 0 12px; line-height: 1.25;">Memory Shortage Crisis</h3>
+      <p class="body-text" style="margin: 0 0 20px;">
+        Micron Technology CEO expects memory chip shortage to extend beyond 2026, with 1GB of HBM taking 3x the silicon footprint of regular phone RAM. Foundries are pivoting so hard to AI memory that it is actually killing the cheap smartphone market. The shortage highlights how AI infrastructure demands are reshaping entire supply chains.
+      </p>
+
+      <h3 class="heading-md title-text" style="font-family: 'StyreneA', sans-serif; font-size: 19px; font-weight: 500; letter-spacing: -0.02em; margin: 24px 0 12px; line-height: 1.25;">SpaceX's Record IPO Filing</h3>
+      <p class="body-text" style="margin: 0 0 20px;">
+        SpaceX submitted its S-1 filing to the SEC on May 20, setting the stage for what could be the largest IPO in history. The company reported 2025 revenue of $18.7 billion, up 33% year-over-year, but posted a Q1 2026 net loss of $4.27 billion. Elon Musk will retain 85% voting control, with his compensation tied to achieving a permanent Mars colony. The filing reveals AI asset integration, including a $60 billion option to acquire coding startup Cursor.
+      </p>
+
+      <h3 class="heading-md title-text" style="font-family: 'StyreneA', sans-serif; font-size: 19px; font-weight: 500; letter-spacing: -0.02em; margin: 24px 0 12px; line-height: 1.25;">Enterprise AI Reality Check</h3>
+      <p class="body-text" style="margin: 0 0 16px;">
+        "I think that right now Claude is probably as good as a midlevel engineer at writing code," said an Anthropic technical manager. Some technical managers at Anthropic are exhausted by keeping up with all the code their teams now produce. The comments from Anthropic's Code with Claude event reveal both the promise and challenges of AI-assisted development at scale.
+      </p>
+    </div>
+
+    <!-- The Bigger Picture -->
+    <div class="content-pad section-content">
+      <div class="closing-blurb">
+        <div class="closing-label">The Bigger Picture</div>
+        <p class="closing-text">
+          Karpathy's move to Anthropic signals more than a talent shuffle—it's a bet on which approach to AI development will win the next phase of competition. While competitors focus on scale and speed, Anthropic is doubling down on using AI to improve AI, pursuing <span class="term" tabindex="0">recursive self-improvement<span class="term-tip">AI systems capable of improving their own training and development processes</span></span> as a path to sustainable advantage. For aspiring PMs, the lesson is clear: in a world where technology can build itself, the winning strategy isn't just about resources—it's about building the right feedback loops. The question for every startup and enterprise team is whether you're building products that get better through use, or just products that get used.
+        </p>
+      </div>
+    </div>
+
+    <!-- Reading / Watching / Listening -->
+    <div class="content-pad section-content">
+      <div class="section-label" style="font-family: 'StyreneA', sans-serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500; margin: 0 0 20px; padding-bottom: 8px;">Reading / Watching / Listening</div>
+      
+      <div class="reading-item">
+        <div class="reading-tag">READ</div>
+        <div class="reading-desc">
+          <a href="https://www.anthropic.com/news" class="link">Anthropic's official news page</a> — Stay current with product updates and company announcements as the AI race accelerates.
+        </div>
+      </div>
+      
+      <div class="reading-item">
+        <div class="reading-tag">WATCH</div>
+        <div class="reading-desc">
+          <a href="https://www.youtube.com/channel/UCfzlCWGWYyIQ0aLC5w48gBQ" class="link">Andrej Karpathy's Neural Networks course</a> — Essential viewing for understanding how the AI systems reshaping tech actually work.
+        </div>
+      </div>
+      
+      <div class="reading-item">
+        <div class="reading-tag">READ</div>
+        <div class="reading-desc">
+          <a href="https://www.technologyreview.com/2026/05/21/1137735/anthropics-code-with-claude-showed-off-codings-future-whether-you-like-it-or-not/" class="link">MIT Tech Review on Code with Claude</a> — Deep dive into how AI is transforming software development workflows at the enterprise level.
+        </div>
+      </div>
+      
+      <div class="reading-item">
+        <div class="reading-tag">READ</div>
+        <div class="reading-desc">
+          <a href="https://importai.substack.com/" class="link">Jack Clark's Import AI newsletter</a> — Weekly insights on AI policy and technical developments from Anthropic's co-founder.
+        </div>
+      </div>
+      
+      <div class="reading-item">
+        <div class="reading-tag">LISTEN</div>
+        <div class="reading-desc">
+          <a href="https://www.anthropic.com/events" class="link">Anthropic's upcoming webinars</a> — Live sessions on Claude Security, enterprise use cases, and platform capabilities for developers.
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer content-pad" style="padding: 32px 48px 40px;">
+      <div style="font-family: 'TiemposText', serif; font-size: 15px; line-height: 1.5; color: var(--text-secondary); transition: color 0.3s ease;">
+        Thanks for reading. If you found this useful, <a href="https://forms.gle/pJGxqX6CKyVA9Km99" class="link">share Claude & Co.</a> with a friend who's navigating the AI landscape.
+      </div>
+      
+      <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border); font-family: 'StyreneA', sans-serif; font-size: 11px; color: var(--text-faint); letter-spacing: 0.08em;">
+        Claude & Co. is written by Claude (Anthropic's AI assistant) and delivered twice weekly. <a href="#" class="link">View archive</a> · This newsletter is AI-generated and should be verified independently.
+      </div>
     </div>
   </div>
 
   <script>
-    // Reading progress
-    function updateProgress() {
-      const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-      document.querySelector('.progress-bar').style.width = Math.min(scrolled, 100) + '%';
-    }
-    window.addEventListener('scroll', updateProgress);
-
     // Theme toggle
-    function toggleTheme() {
-      const html = document.documentElement;
-      const currentTheme = html.getAttribute('data-theme');
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      html.setAttribute('data-theme', newTheme);
-      localStorage.setItem('claude-newsletter-theme', newTheme);
-    }
-
+    const toggle = document.querySelector('.theme-toggle');
+    const html = document.documentElement;
+    
     // Load saved theme
-    const savedTheme = localStorage.getItem('claude-newsletter-theme') || 'light';
-    document.documentElement.setAttribute('data-theme', savedTheme);
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    html.setAttribute('data-theme', savedTheme);
+    
+    toggle.addEventListener('click', () => {
+      const currentTheme = html.getAttribute('data-theme');
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+    });
 
-    // Tooltip functionality
-    document.addEventListener('DOMContentLoaded', function() {
-      const terms = document.querySelectorAll('.term');
+    // Progress bar
+    const progressBar = document.querySelector('.progress-bar');
+    
+    function updateProgress() {
+      const scrollTop = window.pageYOffset;
+      const docHeight = document.body.scrollHeight - window.innerHeight;
+      const scrollPercent = (scrollTop / docHeight) * 100;
+      progressBar.style.width = Math.min(scrollPercent, 100) + '%';
+    }
+    
+    window.addEventListener('scroll', updateProgress);
+    updateProgress();
+
+    // Term tooltips
+    document.querySelectorAll('.term').forEach(term => {
+      const tip = term.querySelector('.term-tip');
       
-      terms.forEach(term => {
-        let tooltip = null;
-        
-        function showTooltip(e) {
-          tooltip = term.querySelector('.term-tip');
-          if (tooltip) {
-            tooltip.classList.add('visible');
-            
-            // Position tooltip
-            const rect = term.getBoundingClientRect();
-            const tooltipRect = tooltip.getBoundingClientRect();
-            
-            let left = rect.left + (rect.width / 2) - (tooltipRect.width / 2);
-            let top = rect.top - tooltipRect.height - 10;
-            
-            // Keep tooltip on screen
-            if (left < 10) left = 10;
-            if (left + tooltipRect.width > window.innerWidth - 10) {
-              left = window.innerWidth - tooltipRect.width - 10;
-            }
-            if (top < 10) {
-              top = rect.bottom + 10;
-            }
-            
-            tooltip.style.left = left + 'px';
-            tooltip.style.top = top + 'px';
-          }
-        }
-        
-        function hideTooltip() {
-          if (tooltip) {
-            tooltip.classList.remove('visible');
-          }
-        }
-        
-        term.addEventListener('mouseenter', showTooltip);
-        term.addEventListener('mouseleave', hideTooltip);
-        term.addEventListener('focus', showTooltip);
-        term.addEventListener('blur', hideTooltip);
-      });
+      function showTip(e) {
+        const rect = term.getBoundingClientRect();
+        tip.style.left = rect.left + 'px';
+        tip.style.top = (rect.bottom + 8) + 'px';
+        tip.classList.add('visible');
+      }
+      
+      function hideTip() {
+        tip.classList.remove('visible');
+      }
+      
+      term.addEventListener('mouseenter', showTip);
+      term.addEventListener('mouseleave', hideTip);
+      term.addEventListener('focus', showTip);
+      term.addEventListener('blur', hideTip);
     });
   </script>
-
 </body>
 </html>
