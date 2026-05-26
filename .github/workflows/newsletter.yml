@@ -51,11 +51,9 @@ jobs:
 
       - name: Send newsletter emails
         env:
-          GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
-          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
-          RECIPIENT_EMAIL: ${{ secrets.GMAIL_ADDRESS }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          RECIPIENT_EMAIL: ${{ secrets.RECIPIENT_EMAIL }}
           SUBSCRIBERS_SHEET_URL: ${{ secrets.SUBSCRIBERS_SHEET_URL }}
-          SIGNUP_FORM_URL: ${{ secrets.SIGNUP_FORM_URL }}
           NEWSLETTER_BASE_URL: https://selayerturkk.github.io/claude-newsletter/newsletters
         run: |
           TODAY="${{ steps.info.outputs.today }}"
