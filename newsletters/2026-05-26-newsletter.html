@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Claude & Co. — Issue #3: Racing at the Frontier</title>
+  <title>Claude & Co. | Issue #4 | May 26, 2026</title>
   
   <style>
   /* Fonts */
@@ -321,269 +321,310 @@
     border: 5px solid transparent;
     border-top-color: var(--text-primary);
   }
-</style>
+  </style>
 </head>
 
-<body class="outer-wrap">
-  <div class="progress-bar"></div>
+<body>
+  <div class="progress-bar" id="progress-bar"></div>
   
-  <button class="theme-toggle" aria-label="Toggle dark mode">
-    <svg class="icon-sun" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <button class="theme-toggle" onclick="toggleTheme()" type="button" aria-label="Toggle theme">
+    <svg class="icon-sun" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
     </svg>
-    <svg class="icon-moon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg class="icon-moon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
     </svg>
   </button>
 
-  <div class="container" style="margin: 0 auto;">
-    
-    <!-- Header -->
-    <div class="content-pad" style="padding: 52px 48px 36px;">
-      <div class="header-border" style="padding-bottom: 20px;">
-        <h1 class="title-main title-text" style="font-family: 'StyreneB', 'StyreneA', sans-serif; font-size: 36px; font-weight: 500; line-height: 0.95; letter-spacing: -0.02em; margin: 0 0 8px;">Claude & Co.</h1>
-        <div style="font-family: 'StyreneA', sans-serif; font-size: 12px; font-weight: 400; color: var(--text-muted); letter-spacing: 0.1em;">
-          ISSUE #3 · MAY 26, 2026 · RACING AT THE FRONTIER
+  <div class="outer-wrap">
+    <div class="container" style="margin: 0 auto;">
+      
+      <!-- Header -->
+      <header class="section-gap content-pad header-border">
+        <div style="font-family: 'StyreneB', 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 36px; font-weight: 500; line-height: 0.95; margin: 0 0 8px; letter-spacing: -0.02em;" class="title-main title-text">
+          Claude & Co.
+        </div>
+        <div style="font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 13px; margin: 0;" class="meta-text">
+          Issue #4 • May 26, 2026 • Your weekly guide to Claude and the AI ecosystem
+        </div>
+      </header>
+
+      <!-- Intro -->
+      <section class="content-pad section-gap">
+        <div class="intro-text body-text">
+          It's been a quiet Sunday for Claude's infrastructure—no major incidents reported today, but the broader AI world is anything but still. From Cursor's Composer 2.5 delivering frontier-level coding performance at a fraction of the cost to Anthropic's firm stance on keeping Claude ad-free, this week's developments shape how AI assistants will serve users and businesses. Here's what's moving the needle in AI product development.
+        </div>
+      </section>
+
+      <!-- Hook Pullquote -->
+      <div class="hook">
+        <div class="hook-box">
+          <p class="hook-quote">
+            "Cursor is no longer just an IDE wrapper around frontier models from OpenAI and Anthropic. It's a model lab that happens to make an editor."
+          </p>
+          <p class="hook-sub">
+            <strong>Also in this issue:</strong> Anthropic expands security tools, Google showcases Gemini 3.5 at I/O, and SAP integrates Claude across enterprise workflows.
+          </p>
         </div>
       </div>
-    </div>
 
-    <!-- Intro -->
-    <div class="content-pad section-content">
-      <p class="intro-text body-text" style="margin: 0; line-height: 1.55;">
-        The AI race just hit a new gear this week, with talent defections, partnership announcements, and security pivots reshaping the landscape. From a major hiring coup at Anthropic to enterprise expansions and regulatory tensions, here's what you need to know about the week that changed the competitive dynamics in AI.
-      </p>
-    </div>
+      <!-- Jargon Decoder -->
+      <section class="content-pad section-gap">
+        <details class="glossary-toggle">
+          <summary>Jargon Decoder</summary>
+          <div class="glossary-content">
+            <div class="glossary-item">
+              <div class="glossary-term">Reinforcement Learning</div>
+              <div class="glossary-def">Training method where models learn by receiving rewards for successful task completion</div>
+            </div>
+            <div class="glossary-item">
+              <div class="glossary-term">Self-Hosted Sandbox</div>
+              <div class="glossary-def">Running code execution environment on your own infrastructure instead of the vendor's servers</div>
+            </div>
+            <div class="glossary-item">
+              <div class="glossary-term">MCP</div>
+              <div class="glossary-def">Model Context Protocol—a standard for connecting AI models to external tools and data</div>
+            </div>
+            <div class="glossary-item">
+              <div class="glossary-term">SWE-Bench</div>
+              <div class="glossary-def">Popular benchmark measuring how well AI models can solve real-world software engineering problems</div>
+            </div>
+            <div class="glossary-item">
+              <div class="glossary-term">Token Pricing</div>
+              <div class="glossary-def">Cost model where you pay per unit of text processed, typically per million input/output tokens</div>
+            </div>
+            <div class="glossary-item">
+              <div class="glossary-term">Agentic AI</div>
+              <div class="glossary-def">AI systems that can autonomously plan, use tools, and execute multi-step tasks with minimal human guidance</div>
+            </div>
+            <div class="glossary-item">
+              <div class="glossary-term">Mythos</div>
+              <div class="glossary-def">Anthropic's unreleased model designed for cybersecurity that can discover software vulnerabilities</div>
+            </div>
+          </div>
+        </details>
+      </section>
 
-    <!-- Hook -->
-    <div class="hook">
-      <div class="hook-box">
-        <p class="hook-quote">"I think the next few years at the frontier of LLMs will be especially formative"—and Andrej Karpathy just voted with his feet by leaving his independent AI education startup to join Anthropic's pre-training team.</p>
-        <p class="hook-sub"><strong>Also in this issue:</strong> Claude Security enters public beta, SAP makes Claude central to enterprise operations, and the U.S. government postpones AI oversight after Big Tech pushback.</p>
-      </div>
-    </div>
-
-    <!-- Jargon Decoder -->
-    <div class="content-pad section-gap">
-      <details class="glossary-toggle">
-        <summary>Jargon Decoder</summary>
-        <div class="glossary-content">
-          <div class="glossary-item">
-            <div class="glossary-term">Pre-training</div>
-            <div class="glossary-def">The foundational training phase where models learn language patterns from massive datasets</div>
-          </div>
-          <div class="glossary-item">
-            <div class="glossary-term">MCP</div>
-            <div class="glossary-def">Model Context Protocol — Anthropic's standard for connecting AI systems to external tools</div>
-          </div>
-          <div class="glossary-item">
-            <div class="glossary-term">Managed Agents</div>
-            <div class="glossary-def">Cloud-hosted AI assistants that can perform multi-step tasks autonomously</div>
-          </div>
-          <div class="glossary-item">
-            <div class="glossary-term">Self-hosted sandboxes</div>
-            <div class="glossary-def">Secure environments where companies can run AI agents on their own infrastructure</div>
-          </div>
-          <div class="glossary-item">
-            <div class="glossary-term">Recursive self-improvement</div>
-            <div class="glossary-def">AI systems capable of improving their own training and development processes</div>
-          </div>
-          <div class="glossary-item">
-            <div class="glossary-term">API limits</div>
-            <div class="glossary-def">Usage caps on how many requests developers can make to AI services per time period</div>
-          </div>
+      <!-- Anthropic Product News -->
+      <section class="section-content content-pad">
+        <div style="font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500; margin: 0 0 24px; padding-bottom: 8px;" class="section-label">
+          Anthropic Product News
         </div>
-      </details>
-    </div>
 
-    <!-- Anthropic Product News -->
-    <div class="content-pad section-content">
-      <div class="section-label" style="font-family: 'StyreneA', sans-serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500; margin: 0 0 24px; padding-bottom: 8px;">Anthropic Product News</div>
-      
-      <h2 class="heading-lg title-text" style="font-family: 'StyreneA', sans-serif; font-size: 23px; font-weight: 500; letter-spacing: -0.02em; margin: 0 0 16px; line-height: 1.2;">Industry Veteran Joins Pre-Training Team</h2>
-      <p class="body-text" style="margin: 0 0 20px;">
-        Andrej Karpathy, one of the best-known AI researchers in the world and a founding member of OpenAI, announced Tuesday that he's joining rival AI lab Anthropic. Karpathy will start this week on Anthropic's pre-training team, which is responsible for the massive training runs that give Claude its core knowledge and capabilities, where he'll build a team focused on using Claude to accelerate pre-training research. This represents a significant step toward <span class="term" tabindex="0">recursive self-improvement<span class="term-tip">AI systems capable of improving their own training and development processes</span></span>, where AI helps design the next generation of AI.
-      </p>
+        <h2 style="font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 21px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.3; margin: 0 0 16px;" class="heading-md body-text">
+          Claude Stays Ad-Free, Expands Platform Features
+        </h2>
 
-      <h3 class="heading-md title-text" style="font-family: 'StyreneA', sans-serif; font-size: 19px; font-weight: 500; letter-spacing: -0.02em; margin: 24px 0 12px; line-height: 1.25;">Claude Security Goes Public</h3>
-      <p class="body-text" style="margin: 0 0 20px;">
-        Anthropic expanded Project Glasswing with Claude Security in public beta and new cyber verification tools for eligible security teams, helping scan codebases, triage vulnerabilities, and generate fixes while sharing research and support for open-source defenders. The move comes as the company introduces Claude Mythos, a security-focused model that can find software vulnerabilities at a level beyond many human experts.
-      </p>
-
-      <h3 class="heading-md title-text" style="font-family: 'StyreneA', sans-serif; font-size: 19px; font-weight: 500; letter-spacing: -0.02em; margin: 24px 0 12px; line-height: 1.25;">Platform Expansion</h3>
-      <p class="body-text" style="margin: 0 0 20px;">
-        Claude expanded its developer platform with higher Claude Code and Opus API limits plus new Claude Managed Agents capabilities, including dreaming, multiagent orchestration, outcomes, and webhooks. Self-hosted sandboxes arrive as a public beta feature, while MCP tunnels allow Claude Managed Agents users to route services through a private network. Claude also released 20+ new legal MCP connectors and 12 practice-area plugins, expanding how law firms and in-house teams work across research, contracts, discovery, matter management, and legal aid.
-      </p>
-
-      <h3 class="heading-md title-text" style="font-family: 'StyreneA', sans-serif; font-size: 19px; font-weight: 500; letter-spacing: -0.02em; margin: 24px 0 12px; line-height: 1.25;">Enterprise Partnerships</h3>
-      <p class="body-text" style="margin: 0 0 16px;">
-        SAP and Anthropic announced plans to expand their collaboration to deliver advanced AI solutions to enterprise customers, making Claude a primary reasoning and agentic capability embedded across SAP's AI-enabled solution portfolio, unveiled at SAP Sapphire. The integration will enable Claude to handle complex business tasks across finance, HR, procurement, and supply chain management.
-      </p>
-    </div>
-
-    <!-- Feature Deep-Dive -->
-    <div class="content-pad section-content">
-      <div class="section-label" style="font-family: 'StyreneA', sans-serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500; margin: 0 0 24px; padding-bottom: 8px;">Feature Deep-Dive</div>
-      
-      <h2 class="heading-lg title-text" style="font-family: 'StyreneA', sans-serif; font-size: 23px; font-weight: 500; letter-spacing: -0.02em; margin: 0 0 16px; line-height: 1.2;">Understanding Self-Hosted Sandboxes</h2>
-      
-      <p class="body-text" style="margin: 0 0 20px;">
-        <span class="term" tabindex="0">Self-hosted sandboxes<span class="term-tip">Secure environments where companies can run AI agents on their own infrastructure</span></span> represent a crucial step in enterprise AI adoption. Here's what they actually do and why they matter:
-      </p>
-      
-      <p class="body-text" style="margin: 0 0 16px;">
-        <strong>What they solve:</strong> Traditional cloud-based AI agents execute code and access data on the provider's infrastructure. For enterprises with sensitive data or strict compliance requirements, this creates security and governance challenges.
-      </p>
-      
-      <p class="body-text" style="margin: 0 0 16px;">
-        <strong>How they work:</strong> With self-hosted sandboxes, you keep sensitive files, packages, and services in your own infrastructure while the agent loop that handles orchestration stays on Anthropic's infrastructure. Inside your perimeter, network policies, audit logging, and security tooling are already in place, and files and repositories don't leave.
-      </p>
-      
-      <p class="body-text" style="margin: 0 0 16px;">
-        <strong>Why it matters:</strong> This hybrid approach lets enterprises get the benefits of advanced AI agents without compromising on data security or compliance. You control compute resources, runtime environments, and data access while still leveraging Anthropic's agent orchestration capabilities.
-      </p>
-      
-      <p class="body-text" style="margin: 0 0 16px;">
-        <strong>Getting started:</strong> You can bring any sandbox client or start with supported providers like Cloudflare, which runs sandboxes at scale using microVMs. Anthropic provides docs, cookbooks for setup, and deployment tools in the Claude Console.
-      </p>
-    </div>
-
-    <!-- Broader Tech News -->
-    <div class="content-pad section-content">
-      <div class="section-label" style="font-family: 'StyreneA', sans-serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500; margin: 0 0 24px; padding-bottom: 8px;">Broader Tech News</div>
-      
-      <h3 class="heading-md title-text" style="font-family: 'StyreneA', sans-serif; font-size: 19px; font-weight: 500; letter-spacing: -0.02em; margin: 0 0 12px; line-height: 1.25;">Regulatory Pushback</h3>
-      <p class="body-text" style="margin: 0 0 20px;">
-        President Trump postponed a planned AI executive order after last-minute pressure from tech leaders, including Elon Musk and Mark Zuckerberg. The order would have asked leading AI companies to voluntarily share advanced models with the government before release for security testing. The delay shows how much influence Silicon Valley still has over Washington's AI policy, with the fight now focused on whether oversight slows U.S. competitiveness against China.
-      </p>
-
-      <h3 class="heading-md title-text" style="font-family: 'StyreneA', sans-serif; font-size: 19px; font-weight: 500; letter-spacing: -0.02em; margin: 24px 0 12px; line-height: 1.25;">Memory Shortage Crisis</h3>
-      <p class="body-text" style="margin: 0 0 20px;">
-        Micron Technology CEO expects memory chip shortage to extend beyond 2026, with 1GB of HBM taking 3x the silicon footprint of regular phone RAM. Foundries are pivoting so hard to AI memory that it is actually killing the cheap smartphone market. The shortage highlights how AI infrastructure demands are reshaping entire supply chains.
-      </p>
-
-      <h3 class="heading-md title-text" style="font-family: 'StyreneA', sans-serif; font-size: 19px; font-weight: 500; letter-spacing: -0.02em; margin: 24px 0 12px; line-height: 1.25;">SpaceX's Record IPO Filing</h3>
-      <p class="body-text" style="margin: 0 0 20px;">
-        SpaceX submitted its S-1 filing to the SEC on May 20, setting the stage for what could be the largest IPO in history. The company reported 2025 revenue of $18.7 billion, up 33% year-over-year, but posted a Q1 2026 net loss of $4.27 billion. Elon Musk will retain 85% voting control, with his compensation tied to achieving a permanent Mars colony. The filing reveals AI asset integration, including a $60 billion option to acquire coding startup Cursor.
-      </p>
-
-      <h3 class="heading-md title-text" style="font-family: 'StyreneA', sans-serif; font-size: 19px; font-weight: 500; letter-spacing: -0.02em; margin: 24px 0 12px; line-height: 1.25;">Enterprise AI Reality Check</h3>
-      <p class="body-text" style="margin: 0 0 16px;">
-        "I think that right now Claude is probably as good as a midlevel engineer at writing code," said an Anthropic technical manager. Some technical managers at Anthropic are exhausted by keeping up with all the code their teams now produce. The comments from Anthropic's Code with Claude event reveal both the promise and challenges of AI-assisted development at scale.
-      </p>
-    </div>
-
-    <!-- The Bigger Picture -->
-    <div class="content-pad section-content">
-      <div class="closing-blurb">
-        <div class="closing-label">The Bigger Picture</div>
-        <p class="closing-text">
-          Karpathy's move to Anthropic signals more than a talent shuffle—it's a bet on which approach to AI development will win the next phase of competition. While competitors focus on scale and speed, Anthropic is doubling down on using AI to improve AI, pursuing <span class="term" tabindex="0">recursive self-improvement<span class="term-tip">AI systems capable of improving their own training and development processes</span></span> as a path to sustainable advantage. For aspiring PMs, the lesson is clear: in a world where technology can build itself, the winning strategy isn't just about resources—it's about building the right feedback loops. The question for every startup and enterprise team is whether you're building products that get better through use, or just products that get used.
+        <p class="body-text">
+          Anthropic made a clear choice this week: Claude will remain ad-free. The company explained why advertising incentives are incompatible with a genuinely helpful AI assistant, and how they plan to expand access without compromising user trust. This stance contrasts sharply with OpenAI's new self-serve ad platform inside ChatGPT, which signals a push toward commercialization with tighter API pricing tiers and new enterprise SLAs.
         </p>
-      </div>
-    </div>
 
-    <!-- Reading / Watching / Listening -->
-    <div class="content-pad section-content">
-      <div class="section-label" style="font-family: 'StyreneA', sans-serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500; margin: 0 0 20px; padding-bottom: 8px;">Reading / Watching / Listening</div>
-      
-      <div class="reading-item">
-        <div class="reading-tag">READ</div>
-        <div class="reading-desc">
-          <a href="https://www.anthropic.com/news" class="link">Anthropic's official news page</a> — Stay current with product updates and company announcements as the AI race accelerates.
-        </div>
-      </div>
-      
-      <div class="reading-item">
-        <div class="reading-tag">WATCH</div>
-        <div class="reading-desc">
-          <a href="https://www.youtube.com/channel/UCfzlCWGWYyIQ0aLC5w48gBQ" class="link">Andrej Karpathy's Neural Networks course</a> — Essential viewing for understanding how the AI systems reshaping tech actually work.
-        </div>
-      </div>
-      
-      <div class="reading-item">
-        <div class="reading-tag">READ</div>
-        <div class="reading-desc">
-          <a href="https://www.technologyreview.com/2026/05/21/1137735/anthropics-code-with-claude-showed-off-codings-future-whether-you-like-it-or-not/" class="link">MIT Tech Review on Code with Claude</a> — Deep dive into how AI is transforming software development workflows at the enterprise level.
-        </div>
-      </div>
-      
-      <div class="reading-item">
-        <div class="reading-tag">READ</div>
-        <div class="reading-desc">
-          <a href="https://importai.substack.com/" class="link">Jack Clark's Import AI newsletter</a> — Weekly insights on AI policy and technical developments from Anthropic's co-founder.
-        </div>
-      </div>
-      
-      <div class="reading-item">
-        <div class="reading-tag">LISTEN</div>
-        <div class="reading-desc">
-          <a href="https://www.anthropic.com/events" class="link">Anthropic's upcoming webinars</a> — Live sessions on Claude Security, enterprise use cases, and platform capabilities for developers.
-        </div>
-      </div>
-    </div>
+        <p class="body-text">
+          On the development front, Claude Platform launched self-hosted sandboxes in public beta, allowing organizations to keep sensitive files and services within their own infrastructure while agent orchestration stays on Anthropic's servers. The platform also expanded Claude Managed Agents with new capabilities including dreaming, multiagent orchestration, outcomes, and webhooks.
+        </p>
 
-    <!-- Footer -->
-    <div class="footer content-pad" style="padding: 32px 48px 40px;">
-      <div style="font-family: 'TiemposText', serif; font-size: 15px; line-height: 1.5; color: var(--text-secondary); transition: color 0.3s ease;">
-        Thanks for reading. If you found this useful, <a href="https://forms.gle/pJGxqX6CKyVA9Km99" class="link">share Claude & Co.</a> with a friend who's navigating the AI landscape.
+        <p class="body-text">
+          Anthropic expanded Project Glasswing with Claude Security in public beta and committed to scanning any open-source packages they adopt, supporting maintainers through Claude for Open Source. The timing aligns with growing concern about AI-accelerated vulnerability discovery—the company noted that models as capable as Mythos Preview will soon be developed by many AI companies, and no company has yet developed sufficient safeguards to prevent misuse.
+        </p>
+      </section>
+
+      <!-- Feature Deep-Dive -->
+      <section class="section-content content-pad">
+        <div style="font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500; margin: 0 0 24px; padding-bottom: 8px;" class="section-label">
+          Feature Deep-Dive
+        </div>
+
+        <h2 style="font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 21px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.3; margin: 0 0 16px;" class="heading-md body-text">
+          Understanding Claude's Dreaming Feature
+        </h2>
+
+        <p class="body-text">
+          Claude Code's new "dreaming" feature represents a fundamental shift in how coding agents learn and improve. Agents write notes to themselves about specific tasks, and when another agent works on the same code later, it can use these notes to get up to speed faster and learn from previous errors.
+        </p>
+
+        <p class="body-text">
+          The dreaming system consolidates information from all these notes, spotting patterns and common issues across different tasks. In theory, this should help Claude Code learn about a particular codebase and get better at working on it over time. Think of it as creating institutional memory for your development workflow.
+        </p>
+
+        <p class="body-text">
+          <strong>How to use it:</strong> Dreaming works automatically in <span class="term" tabindex="0">Claude Code<span class="term-tip">Anthropic's AI coding assistant that can write, debug, and refactor code across multiple files</span></span>—no setup required. As you work on projects, agents automatically capture insights about your codebase architecture, common debugging patterns, and successful approaches. Future coding sessions benefit from this accumulated knowledge, leading to more contextually appropriate suggestions and faster problem-solving.
+        </p>
+
+        <p class="body-text">
+          <strong>Why it matters:</strong> This addresses a core limitation of stateless AI interactions. Instead of every coding session starting from scratch, your AI assistant develops familiarity with your specific codebase, team patterns, and project constraints. For teams shipping frequently, this could significantly reduce the time spent bringing AI tools up to speed on each task.
+        </p>
+      </section>
+
+      <!-- Broader Tech News -->
+      <section class="section-content content-pad">
+        <div style="font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500; margin: 0 0 24px; padding-bottom: 8px;" class="section-label">
+          Broader Tech News
+        </div>
+
+        <h2 style="font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 21px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.3; margin: 0 0 16px;" class="heading-md body-text">
+          Cursor Composer 2.5 Reshapes Coding Economics
+        </h2>
+
+        <p class="body-text">
+          Cursor released Composer 2.5, scoring 62 on the Coding Agent Index—a 14-point gain over Composer 2. This puts it in third place behind only Claude Opus 4.7 in Claude Code (66) and GPT-5.5 in Codex (65), while costing roughly 10x less than these alternatives.
+        </p>
+
+        <p class="body-text">
+          Built on Moonshot AI's Kimi K2.5 with additional reinforcement learning, synthetic training, and behavioral improvements, Composer 2.5 offers industry-disruptive pricing: $0.5 per million input tokens and $2.5 per million output tokens for the standard version, with a fast variant at $3.0/$15.0 respectively. The emerging pattern: teams use Composer 2.5 as the default for everyday coding inside Cursor, reaching for Opus 4.7 only for complex architectural reasoning.
+        </p>
+
+        <h3 style="font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 500; letter-spacing: -0.02em; margin: 24px 0 12px;" class="body-text">
+          Google I/O 2026 Highlights
+        </h3>
+
+        <p class="body-text">
+          Google launched Gemini 3.5 Flash as the first model in the new Gemini 3.5 family, already powering Google Search AI Mode and AI Overviews. The company also unveiled Gemini Omni, combining reasoning with content creation tools, allowing users to generate and edit videos using text, images, audio and video prompts through the Gemini app and YouTube Shorts.
+        </p>
+
+        <p class="body-text">
+          Google Cloud CEO Thomas Kurian confirmed that Gemini will power a more personalized Siri launching later in 2026, with Apple paying approximately $1 billion annually for a custom 1.2 trillion parameter Gemini model. This Apple-Google AI partnership represents the most consequential deal in consumer technology since Apple made Google the default search engine, bringing Gemini to two billion Apple devices.
+        </p>
+
+        <h3 style="font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 500; letter-spacing: -0.02em; margin: 24px 0 12px;" class="body-text">
+          Enterprise AI Adoption Accelerates
+        </h3>
+
+        <p class="body-text">
+          Anthropic and PwC announced an expanded strategic alliance, with PwC rolling out Claude Code and Cowork starting with U.S. teams and establishing a joint Center of Excellence to train 30,000 professionals. SAP and Anthropic revealed plans to embed Claude as a primary reasoning capability across SAP's AI-enabled solution portfolio, powered by Joule agents.
+        </p>
+
+        <p class="body-text">
+          NextEra Energy announced a $67 billion acquisition of Dominion Energy—the largest utility merger in US history—with explicit acknowledgment that AI-driven power demand is the primary rationale, signaling America's power infrastructure is being rebuilt around AI data center requirements.
+        </p>
+      </section>
+
+      <!-- The Bigger Picture -->
+      <div class="content-pad">
+        <div class="closing-blurb">
+          <div class="closing-label">The Bigger Picture</div>
+          <p class="closing-text">
+            This week's developments reveal a maturing AI ecosystem where differentiation comes from business model choices, not just model capabilities. Anthropic's ad-free commitment and Cursor's cost-efficiency breakthrough suggest that sustainable AI products will win through alignment with user interests, not just raw performance. For aspiring PMs, the lesson is clear: as AI capabilities commoditize, your competitive moat lies in how you structure incentives, price access, and integrate AI into workflows that users actually want to adopt. The companies getting this right are those thinking beyond "better models" to "better products."
+          </p>
+        </div>
       </div>
-      
-      <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border); font-family: 'StyreneA', sans-serif; font-size: 11px; color: var(--text-faint); letter-spacing: 0.08em;">
-        Claude & Co. is written by Claude (Anthropic's AI assistant) and delivered twice weekly. <a href="#" class="link">View archive</a> · This newsletter is AI-generated and should be verified independently.
-      </div>
+
+      <!-- Reading / Watching / Listening -->
+      <section class="section-content content-pad">
+        <div style="font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500; margin: 0 0 24px; padding-bottom: 8px;" class="section-label">
+          Reading / Watching / Listening
+        </div>
+
+        <div class="reading-item">
+          <div class="reading-tag">READ</div>
+          <div class="reading-desc">
+            <a href="https://www.technologyreview.com/2026/05/21/1137735/anthropics-code-with-claude-showed-off-codings-future-whether-you-like-it-or-not/" class="link">Anthropic's Code with Claude showed off coding's future—whether you like it or not</a> — MIT Technology Review's deep dive into how AI coding tools are reshaping software development velocity and engineering management.
+          </div>
+        </div>
+
+        <div class="reading-item">
+          <div class="reading-tag">READ</div>
+          <div class="reading-desc">
+            <a href="https://cursor.com/blog/composer-2-5" class="link">Introducing Composer 2.5</a> — Cursor's technical blog post detailing their reinforcement learning approach and the training challenges of building competitive coding models.
+          </div>
+        </div>
+
+        <div class="reading-item">
+          <div class="reading-tag">READ</div>
+          <div class="reading-desc">
+            <a href="https://simonwillison.net/2026/May/6/code-w-claude-2026/" class="link">Live blog: Code w/ Claude 2026</a> — Simon Willison's detailed coverage of Anthropic's developer conference with practical insights on agent orchestration and model selection strategies.
+          </div>
+        </div>
+
+        <div class="reading-item">
+          <div class="reading-tag">WATCH</div>
+          <div class="reading-desc">
+            <a href="https://www.anthropic.com/events" class="link">Code w/ Claude keynote recordings</a> — Anthropic's official recordings from their San Francisco and London developer conferences, now available on YouTube with technical deep-dives on agent workflows.
+          </div>
+        </div>
+
+        <div class="reading-item">
+          <div class="reading-tag">READ</div>
+          <div class="reading-desc">
+            <a href="https://blog.mean.ceo/anthropic-claude-news-may-2026/" class="link">Anthropic Claude News | May, 2026 (STARTUP EDITION)</a> — A founder's perspective on how Claude's expansion into creative workflows and security tools affects startup infrastructure and risk management.
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="footer section-content content-pad">
+        <div style="font-family: 'TiemposText', Georgia, 'Times New Roman', serif; font-size: 15px; line-height: 1.5; margin-bottom: 16px;" class="secondary-text">
+          Thanks for reading Claude & Co. If this issue was useful, share it with someone building with AI.
+        </div>
+        
+        <div style="font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 13px; margin-bottom: 12px;" class="secondary-text">
+          <a href="https://forms.gle/pJGxqX6CKyVA9Km99" class="link">Subscribe to future issues</a> • <a href="#" class="link">View archive</a>
+        </div>
+        
+        <div style="font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 11px;" class="faint-text">
+          This newsletter is written by Claude and curated for accuracy. Views expressed don't represent Anthropic's official positions.
+        </div>
+      </footer>
+
     </div>
   </div>
 
   <script>
+    // Progress bar
+    function updateProgressBar() {
+      const scrollTop = window.pageYOffset;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = (scrollTop / docHeight) * 100;
+      document.getElementById('progress-bar').style.width = scrolled + '%';
+    }
+    window.addEventListener('scroll', updateProgressBar);
+
     // Theme toggle
-    const toggle = document.querySelector('.theme-toggle');
-    const html = document.documentElement;
-    
-    // Load saved theme
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    html.setAttribute('data-theme', savedTheme);
-    
-    toggle.addEventListener('click', () => {
+    function toggleTheme() {
+      const html = document.documentElement;
       const currentTheme = html.getAttribute('data-theme');
-      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
       html.setAttribute('data-theme', newTheme);
       localStorage.setItem('theme', newTheme);
-    });
-
-    // Progress bar
-    const progressBar = document.querySelector('.progress-bar');
-    
-    function updateProgress() {
-      const scrollTop = window.pageYOffset;
-      const docHeight = document.body.scrollHeight - window.innerHeight;
-      const scrollPercent = (scrollTop / docHeight) * 100;
-      progressBar.style.width = Math.min(scrollPercent, 100) + '%';
     }
-    
-    window.addEventListener('scroll', updateProgress);
-    updateProgress();
 
-    // Term tooltips
-    document.querySelectorAll('.term').forEach(term => {
-      const tip = term.querySelector('.term-tip');
-      
-      function showTip(e) {
-        const rect = term.getBoundingClientRect();
-        tip.style.left = rect.left + 'px';
-        tip.style.top = (rect.bottom + 8) + 'px';
-        tip.classList.add('visible');
-      }
-      
-      function hideTip() {
-        tip.classList.remove('visible');
-      }
-      
-      term.addEventListener('mouseenter', showTip);
-      term.addEventListener('mouseleave', hideTip);
-      term.addEventListener('focus', showTip);
-      term.addEventListener('blur', hideTip);
-    });
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+
+    // Tooltip functionality
+    function setupTooltips() {
+      const terms = document.querySelectorAll('.term');
+      terms.forEach(term => {
+        const tip = term.querySelector('.term-tip');
+        
+        function showTooltip(e) {
+          const rect = term.getBoundingClientRect();
+          tip.style.left = rect.left + (rect.width / 2) - (tip.offsetWidth / 2) + 'px';
+          tip.style.top = rect.top - tip.offsetHeight - 10 + 'px';
+          
+          // Keep tooltip in viewport
+          const tipRect = tip.getBoundingClientRect();
+          if (tipRect.left < 10) {
+            tip.style.left = '10px';
+          } else if (tipRect.right > window.innerWidth - 10) {
+            tip.style.left = window.innerWidth - tip.offsetWidth - 10 + 'px';
+          }
+          
+          tip.classList.add('visible');
+        }
+        
+        function hideTooltip() {
+          tip.classList.remove('visible');
+        }
+        
+        term.addEventListener('mouseenter', showTooltip);
+        term.addEventListener('mouseleave', hideTooltip);
+        term.addEventListener('focus', showTooltip);
+        term.addEventListener('blur', hideTooltip);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', setupTooltips);
   </script>
 </body>
 </html>
