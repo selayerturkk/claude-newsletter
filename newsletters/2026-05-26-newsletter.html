@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude & Co. - Issue #2</title>
+
+  <style>
+  /* Fonts */
+  @font-face { font-family:'TiemposText'; src:url('https://www.anthropic.com/_next/static/media/TiemposText_Regular-s.p.7f1d46d6.woff2') format('woff2'); font-weight:400; font-style:normal; font-display:swap; }
+  @font-face { font-family:'TiemposText'; src:url('https://www.anthropic.com/_next/static/media/TiemposText_RegularItalic-s.p.1a798fcf.woff2') format('woff2'); font-weight:400; font-style:italic; font-display:swap; }
+  @font-face { font-family:'TiemposText'; src:url('https://www.anthropic.com/_next/static/media/TiemposText_Medium-s.p.520d99f8.woff2') format('woff2'); font-weight:500; font-style:normal; font-display:swap; }
+  @font-face { font-family:'StyreneA'; src:url('https://www.anthropic.com/_next/static/media/StyreneA_Regular_Web-s.p.429c699d.woff2') format('woff2'); font-weight:400; font-style:normal; font-display:swap; }
+  @font-face { font-family:'StyreneA'; src:url('https://www.anthropic.com/_next/static/media/StyreneA_Medium_Web-s.p.e5135f7e.woff2') format('woff2'); font-weight:500; font-style:normal; font-display:swap; }
+  @font-face { font-family:'StyreneB'; src:url('https://www.anthropic.com/_next/static/media/StyreneB_Regular_Web-s.p.cb3cc1a3.woff2') format('woff2'); font-weight:400; font-style:normal; font-display:swap; }
+  @font-face { font-family:'StyreneB'; src:url('https://www.anthropic.com/_next/static/media/StyreneB_Medium_Web-s.p.88fa5a67.woff2') format('woff2'); font-weight:500; font-style:normal; font-display:swap; }
+
+  /* Theme tokens — Claude palette */
+  :root, [data-theme="light"] {
+    --bg-outer: #F4F3EE;
+    --bg-container: #FFFFFF;
+    --bg-callout: #F4F3EE;
+    --bg-footer: #F4F3EE;
+    --text-primary: #2f2f2b;
+    --text-secondary: #4a4a44;
+    --text-muted: #B1ADA1;
+    --text-faint: #c5c1b8;
+    --accent: #C15F3C;
+    --border: rgba(177,173,161,0.3);
+    --link-underline: rgba(47,47,43,0.3);
+    --toggle-bg: rgba(47,47,43,0.06);
+    --toggle-hover: rgba(47,47,43,0.12);
+    --toggle-icon-show-sun: none;
+    --toggle-icon-show-moon: block;
+  }
+  [data-theme="dark"] {
+    --bg-outer: #2f2f2b;
+    --bg-container: #3a3a36;
+    --bg-callout: #454540;
+    --bg-footer: #2f2f2b;
+    --text-primary: #F4F3EE;
+    --text-secondary: #d5d3cb;
+    --text-muted: #B1ADA1;
+    --text-faint: #7a776e;
+    --accent: #C15F3C;
+    --border: rgba(244,243,238,0.1);
+    --link-underline: rgba(244,243,238,0.3);
+    --toggle-bg: rgba(244,243,238,0.06);
+    --toggle-hover: rgba(244,243,238,0.12);
+    --toggle-icon-show-sun: block;
+    --toggle-icon-show-moon: none;
+  }
+
+  /* Base */
+  body {
+    margin: 0; padding: 0;
+    background-color: var(--bg-outer);
+    font-family: 'TiemposText', Georgia, 'Times New Roman', serif;
+    color: var(--text-primary);
+    line-height: 1.5; font-size: 17px; letter-spacing: -0.01em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Themed elements */
+  .outer-wrap { background-color: var(--bg-outer); transition: background-color 0.3s ease; }
+  .container {
+    background-color: var(--bg-container);
+    transition: background-color 0.3s ease;
+    max-width: 680px !important;
+    width: 100% !important;
+    overflow: visible !important;
+  }
+
+  /* Responsive */
+  @media screen and (min-width: 740px) {
+    .container { max-width: 680px !important; }
+    .content-pad { padding-left: 48px !important; padding-right: 48px !important; }
+    .title-main { font-size: 38px !important; }
+    .intro-text { font-size: 17px !important; }
+    .heading-lg { font-size: 25px !important; }
+    .heading-md { font-size: 21px !important; }
+    .section-gap { padding-top: 24px !important; padding-bottom: 24px !important; }
+    .section-content { padding-top: 40px !important; padding-bottom: 40px !important; }
+  }
+  @media screen and (max-width: 480px) {
+    .container { margin: 0 12px !important; }
+    .content-pad { padding-left: 24px !important; padding-right: 24px !important; }
+    .title-main { font-size: 30px !important; }
+  }
+  .header-border { border-bottom: 1px solid var(--border); }
+  .meta-text { color: var(--text-muted); }
+  .title-text { color: var(--text-primary); transition: color 0.3s ease; }
+  .body-text { color: var(--text-primary); transition: color 0.3s ease; }
+  .secondary-text { color: var(--text-secondary); transition: color 0.3s ease; }
+  .accent-text { color: var(--accent); }
+  .faint-text { color: var(--text-faint); }
+  .section-label { color: var(--accent); border-bottom: 1px solid var(--border); }
+  .divider { border-top: 1px solid var(--border); }
+  .section-gap { padding-top: 20px !important; padding-bottom: 20px !important; }
+  .callout { background-color: var(--bg-callout); transition: background-color 0.3s ease; }
+  .footer { background-color: var(--bg-footer); border-top: 1px solid var(--border); transition: background-color 0.3s ease; }
+  .link { color: var(--text-primary); text-decoration: underline; text-decoration-color: var(--link-underline); text-underline-offset: 2px; transition: color 0.3s ease; }
+  .link:hover { text-decoration-color: var(--text-primary); }
+
+  /* Progress bar */
+  .progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0%;
+    background: var(--accent);
+    z-index: 10000;
+    transition: width 0.1s linear;
+  }
+
+  /* Pullquote hook */
+  .hook {
+    padding: 28px 48px 24px;
+  }
+  .hook-box {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 28px 32px;
+    background-color: var(--bg-callout);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+  .hook-quote {
+    font-family: 'TiemposText', Georgia, 'Times New Roman', serif;
+    font-size: 20px;
+    font-weight: 400;
+    font-style: italic;
+    letter-spacing: -0.01em;
+    line-height: 1.4;
+    color: var(--text-primary);
+    margin: 0 0 12px;
+    transition: color 0.3s ease;
+  }
+  .hook-sub {
+    font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    margin: 0;
+    letter-spacing: -0.01em;
+    line-height: 1.45;
+  }
+  @media screen and (min-width: 740px) {
+    .hook-quote { font-size: 22px !important; }
+  }
+
+  /* Reading list */
+  .reading-item {
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+    padding: 10px 0;
+    border-top: 1px solid var(--border);
+  }
+  .reading-tag {
+    font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--accent);
+    white-space: nowrap;
+    min-width: 52px;
+  }
+  .reading-desc {
+    font-family: 'TiemposText', Georgia, 'Times New Roman', serif;
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.45;
+    transition: color 0.3s ease;
+  }
+  .reading-desc a { color: var(--text-primary); text-decoration: underline; text-decoration-color: var(--link-underline); text-underline-offset: 2px; }
+
+  /* Closing PM blurb */
+  .closing-blurb {
+    border-top: 1px solid var(--border);
+    padding-top: 28px;
+    margin-top: 8px;
+  }
+  .closing-label {
+    font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--accent);
+    margin: 0 0 10px;
+  }
+  .closing-text {
+    font-family: 'TiemposText', Georgia, 'Times New Roman', serif;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--text-primary);
+    margin: 0;
+    transition: color 0.3s ease;
+  }
+
+  /* Toggle button */
+  .theme-toggle {
+    position: fixed; top: 20px; right: 20px; z-index: 999;
+    width: 40px; height: 40px;
+    background: var(--toggle-bg);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s ease;
+    padding: 0;
+  }
+  .theme-toggle:hover { background: var(--toggle-hover); }
+  .theme-toggle svg { width: 18px; height: 18px; }
+  .theme-toggle .icon-sun { display: var(--toggle-icon-show-sun); color: var(--text-primary); }
+  .theme-toggle .icon-moon { display: var(--toggle-icon-show-moon); color: var(--text-primary); }
+
+  /* Glossary toggle */
+  .glossary-toggle {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    transition: border-color 0.3s ease;
+  }
+  .glossary-toggle summary {
+    font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--accent);
+    cursor: pointer;
+    padding: 14px 20px;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    user-select: none;
+  }
+  .glossary-toggle summary::-webkit-details-marker { display: none; }
+  .glossary-toggle summary::before {
+    content: '+';
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--accent);
+    transition: transform 0.2s ease;
+    display: inline-block;
+    width: 16px;
+    text-align: center;
+  }
+  .glossary-toggle[open] summary::before {
+    content: '\2212';
+  }
+  .glossary-content {
+    padding: 0 20px 16px;
+  }
+  .glossary-item {
+    display: flex;
+    gap: 12px;
+    padding: 8px 0;
+    border-top: 1px solid var(--border);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .glossary-term {
+    font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    color: var(--text-primary);
+    white-space: nowrap;
+    min-width: 110px;
+    font-size: 13px;
+    letter-spacing: -0.01em;
+    transition: color 0.3s ease;
+  }
+  .glossary-def {
+    font-family: 'TiemposText', Georgia, 'Times New Roman', serif;
+    color: var(--text-secondary);
+    transition: color 0.3s ease;
+  }
+
+  /* Inline term tooltips */
+  .term {
+    border-bottom: 1px dotted var(--accent);
+    cursor: help;
+    color: inherit;
+    text-decoration: none;
+  }
+  .term-tip {
+    position: fixed;
+    visibility: hidden;
+    opacity: 0;
+    background-color: var(--text-primary);
+    color: var(--bg-container);
+    font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    line-height: 1.4;
+    letter-spacing: 0;
+    padding: 10px 16px;
+    border-radius: 6px;
+    width: 340px;
+    max-width: 90vw;
+    white-space: normal;
+    z-index: 9999;
+    pointer-events: none;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+    transition: opacity 0.15s ease, visibility 0.15s ease;
+  }
+  .term-tip.visible {
+    visibility: visible;
+    opacity: 1;
+  }
+  .term-tip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: var(--text-primary);
+  }
+</style>
+</head>
+
+<body>
+  <div class="progress-bar"></div>
+  
+  <button class="theme-toggle" onclick="toggleTheme()">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="12" cy="12" r="5"/>
+      <path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72 1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42m12.72-12.72 1.42-1.42"/>
+    </svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+  </button>
+
+  <div class="outer-wrap">
+    <div class="container" style="margin: 0 auto;">
+      
+      <!-- Header -->
+      <div class="content-pad section-gap header-border">
+        <div style="text-align: center;">
+          <div class="title-main" style="font-family: 'StyreneB', 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 36px; font-weight: 500; line-height: 0.95; letter-spacing: -0.02em; color: var(--text-primary); margin: 0;">Claude & Co.</div>
+          <div style="font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500; color: var(--text-muted); margin: 8px 0 0;">Issue #2 • May 26, 2026</div>
+          <div style="font-family: 'TiemposText', Georgia, serif; font-style: italic; color: var(--text-secondary); margin: 6px 0 0; font-size: 14px;">When AI meets scale, everything changes faster</div>
+        </div>
+      </div>
+
+      <!-- Intro -->
+      <div class="content-pad section-gap">
+        <div class="body-text intro-text">
+          It's been a whirlwind four days since our first issue. <a href="#" class="link">Anthropic's Code w/ Claude conference</a> showcased developers shipping entire pull requests written by AI, while the company quietly expanded into enterprise partnerships worth billions. Meanwhile, the government is racing to understand what happens when models like Claude Mythos can find decades-old vulnerabilities faster than human experts.
+        </div>
+      </div>
+
+      <!-- Hook -->
+      <div class="hook">
+        <div class="hook-box">
+          <div class="hook-quote">
+            The distance between idea and production software is narrowing—and some teams are getting 70% of their delivery time back.
+          </div>
+          <div class="hook-sub">
+            <strong>Also in this issue:</strong> Claude for Small Business launches nationwide, API pricing gets more complex, and cybersecurity stocks rally as Claude Mythos finds 10,000+ critical vulnerabilities
+          </div>
+        </div>
+      </div>
+
+      <!-- Jargon Decoder -->
+      <div class="content-pad section-gap">
+        <details class="glossary-toggle">
+          <summary>Jargon Decoder</summary>
+          <div class="glossary-content">
+            <div class="glossary-item">
+              <div class="glossary-term">Agentic AI</div>
+              <div class="glossary-def">AI systems that can plan, use tools, and work toward goals over time rather than just respond to single prompts</div>
+            </div>
+            <div class="glossary-item">
+              <div class="glossary-term">Zero-day</div>
+              <div class="glossary-def">A software vulnerability that was previously unknown and unpatched</div>
+            </div>
+            <div class="glossary-item">
+              <div class="glossary-term">Rate limits</div>
+              <div class="glossary-def">Maximum number of API requests you can make per minute or hour</div>
+            </div>
+            <div class="glossary-item">
+              <div class="glossary-term">Batch API</div>
+              <div class="glossary-def">Processing multiple requests at once for cost savings, trading speed for cheaper rates</div>
+            </div>
+            <div class="glossary-item">
+              <div class="glossary-term">Prompt caching</div>
+              <div class="glossary-def">Saving repeated parts of prompts to reduce costs on subsequent uses</div>
+            </div>
+            <div class="glossary-item">
+              <div class="glossary-term">CVE</div>
+              <div class="glossary-def">Common Vulnerabilities and Exposures—official IDs for security flaws</div>
+            </div>
+            <div class="glossary-item">
+              <div class="glossary-term">SWE-bench</div>
+              <div class="glossary-def">A benchmark that tests AI models on real software engineering tasks</div>
+            </div>
+          </div>
+        </details>
+      </div>
+
+      <!-- Anthropic Product News -->
+      <div class="content-pad section-content">
+        <div class="section-label" style="font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500; padding: 0 0 16px; margin: 0 0 20px;">Anthropic Product News</div>
+        
+        <div class="heading-md" style="font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 21px; font-weight: 500; letter-spacing: -0.02em; margin: 0 0 16px;">Claude Code Gets "Dreaming" and Major Rate Limit Boosts</div>
+        
+        <div class="body-text" style="margin-bottom: 20px;">
+          Claude expands its developer platform with higher Claude Code and Opus API limits plus new Claude Managed Agents capabilities, including dreaming, multiagent orchestration, outcomes, and webhooks. The <span class="term" tabindex="0">rate limits<span class="term-tip">Maximum number of API requests you can make per minute or hour</span></span> doubled for Pro, Max, and Enterprise customers, while "We're partnering with SpaceX to use all of the capacity of their Colossus data center" suggests serious infrastructure expansion.
+        </div>
+        
+        <div class="body-text" style="margin-bottom: 20px;">
+          The "dreaming" feature is particularly interesting: Claude Code agents write notes to themselves, recording and saving useful information about specific tasks. When another coding agent later starts to work on the same code, it can use the notes to get up to speed faster and learn from any errors that previous agents may have made. Dreaming is a system that Claude Code uses to read through all these notes and consolidate the information they contain, spotting patterns and common issues across different tasks.
+        </div>
+
+        <div class="heading-md" style="font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 21px; font-weight: 500; letter-spacing: -0.02em; margin: 32px 0 16px;">API Pricing Stays Flat, But Usage Costs May Rise</div>
+        
+        <div class="body-text" style="margin-bottom: 20px;">
+          As of May 2026 per Anthropic's pricing page: Claude Haiku 4.5 at $1.00 input / $5.00 output, Claude Sonnet 4.6 at $3.00 / $15.00, and Claude Opus 4.7 at $5.00 / $25.00. But there's a catch: Opus 4.7 ships with a new tokenizer that can produce up to 35% more tokens for the same input text. Your bill per request could increase even though the rate card didn't change.
+        </div>
+
+        <div class="body-text" style="margin-bottom: 20px;">
+          More importantly, Beginning June 15, Anthropic will separate programmatic Claude usage from standard chat subscription limits, introducing a dedicated monthly credit system, billed at API-style rates, for tools including its Agent SDK, GitHub Actions, and third-party frameworks such as OpenClaw. The monthly credit for programmatic usage will depend on a user's existing Claude subscription tier and generally mirror its monthly price, with Pro users receiving $20 in credits, Max 5x users $100, and Max 20x users $200.
+        </div>
+
+        <div class="heading-md" style="font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 21px; font-weight: 500; letter-spacing: -0.02em; margin: 32px 0 16px;">Claude for Small Business Goes Nationwide</div>
+        
+        <div class="body-text" style="margin-bottom: 20px;">
+          We're launching Claude for Small Business—a package of connectors and ready-to-run workflows that put Claude inside the tools small businesses depend on—to help small business owners take full advantage of AI and cross off items on the to-do list. The platform integrates with Intuit Quickbooks, PayPal, HubSpot, Canva, Docusign, Google Workspace, and Microsoft 365.
+        </div>
+
+        <div class="body-text" style="margin-bottom: 20px;">
+          Starting May 14 in Chicago, we're taking Claude for Small Business on the road. The tour is a free, half-day live AI fluency training and hands-on workshop for 100 local small business leaders per stop. Spring stops include Chicago, Tulsa, Dallas, Baltimore, and Salt Lake City, with more cities coming this fall.
+        </div>
+      </div>
+
+      <!-- Feature Deep-Dive -->
+      <div class="content-pad section-content">
+        <div class="section-label" style="font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500; padding: 0 0 16px; margin: 0 0 20px;">Feature Deep-Dive</div>
+        
+        <div class="heading-md" style="font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 21px; font-weight: 500; letter-spacing: -0.02em; margin: 0 0 16px;">How to Cut Your Claude Bills by 95% with Batch API + Caching</div>
+        
+        <div class="body-text" style="margin-bottom: 20px;">
+          If you're running Claude at scale, you're probably overpaying. The combination of <span class="term" tabindex="0">batch processing<span class="term-tip">Processing multiple requests at once for cost savings, trading speed for cheaper rates</span></span> and <span class="term" tabindex="0">prompt caching<span class="term-tip">Saving repeated parts of prompts to reduce costs on subsequent uses</span></span> can reduce costs by up to 95%, but most developers aren't using them effectively.
+        </div>
+        
+        <div class="body-text" style="margin-bottom: 20px;">
+          <strong>Step 1: Enable Prompt Caching</strong><br>
+          Prompt caching cuts cached input by 90%. If you're sending the same system prompt, tool schemas, or reference documents repeatedly, cache them. Anthropic prompt caching charges cache writes and cache reads separately: A cache hit costs 10% of the standard input price. Use prompt caching for repeated system prompts, tool schemas, long reference documents, and stable conversation history.
+        </div>
+        
+        <div class="body-text" style="margin-bottom: 20px;">
+          <strong>Step 2: Use Batch API for Non-Urgent Work</strong><br>
+          Batch processing is 50% off. Anthropic's Message Batches API gives a 50% discount on input and output tokens for asynchronous workloads: Batch processing and prompt caching can be combined, so high-volume jobs with repeated context should use both when latency is not critical.
+        </div>
+        
+        <div class="body-text" style="margin-bottom: 20px;">
+          <strong>Step 3: Route by Complexity</strong><br>
+          Claude Haiku pricing at $1/$5 per MTok is 5x cheaper than Claude Sonnet pricing at $3/$15, and 25x cheaper than Claude Opus pricing at $5/$25. Start simple tasks on Haiku, escalate to Sonnet for general coding, and reserve Opus for complex reasoning.
+        </div>
+        
+        <div class="body-text">
+          <strong>Real Example:</strong> A team processing 50,000 documents monthly at Claude Haiku 4.5 pricing: $200/month standard, $100/month batch. Same outputs. Half the invoice. With prompt caching on top, you could get this down to $30-50/month.
+        </div>
+      </div>
+
+      <!-- Broader Tech News -->
+      <div class="content-pad section-content">
+        <div class="section-label" style="font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500; padding: 0 0 16px; margin: 0 0 20px;">Broader Tech News</div>
+        
+        <div class="heading-md" style="font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 21px; font-weight: 500; letter-spacing: -0.02em; margin: 0 0 16px;">Claude Mythos Finds 10,000+ Critical Vulnerabilities</div>
+        
+        <div class="body-text" style="margin-bottom: 20px;">
+          The headline figure: more than 10,000 high- or critical-severity vulnerabilities identified across the most widely used software on the internet, accumulated by roughly 50 partner organizations deploying Claude Mythos Preview in controlled, defensive security workflows. The most striking example: Mythos Preview fully autonomously identified and then exploited a 17-year-old remote code execution vulnerability in FreeBSD that allows anyone to gain root on a machine running NFS.
+        </div>
+        
+        <div class="body-text" style="margin-bottom: 20px;">
+          Claude Security launched in public beta on May 22, 2026 for Claude Enterprise customers. It uses Claude Opus 4.7 to scan code repositories for vulnerabilities and generate proposed fixes. But the real story is what happens when AI gets this good at finding bugs—cybersecurity companies that everyone thought would be hurt are now rallying. As of May 21, HACK was up 17.27% month-to-date, the largest monthly rate of change on its chart since the fund launched in November 2014. BUG was up 26.14% month-to-date, the largest monthly gain in its history since inception in October 2019.
+        </div>
+
+        <div class="heading-md" style="font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 21px; font-weight: 500; letter-spacing: -0.02em; margin: 32px 0 16px;">Government Moves Into AI Oversight</div>
+        
+        <div class="body-text" style="margin-bottom: 20px;">
+          The Center for AI Standards and Innovation on Tuesday announced agreements with Google DeepMind, Microsoft and Elon Musk's xAI that will allow the U.S. government to evaluate artificial intelligence models before they are publicly available. CAISI, which sits under the U.S. Department of Commerce, will "conduct pre-deployment evaluations and targeted research to better assess frontier AI capabilities and advance the state of AI security."
+        </div>
+
+        <div class="body-text" style="margin-bottom: 20px;">
+          Meanwhile, The companies involved in the deal: Elon Musk's SpaceX, ChatGPT-maker OpenAI, Google, Microsoft, Nvidia, Amazon Web Services, Oracle and Reflection. The Pentagon has existing AI contracts with several companies, including Palantir and OpenAI. Notably absent from this list: Anthropic, which continues to face government pressure over Claude Mythos capabilities.
+        </div>
+
+        <div class="heading-md" style="font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 21px; font-weight: 500; letter-spacing: -0.02em; margin: 32px 0 16px;">Major Enterprise Partnerships Signal AI-First Future</div>
+        
+        <div class="body-text" style="margin-bottom: 20px;">
+          PwC will roll out Claude Code and Cowork starting with U.S. teams and expanding toward a global workforce of hundreds of thousands of professionals. The companies are establishing a joint Center of Excellence and a program to train and certify 30,000 PwC professionals on Claude. Insurance underwriting that took 10 weeks now takes 10 days. Security work that took hours now takes minutes.
+        </div>
+        
+        <div class="body-text">
+          Similarly, every one of KPMG's 276,000+ employees globally will gain access to Claude. These aren't pilot programs—they're complete organizational transformations around AI-native workflows.
+        </div>
+      </div>
+
+      <!-- Closing blurb -->
+      <div class="content-pad section-content">
+        <div class="closing-blurb">
+          <div class="closing-label">The Bigger Picture</div>
+          <div class="closing-text">
+            We're watching the end of "AI as a feature" and the beginning of "AI as infrastructure." When "Claude is probably as good as a midlevel engineer at writing code," and enterprises are betting hundreds of thousands of employees on AI workflows, the question isn't whether AI will change how we work—it's how fast your organization can adapt. The teams getting ahead aren't waiting for perfect models; they're building operational muscle around the tools available today. That's the difference between riding the wave and getting swept away by it.
+          </div>
+        </div>
+      </div>
+
+      <!-- Reading List -->
+      <div class="content-pad section-content">
+        <div class="section-label" style="font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500; padding: 0 0 16px; margin: 0 0 20px;">Reading / Watching / Listening</div>
+        
+        <div class="reading-item">
+          <div class="reading-tag">Read</div>
+          <div class="reading-desc">
+            <a href="https://www.technologyreview.com/2026/05/21/1137735/anthropics-code-with-claude-showed-off-codings-future-whether-you-like-it-or-not/" class="link">Anthropic's Code with Claude showed off coding's future—whether you like it or not</a> - MIT Technology Review's deep dive into what happens when half the room ships AI-written code without reading it
+          </div>
+        </div>
+        
+        <div class="reading-item">
+          <div class="reading-tag">Watch</div>
+          <div class="reading-desc">
+            <a href="https://simonwillison.net/2026/May/6/code-w-claude-2026/" class="link">Simon Willison's live blog of Code w/ Claude 2026</a> - Real-time notes from Anthropic's developer conference, including the SpaceX Colossus partnership reveal
+          </div>
+        </div>
+        
+        <div class="reading-item">
+          <div class="reading-tag">Read</div>
+          <div class="reading-desc">
+            <a href="https://red.anthropic.com/2026/mythos-preview/" class="link">Claude Mythos Preview technical report</a> - Anthropic's detailed breakdown of Mythos finding a 17-year-old FreeBSD vulnerability and what it means for cybersecurity
+          </div>
+        </div>
+        
+        <div class="reading-item">
+          <div class="reading-tag">Read</div>
+          <div class="reading-desc">
+            <a href="https://www.anthropic.com/glasswing" class="link">Project Glasswing: Securing critical software for the AI era</a> - Anthropic's initiative to use Claude Mythos for defensive cybersecurity, with quotes from AWS, Microsoft, and Cisco
+          </div>
+        </div>
+        
+        <div class="reading-item">
+          <div class="reading-tag">Guide</div>
+          <div class="reading-desc">
+            <a href="https://www.cloudzero.com/blog/claude-api-pricing/" class="link">Anthropic Claude API Pricing In 2026: Every Model, Token Rate, And Cost Lever</a> - Comprehensive guide to Claude pricing optimization with real cost scenarios
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="footer content-pad section-gap" style="margin-top: 48px;">
+        <div style="font-family: 'TiemposText', Georgia, serif; font-size: 14px; color: var(--text-secondary); line-height: 1.55; margin-bottom: 16px;">
+          Thanks for reading Claude & Co. If you found this useful, <a href="https://forms.gle/pJGxqX6CKyVA9Km99" class="link">share the signup link</a> with someone who'd appreciate AI industry insights.
+        </div>
+        <div style="font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 11px; color: var(--text-faint); line-height: 1.45;">
+          <a href="#" class="link">Newsletter archive</a> • This newsletter is AI-generated and for informational purposes only
+        </div>
+      </div>
+    
+    </div>
+  </div>
+
+  <script>
+    // Reading progress
+    function updateProgress() {
+      const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+      document.querySelector('.progress-bar').style.width = Math.min(scrolled, 100) + '%';
+    }
+    window.addEventListener('scroll', updateProgress);
+
+    // Theme toggle
+    function toggleTheme() {
+      const html = document.documentElement;
+      const currentTheme = html.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('claude-newsletter-theme', newTheme);
+    }
+
+    // Load saved theme
+    const savedTheme = localStorage.getItem('claude-newsletter-theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+
+    // Tooltip functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const terms = document.querySelectorAll('.term');
+      
+      terms.forEach(term => {
+        let tooltip = null;
+        
+        function showTooltip(e) {
+          tooltip = term.querySelector('.term-tip');
+          if (tooltip) {
+            tooltip.classList.add('visible');
+            
+            // Position tooltip
+            const rect = term.getBoundingClientRect();
+            const tooltipRect = tooltip.getBoundingClientRect();
+            
+            let left = rect.left + (rect.width / 2) - (tooltipRect.width / 2);
+            let top = rect.top - tooltipRect.height - 10;
+            
+            // Keep tooltip on screen
+            if (left < 10) left = 10;
+            if (left + tooltipRect.width > window.innerWidth - 10) {
+              left = window.innerWidth - tooltipRect.width - 10;
+            }
+            if (top < 10) {
+              top = rect.bottom + 10;
+            }
+            
+            tooltip.style.left = left + 'px';
+            tooltip.style.top = top + 'px';
+          }
+        }
+        
+        function hideTooltip() {
+          if (tooltip) {
+            tooltip.classList.remove('visible');
+          }
+        }
+        
+        term.addEventListener('mouseenter', showTooltip);
+        term.addEventListener('mouseleave', hideTooltip);
+        term.addEventListener('focus', showTooltip);
+        term.addEventListener('blur', hideTooltip);
+      });
+    });
+  </script>
+
+</body>
+</html>
