@@ -148,9 +148,13 @@ def send_via_resend(api_key: str, from_addr: str, to: str, subject: str, html: s
         method="POST",
     )
 
-    with urllib.request.urlopen(req, timeout=30) as resp:
-        result = json.loads(resp.read().decode("utf-8"))
-        return result
+    try:
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            result = json.loads(resp.read().decode("utf-8"))
+            return result
+    except urllib.error.HTTPError as e:
+        body = e.read().decode("utf-8", errors="replace")
+        raise RuntimeError(f"Resend API {e.code}: {body}") from e
 
 
 def send_newsletter(html_path: str | None = None):
