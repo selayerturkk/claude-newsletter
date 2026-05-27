@@ -1,0 +1,520 @@
+I'll search for recent Anthropic/Claude news and broader tech news for the specified date range, then generate the newsletter.Based on the search results, I now have enough information to generate Issue #7 of Claude & Co. for May 27, 2026. Here's the complete HTML newsletter:
+
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude & Co. - Issue #7</title>
+    
+    <style>
+        @font-face {
+            font-family: 'TiemposText';
+            src: url('https://www.anthropic.com/_next/static/media/TiemposText_Regular.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'TiemposText';
+            src: url('https://www.anthropic.com/_next/static/media/TiemposText_RegularItalic.woff2') format('woff2');
+            font-weight: 400;
+            font-style: italic;
+        }
+        @font-face {
+            font-family: 'TiemposText';
+            src: url('https://www.anthropic.com/_next/static/media/TiemposText_Medium.woff2') format('woff2');
+            font-weight: 500;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'StyreneA';
+            src: url('https://www.anthropic.com/_next/static/media/StyreneA_Regular.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'StyreneA';
+            src: url('https://www.anthropic.com/_next/static/media/StyreneA_Medium.woff2') format('woff2');
+            font-weight: 500;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'StyreneB';
+            src: url('https://www.anthropic.com/_next/static/media/StyreneB_Regular.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'StyreneB';
+            src: url('https://www.anthropic.com/_next/static/media/StyreneB_Medium.woff2') format('woff2');
+            font-weight: 500;
+            font-style: normal;
+        }
+
+        :root {
+            --bg-outer: #F4F3EE;
+            --bg-container: #FFFFFF;
+            --bg-callout: #F4F3EE;
+            --text-primary: #2f2f2b;
+            --text-secondary: #4a4a44;
+            --text-muted: #B1ADA1;
+            --text-faint: #c5c1b8;
+            --accent: #C15F3C;
+            --border: rgba(177,173,161,0.3);
+            --link-underline: rgba(47,47,43,0.3);
+        }
+
+        [data-theme="dark"] {
+            --bg-outer: #2f2f2b;
+            --bg-container: #3a3a36;
+            --bg-callout: #454540;
+            --text-primary: #F4F3EE;
+            --text-secondary: #d5d3cb;
+            --text-muted: #B1ADA1;
+            --text-faint: #7a776e;
+            --accent: #C15F3C;
+            --border: rgba(244,243,238,0.1);
+            --link-underline: rgba(244,243,238,0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'TiemposText', Georgia, 'Times New Roman', serif;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 1.5;
+            letter-spacing: -0.01em;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-outer);
+            color: var(--text-primary);
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background-color: var(--accent);
+            z-index: 1000;
+            transition: width 0.1s ease;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--bg-container);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            transition: all 0.2s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .theme-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 48px;
+            background-color: var(--bg-container);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 48px;
+            padding-top: 24px;
+        }
+
+        .newsletter-title {
+            font-family: 'StyreneB', 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 36px;
+            font-weight: 500;
+            line-height: 0.95;
+            margin: 0;
+            color: var(--text-primary);
+        }
+
+        .issue-info {
+            font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            margin: 12px 0;
+        }
+
+        .tagline {
+            font-style: italic;
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-top: 8px;
+        }
+
+        .section {
+            margin: 36px 0;
+        }
+
+        .section-label {
+            font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 11px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--accent);
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-heading {
+            font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 21px;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            margin: 24px 0 16px 0;
+        }
+
+        .hook-callout {
+            background-color: var(--bg-callout);
+            border-radius: 4px;
+            padding: 20px;
+            margin: 24px 0;
+            border-left: 4px solid var(--accent);
+        }
+
+        .hook-quote {
+            font-style: italic;
+            font-size: 18px;
+            line-height: 1.4;
+            color: var(--text-primary);
+            margin: 0 0 16px 0;
+        }
+
+        .hook-also {
+            font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+            margin: 0 0 8px 0;
+        }
+
+        .hook-highlights {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        .jargon-decoder {
+            margin: 24px 0;
+        }
+
+        .jargon-decoder summary {
+            font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            color: var(--text-secondary);
+            list-style: none;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .jargon-decoder summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .jargon-decoder summary::before {
+            content: '+ ';
+            margin-right: 8px;
+        }
+
+        .jargon-decoder[open] summary::before {
+            content: '− ';
+        }
+
+        .jargon-list {
+            padding: 16px 0 0 0;
+            margin: 0;
+        }
+
+        .jargon-item {
+            margin: 8px 0;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .jargon-term {
+            font-weight: 500;
+            color: var(--accent);
+        }
+
+        .term {
+            position: relative;
+            border-bottom: 1px dotted var(--accent);
+            cursor: help;
+        }
+
+        .term-tip {
+            visibility: hidden;
+            opacity: 0;
+            position: absolute;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--bg-container);
+            color: var(--text-primary);
+            text-align: center;
+            border-radius: 4px;
+            padding: 8px 12px;
+            font-size: 12px;
+            font-weight: 400;
+            white-space: nowrap;
+            z-index: 1;
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: opacity 0.2s ease;
+        }
+
+        .term:hover .term-tip,
+        .term:focus .term-tip {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        a {
+            color: var(--text-primary);
+            text-decoration: underline;
+            text-decoration-color: var(--link-underline);
+            text-underline-offset: 2px;
+        }
+
+        a:hover {
+            text-decoration-color: var(--accent);
+        }
+
+        .footer {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            font-size: 14px;
+            color: var(--text-secondary);
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 24px;
+            }
+            
+            .newsletter-title {
+                font-size: 28px;
+            }
+            
+            .theme-toggle {
+                top: 12px;
+                right: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <svg class="theme-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path class="sun-icon" d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+            <path class="moon-icon" style="display: none;" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z"/>
+        </svg>
+    </button>
+
+    <div class="container">
+        <header class="header">
+            <h1 class="newsletter-title">Claude & Co.</h1>
+            <div class="issue-info">Issue #7 • May 27, 2026</div>
+            <div class="tagline">Your twice-weekly briefing on Claude, Anthropic, and the AI landscape</div>
+        </header>
+
+        <section class="intro">
+            <p>AI companies are playing an interesting game right now. Just as their models get more powerful, their messaging is becoming more cautious. This week brought a fascinating contradiction: Anthropic announced major security advances at their Code w/ Claude event in London, while OpenAI's Sam Altman walked back his predictions about an AI "jobs apocalypse".</p>
+            
+            <div class="hook-callout">
+                <p class="hook-quote">"I'm delighted to be wrong about this. I thought there would have been more impact on entry-level white-collar jobs being eliminated by now than has actually happened."</p>
+                <p class="hook-also">Also in this issue:</p>
+                <p class="hook-highlights">Google cuts AI Ultra pricing by 60% • Mythos spotted in Claude Code • New sandbox security for developers</p>
+            </div>
+        </section>
+
+        <details class="jargon-decoder">
+            <summary>Jargon Decoder</summary>
+            <div class="jargon-list">
+                <div class="jargon-item"><span class="jargon-term">Sandbox:</span> A secure, isolated environment where code can run safely without affecting your main systems</div>
+                <div class="jargon-item"><span class="jargon-term">API:</span> Application Programming Interface - how different software programs talk to each other</div>
+                <div class="jargon-item"><span class="jargon-term">MCP:</span> Model Control Protocol - a way to manage and connect AI models to external tools</div>
+                <div class="jargon-item"><span class="jargon-term">Vulnerability:</span> A security weakness in software that could be exploited by attackers</div>
+                <div class="jargon-item"><span class="jargon-term">Agent:</span> An AI system that can take actions and complete tasks autonomously</div>
+                <div class="jargon-item"><span class="jargon-term">Usage limits:</span> Restrictions on how much you can use an AI service in a given time period</div>
+                <div class="jargon-item"><span class="jargon-term">Credits:</span> A consumption-based pricing model where you pay for actual usage rather than unlimited access</div>
+            </div>
+        </details>
+
+        <section class="section">
+            <div class="section-label">Anthropic Product News</div>
+            
+            <h2 class="section-heading">Claude Gets Serious About Security</h2>
+            <p>Anthropic unveiled two major security advances this week that signal a shift toward enterprise-grade development tools. The company launched a self-hosted sandbox in public beta, allowing Claude Managed Agents to operate in user-controlled environments connected to private MCP servers. Think of it as bringing your own fortress instead of relying on Anthropic's walls.</p>
+
+            <p>The real kicker? A new security guidance plugin has already shown a 30-40% decrease in security-related comments on pull requests during internal testing. The plugin is now available through the official Anthropic marketplace, essentially giving every developer a security reviewer that never sleeps.</p>
+
+            <p>Meanwhile, Anthropic expanded Claude's enterprise reach with 28 new security and compliance integrations, including CrowdStrike, Palo Alto Networks, and Microsoft, powered by the new Claude Compliance API. This isn't just about making Claude work with enterprise tools—it's about making it governable within existing corporate IT frameworks.</p>
+
+            <h2 class="section-heading">Mythos Mystery Deepens</h2>
+            <p>Anthropic appears to be moving Mythos closer to public use after the model briefly appeared in Claude Code references on May 25, with users spotting a toggle before it disappeared again. About 50 partners have already used Claude Mythos Preview to find more than 10,000 high- or severe-severity vulnerabilities, making any potential Claude Code integration highly consequential.</p>
+
+            <p>The timing is notable: US Treasury Secretary Scott Bessent recently called a meeting with major bank CEOs to discuss cybersecurity risks posed by Mythos, following Anthropic's disclosure that the model had identified thousands of previously unknown software vulnerabilities.</p>
+
+            <h2 class="section-heading">Pricing Gets Real</h2>
+            <p>Beginning June 15, Anthropic will separate programmatic Claude usage from standard chat subscription limits, introducing dedicated monthly credits billed at API-style rates. Pro users get $20 in credits, Max 5x users $100, and Max 20x users $200.</p>
+
+            <p>This mirrors a broader industry trend. As analyst Sanchit Vir Gogia notes, enterprises should expect more vendors to create separate consumption pools for agents, premium models, and background tasks over the next 12-24 months. The era of all-you-can-eat AI subscriptions for production workloads is ending.</p>
+        </section>
+
+        <section class="section">
+            <div class="section-label">Feature Deep-Dive</div>
+            
+            <h2 class="section-heading">How to Use Claude's New <span class="term" tabindex="0">Sandbox<span class="term-tip">A secure, isolated environment for running code safely</span></span> Security</h2>
+            <p>The new self-hosted <span class="term" tabindex="0">sandbox<span class="term-tip">A secure, isolated environment for running code safely</span></span> feature fundamentally changes how Claude can work with your code. Instead of executing everything in Anthropic's cloud, you can now run <span class="term" tabindex="0">agents<span class="term-tip">AI systems that can take actions autonomously</span></span> in your own controlled environment.</p>
+
+            <p><strong>Getting Started:</strong></p>
+            <ol>
+                <li>Configure your infrastructure through supported providers like Cloudflare, Daytona, Modal, or Vercel</li>
+                <li>Set up your network policies and audit logging as you would for any sensitive workload</li>
+                <li>Connect Claude Managed Agents to your private <span class="term" tabindex="0">MCP<span class="term-tip">Model Control Protocol for managing AI model connections</span></span> servers</li>
+                <li>Define what files and repositories Claude can access within your perimeter</li>
+            </ol>
+
+            <p><strong>Why This Matters:</strong> Your code never leaves your network, your security tools still apply, and you control compute sizing for heavy workloads. The agent orchestration and context management stays on Anthropic's infrastructure, but tool execution happens in your environment with your security controls.</p>
+
+            <p>This is particularly powerful for teams dealing with sensitive codebases, regulatory requirements, or proprietary algorithms. You get the intelligence of Claude without the exposure risk of sending your code to external servers.</p>
+        </section>
+
+        <section class="section">
+            <div class="section-label">Broader Tech News</div>
+
+            <h2 class="section-heading">The Jobs Apocalypse That Wasn't</h2>
+            <p>OpenAI CEO Sam Altman admitted he was "delighted to be wrong" about AI's impact on employment, saying he thought there would have been more impact on entry-level white-collar jobs by now than has actually happened. This represents a significant reversal from his earlier predictions that AI would eliminate most current jobs.</p>
+
+            <p>Altman realized that human interaction remains essential after experimenting with AI for his own communications, noting "we really do care about people" and "we really do care about our interactions with people". Meanwhile, a Yale Budget Lab study found no meaningful change in unemployment through March 2026 for workers in high AI exposure jobs.</p>
+
+            <h2 class="section-heading">Google's Aggressive Pricing Play</h2>
+            <p>Google launched a $100/month AI Ultra plan for developers and technical leads while reducing their top-tier plan from $250 to $200. The company also moved from daily prompt limits to a "compute-used" model that factors in prompt complexity, features used, and chat length.</p>
+
+            <p>The price cuts suggest Google is feeling competitive pressure and would rather have more subscribers at lower margins than fewer subscribers watching from the sidelines. This puts pressure on OpenAI and Microsoft to respond with their own pricing moves.</p>
+
+            <h2 class="section-heading">Chip Wars Continue</h2>
+            <p>Nvidia CEO Jensen Huang warned against splitting US and China AI ecosystems, acknowledging Nvidia has "largely conceded" China's AI chip market to Huawei after export controls. China previously accounted for more than 20% of Nvidia's data center revenue, but the company reported zero China revenue in its latest earnings.</p>
+
+            <p>Meanwhile, AMD kicked off production of its 6th Generation EPYC processors on TSMC's 2nm process, marking the first high-performance computing product at this node and signaling a direct challenge to Nvidia's AI compute dominance.</p>
+
+            <h2 class="section-heading">AI Infrastructure Investments</h2>
+            <p>Finnish startup Quanscient raised €10 million to expand its quantum- and AI-native simulation platform, targeting industries where faster modeling could shorten development cycles from years to shorter cycles. California State University committed millions to provide ChatGPT Edu access across campuses while partnering with major tech vendors for system-wide AI integration.</p>
+        </section>
+
+        <section class="section">
+            <div class="section-label">The Bigger Picture</div>
+
+            <p>This week revealed a fascinating tension in AI leadership. While Anthropic is doubling down on security and enterprise capabilities, OpenAI is softening its rhetoric about job displacement. Google is aggressively cutting prices to gain market share. These aren't disconnected moves—they're symptoms of an industry transitioning from "move fast and break things" to "move fast and control things."</p>
+
+            <p>For aspiring product managers and CS students, the strategic lesson is clear: the companies winning long-term aren't just building better models—they're building better systems for deployment, governance, and trust. AI success now depends on compute access, regulatory compliance, distribution channels, and operational reliability, not just technical capabilities. The next wave of AI products will be defined not by what they can do in a demo, but by how safely and reliably they can do it at scale in real-world environments with real consequences.</p>
+        </section>
+
+        <section class="section">
+            <div class="section-label">Reading / Watching / Listening</div>
+
+            <p><strong><a href="https://www.technologyreview.com/2026/05/21/1137735/anthropics-code-with-claude-showed-off-codings-future-whether-you-like-it-or-not/" target="_blank">Anthropic's Code with Claude showed off coding's future—whether you like it or not</a></strong><br>
+            MIT Technology Review's deep dive into the London event where developers admitted to shipping pull requests written entirely by Claude without reading the code.</p>
+
+            <p><strong><a href="https://artificiallyintimidating.com/p/ai-brief-may-26-2026" target="_blank">AI Brief May 26: Big Tech Revenue Loop, Nvidia China, Codex Locks Mac</a></strong><br>
+            Sharp analysis on Jensen Huang's China comments and Google's quota compression strategy for driving paid subscriptions.</p>
+
+            <p><strong><a href="https://blog.mean.ceo/anthropic-claude-news-may-2026/" target="_blank">Anthropic Claude News | May 2026 (Startup Edition)</a></strong><br>
+            European founder's perspective on how Claude's security focus changes the startup threat surface and compliance requirements.</p>
+
+            <p><strong><a href="https://www.infoworld.com/article/4171274/anthropic-puts-claude-agents-on-a-meter-across-its-subscriptions.html" target="_blank">Anthropic puts Claude agents on a meter across its subscriptions</a></strong><br>
+            InfoWorld's analysis of why the era of unlimited AI subscriptions for production workloads is ending across the industry.</p>
+
+            <p><strong><a href="https://martech.org/the-latest-ai-powered-martech-news-and-releases/" target="_blank">The latest AI-powered martech news and releases</a></strong><br>
+            MarTech's take on how AI platforms are moving beyond point solutions toward connected, agentic systems that orchestrate workflows.</p>
+        </section>
+
+        <footer class="footer">
+            <p><strong>Claude & Co.</strong> is your twice-weekly briefing on Claude, Anthropic, and the evolving AI landscape. Written for emerging CS students and aspiring product managers who need to understand where this technology is heading.</p>
+            
+            <p>Share this newsletter: <a href="https://forms.gle/pJGxqX6CKyVA9Km99" target="_blank">Subscribe here</a> • <a href="newsletters/" target="_blank">Archive</a></p>
+            
+            <p style="font-size: 12px; color: var(--text-muted); margin-top: 20px;">This newsletter is generated with AI assistance. All sources are cited and verified. Views expressed are editorial analysis, not financial or professional advice.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Progress bar
+        function updateProgressBar() {
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight - windowHeight;
+            const scrolled = window.scrollY;
+            const progress = (scrolled / documentHeight) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        window.addEventListener('scroll', updateProgressBar);
+
+        // Theme toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const sunIcon = document.querySelector('.sun-icon');
+        const moonIcon = document.querySelector('.moon-icon');
+        
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            
+            if (theme === 'dark') {
+                sunIcon.style.display = 'none';
+                moonIcon.style.display = 'block';
+            } else {
+                sunIcon.style.display = 'block';
+                moonIcon.style.display = 'none';
+            }
+        }
+        
+        // Initialize theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        setTheme(savedTheme);
+        
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+        });
+    </script>
+</body>
+</html>
