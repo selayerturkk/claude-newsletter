@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude & Co. Issue #9 - June 3, 2026</title>
+    
+    <!-- Custom Fonts -->
+    <style>
+        @font-face { font-family: 'TiemposText'; src: url('https://www.anthropic.com/_next/static/media/TiemposText_Regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+        @font-face { font-family: 'TiemposText'; src: url('https://www.anthropic.com/_next/static/media/TiemposText_RegularItalic.woff2') format('woff2'); font-weight: 400; font-style: italic; font-display: swap; }
+        @font-face { font-family: 'TiemposText'; src: url('https://www.anthropic.com/_next/static/media/TiemposText_Medium.woff2') format('woff2'); font-weight: 500; font-display: swap; }
+        @font-face { font-family: 'StyreneA'; src: url('https://www.anthropic.com/_next/static/media/StyreneA_Regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+        @font-face { font-family: 'StyreneA'; src: url('https://www.anthropic.com/_next/static/media/StyreneA_Medium.woff2') format('woff2'); font-weight: 500; font-display: swap; }
+        @font-face { font-family: 'StyreneB'; src: url('https://www.anthropic.com/_next/static/media/StyreneB_Regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+        @font-face { font-family: 'StyreneB'; src: url('https://www.anthropic.com/_next/static/media/StyreneB_Medium.woff2') format('woff2'); font-weight: 500; font-display: swap; }
+        
+        /* Theme Variables */
+        :root[data-theme="light"] {
+            --bg-outer: #F4F3EE;
+            --bg-container: #FFFFFF;
+            --bg-callout: #F4F3EE;
+            --text-primary: #2f2f2b;
+            --text-secondary: #4a4a44;
+            --text-muted: #B1ADA1;
+            --text-faint: #c5c1b8;
+            --accent: #C15F3C;
+            --border: rgba(177,173,161,0.3);
+            --link-underline: rgba(47,47,43,0.3);
+        }
+        
+        :root[data-theme="dark"] {
+            --bg-outer: #2f2f2b;
+            --bg-container: #3a3a36;
+            --bg-callout: #454540;
+            --text-primary: #F4F3EE;
+            --text-secondary: #d5d3cb;
+            --text-muted: #B1ADA1;
+            --text-faint: #7a776e;
+            --accent: #C15F3C;
+            --border: rgba(244,243,238,0.1);
+            --link-underline: rgba(244,243,238,0.3);
+        }
+        
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'TiemposText', Georgia, 'Times New Roman', serif;
+            font-size: 16px;
+            line-height: 1.5;
+            letter-spacing: -0.01em;
+            background-color: var(--bg-outer);
+            color: var(--text-primary);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 0 48px;
+            background-color: var(--bg-container);
+        }
+        
+        /* Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background-color: var(--accent);
+            z-index: 1000;
+            transition: width 0.1s ease;
+            width: 0%;
+        }
+        
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--bg-container);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+            transition: all 0.2s ease;
+        }
+        
+        .theme-toggle:hover {
+            transform: scale(1.05);
+        }
+        
+        .theme-toggle svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--text-primary);
+        }
+        
+        /* Header */
+        .header {
+            padding: 48px 0 36px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .newsletter-title {
+            font-family: 'StyreneB', 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 36px;
+            font-weight: 500;
+            line-height: 0.95;
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+        }
+        
+        .issue-info {
+            font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+        
+        .tagline {
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+        
+        /* Section Styles */
+        .section {
+            padding: 36px 0;
+        }
+        
+        .section-label {
+            font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 11px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--accent);
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .section-heading {
+            font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 21px;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+        
+        /* Links */
+        a {
+            color: var(--text-primary);
+            text-decoration: underline;
+            text-decoration-color: var(--link-underline);
+            text-underline-offset: 2px;
+            transition: all 0.2s ease;
+        }
+        
+        a:hover {
+            text-decoration-color: var(--accent);
+        }
+        
+        /* Callout Boxes */
+        .callout {
+            background-color: var(--bg-callout);
+            border-radius: 4px;
+            padding: 16px 20px;
+            margin: 20px 0;
+            border-left: 3px solid var(--accent);
+        }
+        
+        .hook-quote {
+            font-style: italic;
+            font-size: 18px;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+        
+        .hook-subtitle {
+            font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+        
+        .hook-list {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        
+        /* Details/Summary */
+        details {
+            margin: 20px 0;
+        }
+        
+        summary {
+            font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .glossary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            padding: 16px 0;
+        }
+        
+        .glossary-term {
+            font-weight: 500;
+            color: var(--accent);
+            margin-bottom: 4px;
+        }
+        
+        .glossary-def {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        
+        /* Inline Tooltips */
+        .term {
+            position: relative;
+            color: var(--accent);
+            text-decoration: underline;
+            text-decoration-color: var(--accent);
+            cursor: help;
+        }
+        
+        .term-tip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg-container);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 8px 12px;
+            font-size: 12px;
+            white-space: nowrap;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .term:hover .term-tip,
+        .term:focus .term-tip {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Lists */
+        ul {
+            padding-left: 20px;
+            margin: 12px 0;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        /* Reading List */
+        .reading-item {
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .reading-item:last-child {
+            border-bottom: none;
+        }
+        
+        .reading-title {
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+        
+        .reading-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        
+        /* Footer */
+        .footer {
+            padding: 36px 0 48px;
+            border-top: 1px solid var(--border);
+            font-size: 14px;
+            color: var(--text-muted);
+            text-align: center;
+        }
+        
+        .footer a {
+            color: var(--accent);
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 24px;
+            }
+            
+            .newsletter-title {
+                font-size: 28px;
+            }
+            
+            .glossary-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .term-tip {
+                position: relative;
+                display: block;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                margin-top: 4px;
+                white-space: normal;
+                border: none;
+                background: none;
+                padding: 0;
+                box-shadow: none;
+                font-style: italic;
+                color: var(--text-muted);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progress"></div>
+    
+    <button class="theme-toggle" onclick="toggleTheme()">
+        <svg class="sun-icon" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1" x2="12" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/>
+            <line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+        <svg class="moon-icon" viewBox="0 0 24 24" style="display: none;">
+            <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+        </svg>
+    </button>
+
+    <div class="container">
+        <header class="header">
+            <h1 class="newsletter-title">Claude & Co.</h1>
+            <div class="issue-info">Issue #9 • June 3, 2026</div>
+            <p class="tagline">Your weekly guide to AI that actually works</p>
+        </header>
+
+        <section class="section">
+            <p>Anthropic had a busy weekend while you were offline. Between filing for an IPO, expanding their security program to critical infrastructure worldwide, and rolling out major partner network updates, they're clearly making moves ahead of what could be the <a href="https://www.cnbc.com/2026/06/01/anthropic-ipo-confidential-filing-claude-ai/">biggest AI public offering</a> in history.</p>
+
+            <div class="callout">
+                <div class="hook-quote">"Claude will remain ad-free," Anthropic declared, drawing a bright line between helpfulness and advertising incentives as they race toward a trillion-dollar valuation.</div>
+                <div class="hook-subtitle">Also in this issue:</div>
+                <div class="hook-list">Claude Code gets dynamic workflows for multi-agent orchestration • Microsoft fights back with new AI coding models • The great AI capital expenditure arms race reaches $7.6 trillion</div>
+            </div>
+        </section>
+
+        <section class="section">
+            <details>
+                <summary>Jargon Decoder</summary>
+                <div class="glossary-grid">
+                    <div>
+                        <div class="glossary-term">IPO</div>
+                        <div class="glossary-def">Initial public offering—when a private company sells shares to the public for the first time</div>
+                    </div>
+                    <div>
+                        <div class="glossary-term">Dynamic workflows</div>
+                        <div class="glossary-def">AI systems that automatically coordinate multiple agents to handle complex, multi-step tasks</div>
+                    </div>
+                    <div>
+                        <div class="glossary-term">Zero-day vulnerabilities</div>
+                        <div class="glossary-def">Security flaws unknown to software makers, making them extremely dangerous</div>
+                    </div>
+                    <div>
+                        <div class="glossary-term">MCP connector</div>
+                        <div class="glossary-def">Model Context Protocol—Anthropic's standard for connecting AI to external tools and data</div>
+                    </div>
+                    <div>
+                        <div class="glossary-term">Inference</div>
+                        <div class="glossary-def">The process of an AI model generating responses or predictions from input data</div>
+                    </div>
+                    <div>
+                        <div class="glossary-term">S-1 filing</div>
+                        <div class="glossary-def">SEC registration document required before going public, containing detailed financials</div>
+                    </div>
+                    <div>
+                        <div class="glossary-term">CapEx</div>
+                        <div class="glossary-def">Capital expenditures—money companies spend on infrastructure, data centers, and hardware</div>
+                    </div>
+                </div>
+            </details>
+        </section>
+
+        <section class="section">
+            <div class="section-label">Anthropic Product News</div>
+            
+            <h2 class="section-heading">IPO Filing Marks New Chapter</h2>
+            <p>Anthropic confidentially filed its draft S-1 with the SEC on June 1, following a $65 billion funding round that valued the company at $965 billion. The company is now booking $47 billion in annualized revenue, positioning it ahead of OpenAI in the race to public markets. Anthropic also committed to keeping Claude ad-free, a strategic differentiator as they prepare for investor scrutiny.</p>
+
+            <h2 class="section-heading">Project Glasswing Scales Globally</h2>
+            <p>Anthropic expanded Project Glasswing to about 150 new organizations across more than 15 countries, adding critical infrastructure in power, water, healthcare, communications, and hardware. The program now includes Claude Security for codebase scans and patch suggestions, with Claude Mythos identifying thousands of zero-day vulnerabilities over several weeks.</p>
+
+            <h2 class="section-heading">Claude Code Gets Dynamic Workflows</h2>
+            <p>Claude Code shipped Opus 4.8 with dynamic workflows, allowing Claude to orchestrate work across tens to hundreds of agents in the background for larger, more complex tasks. Early users are applying this for codebase-wide bug hunts, security audits, and large migrations spanning thousands of files. Fast mode now defaults to Opus 4.8 at $10/$50 per MTok—about 2.5x the speed at 2x the standard rate.</p>
+
+            <h2 class="section-heading">Partner Network Adds Structure</h2>
+            <p>Anthropic introduced the Services Track and Partner Hub to its three-month-old Claude Partner Network, with over 40,000 firms applying and more than 10,000 consultants earning Claude certification. The new tiered structure includes Select (10 certified individuals, 2 production deployments), Preferred (100 certified, 15 customers), and Global Premier (1,000 certified, 100 customers across three regions).</p>
+        </section>
+
+        <section class="section">
+            <div class="section-label">Feature Deep-Dive</div>
+            <h2 class="section-heading">How to Use Claude Code's Dynamic Workflows</h2>
+            
+            <p><span class="term" tabindex="0">Dynamic workflows<span class="term-tip">AI systems that automatically coordinate multiple agents to handle complex, multi-step tasks</span></span> represent Claude Code's biggest leap toward true agentic programming. Here's how to put them to work:</p>
+            
+            <p><strong>Getting Started:</strong> Switch on the new "ultracode" setting through the effort menu, which sets effort to xhigh while letting Claude automatically decide when to use workflows. This replaces the old "workflow" trigger keyword.</p>
+            
+            <p><strong>Best Use Cases:</strong> Think codebase-wide operations: security audits where Claude searches a service in parallel, then runs independent verification on findings. Large migrations and modernization efforts work well too—framework swaps, API deprecations, and language ports spanning thousands of files.</p>
+            
+            <p><strong>Managing Runs:</strong> Use /workflows to manage active runs. Each workflow creates an orchestration script that coordinates subagents working different parts of your task. You'll see progress as agents complete their sections and coordinate results.</p>
+            
+            <p><strong>Why It Matters:</strong> Instead of manually breaking large tasks into chunks and tracking progress across multiple conversations, <span class="term" tabindex="0">dynamic workflows<span class="term-tip">AI systems that automatically coordinate multiple agents to handle complex, multi-step tasks</span></span> let you tackle enterprise-scale programming challenges in a single request. It's Claude Code's answer to the "AI can't handle big codebases" problem.</p>
+        </section>
+
+        <section class="section">
+            <div class="section-label">Broader Tech News</div>
+            
+            <h2 class="section-heading">Microsoft Strikes Back with Native Models</h2>
+            <p>Microsoft announced MAI-Code-1-Flash at Build 2026, its first proprietary coding model that generates source code from written descriptions. They also introduced MAI-Thinking-1, a medium-sized reasoning model built for high efficiency at low token cost. After refining models for McKinsey, Microsoft claims 10x better cost efficiency than OpenAI's GPT 5-5.</p>
+            
+            <h2 class="section-heading">The Great AI Capital Arms Race</h2>
+            <p>Google, Amazon, Microsoft, and Meta plan to allocate $725 billion to capital expenditures in 2026—up 77% from last year's $410 billion. The baseline aggregate estimate stands at $7.6 trillion between 2026 and 2031 across compute, data centers, and power. Meanwhile, Google is raising $80 billion in new equity offerings, potentially competing with incoming AI <span class="term" tabindex="0">IPOs<span class="term-tip">Initial public offering—when a private company sells shares to the public for the first time</span></span> for investor attention.</p>
+            
+            <h2 class="section-heading">OpenAI Doubles Down on Biodefense</h2>
+            <p>OpenAI launched Rosalind Biodefense, expanding trusted access to GPT-Rosalind for select U.S. government and allied partners to build biodefense and pandemic preparedness capabilities. Lawrence Livermore National Laboratory is using the model to integrate AI, supercomputing, and laboratory testing for medical countermeasure development.</p>
+            
+            <h2 class="section-heading">Brief Service Disruption</h2>
+            <p>Claude AI experienced a service disruption on June 2, impacting Claude AI, Claude Console, Claude API, and Claude Code, with Anthropic implementing a fix after identifying the root cause. The outage highlighted increasing reliance on AI platforms across industries for content creation, software development, research, and business productivity.</p>
+        </section>
+
+        <section class="section">
+            <div class="section-label">The Bigger Picture</div>
+            <p>Anthropic's <span class="term" tabindex="0">IPO<span class="term-tip">Initial public offering—when a private company sells shares to the public for the first time</span></span> filing isn't just about raising capital—it's about establishing market leadership before the field gets crowded. By expanding critical infrastructure access globally while competitors scramble to catch up in coding, they're building defensible moats. The partner network formalization shows they understand that enterprise adoption happens through trusted intermediaries, not direct sales. As AI moves from experimentation to production, the companies with the strongest ecosystem partnerships and clearest value propositions will capture the largest market shares. For aspiring product managers, watch how Anthropic balances innovation speed with institutional trust—it's a masterclass in scaling AI responsibly at enterprise velocity.</p>
+        </section>
+
+        <section class="section">
+            <div class="section-label">Reading / Watching / Listening</div>
+            
+            <div class="reading-item">
+                <div class="reading-title"><a href="https://www.anthropic.com/news">Anthropic Newsroom</a></div>
+                <div class="reading-desc">Stay updated on official Anthropic announcements and policy positions</div>
+            </div>
+            
+            <div class="reading-item">
+                <div class="reading-title"><a href="https://techcrunch.com/2026/06/02/anthropic-scales-claude-mythos-to-critical-infrastructure-in-15-countries/">TechCrunch: Anthropic scales Claude Mythos to critical infrastructure</a></div>
+                <div class="reading-desc">Deep dive into Project Glasswing's expansion and cybersecurity implications</div>
+            </div>
+            
+            <div class="reading-item">
+                <div class="reading-title"><a href="https://www.cnbc.com/2026/06/02/microsoft-unveils-new-ai-models-lessen-reliance-on-openai-lower-costs.html">CNBC: Microsoft's AI model strategy at Build 2026</a></div>
+                <div class="reading-desc">Analysis of Microsoft's push into proprietary AI models and cost efficiency claims</div>
+            </div>
+            
+            <div class="reading-item">
+                <div class="reading-title"><a href="https://www.pymnts.com/artificial-intelligence-2/2026/anthropic-updates-partner-program-as-enterprise-ai-adoption-grows/">PYMNTS: Enterprise AI adoption through partner networks</a></div>
+                <div class="reading-desc">How AI companies are scaling through partner ecosystems and certification programs</div>
+            </div>
+            
+            <div class="reading-item">
+                <div class="reading-title"><a href="https://gizmodo.com/google-is-suddenly-competing-for-80-billion-in-investor-money-that-could-have-gone-to-the-big-ai-ipos-2000766177">Gizmodo: Google's $80B equity raise timing</a></div>
+                <div class="reading-desc">Strategic analysis of market timing and competition for AI investment dollars</div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p>Thanks for reading Claude & Co. Issue #9</p>
+            <p>Share this newsletter: <a href="https://forms.gle/pJGxqX6CKyVA9Km99">Subscribe here</a> | <a href="#">Archive</a></p>
+            <p style="margin-top: 12px; font-size: 12px;">This newsletter is AI-generated and for informational purposes only. Always verify important information independently.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Progress bar
+        function updateProgress() {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progress').style.width = scrolled + '%';
+        }
+        
+        window.addEventListener('scroll', updateProgress);
+        
+        // Theme toggle
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            const sunIcon = document.querySelector('.sun-icon');
+            const moonIcon = document.querySelector('.moon-icon');
+            
+            if (newTheme === 'dark') {
+                sunIcon.style.display = 'none';
+                moonIcon.style.display = 'block';
+            } else {
+                sunIcon.style.display = 'block';
+                moonIcon.style.display = 'none';
+            }
+        }
+        
+        // Initialize theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        
+        if (savedTheme === 'dark') {
+            document.querySelector('.sun-icon').style.display = 'none';
+            document.querySelector('.moon-icon').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
