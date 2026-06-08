@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude & Co. — Issue #10 — June 8, 2026</title>
+    
+    <style>
+        @font-face { font-family: 'TiemposText'; src: url('https://www.anthropic.com/_next/static/media/TiemposText_Regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+        @font-face { font-family: 'TiemposText'; src: url('https://www.anthropic.com/_next/static/media/TiemposText_RegularItalic.woff2') format('woff2'); font-weight: 400; font-style: italic; font-display: swap; }
+        @font-face { font-family: 'TiemposText'; src: url('https://www.anthropic.com/_next/static/media/TiemposText_Medium.woff2') format('woff2'); font-weight: 500; font-display: swap; }
+        @font-face { font-family: 'StyreneA'; src: url('https://www.anthropic.com/_next/static/media/StyreneA_Regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+        @font-face { font-family: 'StyreneA'; src: url('https://www.anthropic.com/_next/static/media/StyreneA_Medium.woff2') format('woff2'); font-weight: 500; font-display: swap; }
+        @font-face { font-family: 'StyreneB'; src: url('https://www.anthropic.com/_next/static/media/StyreneB_Regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+        @font-face { font-family: 'StyreneB'; src: url('https://www.anthropic.com/_next/static/media/StyreneB_Medium.woff2') format('woff2'); font-weight: 500; font-display: swap; }
+
+        :root[data-theme="light"] {
+            --bg-outer: #F4F3EE;
+            --bg-container: #FFFFFF;
+            --bg-callout: #F4F3EE;
+            --text-primary: #2f2f2b;
+            --text-secondary: #4a4a44;
+            --text-muted: #B1ADA1;
+            --text-faint: #c5c1b8;
+            --accent: #C15F3C;
+            --border: rgba(177,173,161,0.3);
+            --link-underline: rgba(47,47,43,0.3);
+        }
+
+        :root[data-theme="dark"] {
+            --bg-outer: #2f2f2b;
+            --bg-container: #3a3a36;
+            --bg-callout: #454540;
+            --text-primary: #F4F3EE;
+            --text-secondary: #d5d3cb;
+            --text-muted: #B1ADA1;
+            --text-faint: #7a776e;
+            --accent: #C15F3C;
+            --border: rgba(244,243,238,0.1);
+            --link-underline: rgba(244,243,238,0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'TiemposText', Georgia, 'Times New Roman', serif;
+            font-size: 16px;
+            line-height: 1.5;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background-color: var(--bg-outer);
+            color: var(--text-primary);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 2px;
+            background-color: var(--accent);
+            z-index: 1000;
+            transition: width 0.1s ease;
+            width: 0%;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            background-color: var(--bg-container);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--bg-callout);
+        }
+
+        .theme-toggle svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--text-primary);
+        }
+
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 0 48px;
+            background-color: var(--bg-container);
+            min-height: 100vh;
+        }
+
+        .header {
+            padding: 60px 0 36px 0;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .newsletter-title {
+            font-family: 'StyreneB', 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 36px;
+            font-weight: 500;
+            line-height: 0.95;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .issue-info {
+            font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .tagline {
+            font-style: italic;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .section {
+            padding: 36px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-label {
+            font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 11px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 21px;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .intro {
+            font-size: 18px;
+            line-height: 1.4;
+            margin-bottom: 24px;
+        }
+
+        .hook {
+            background-color: var(--bg-callout);
+            border-radius: 4px;
+            border-left: 4px solid var(--accent);
+            padding: 20px 24px;
+            margin-bottom: 24px;
+        }
+
+        .hook-quote {
+            font-style: italic;
+            font-size: 18px;
+            line-height: 1.4;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        .hook-subtitle {
+            font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .hook-items {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        details {
+            margin-bottom: 24px;
+        }
+
+        summary {
+            font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--accent);
+            cursor: pointer;
+            margin-bottom: 12px;
+            list-style: none;
+        }
+
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        summary:before {
+            content: "▶ ";
+            display: inline-block;
+            transition: transform 0.2s;
+        }
+
+        details[open] summary:before {
+            transform: rotate(90deg);
+        }
+
+        .glossary {
+            background-color: var(--bg-callout);
+            border-radius: 4px;
+            padding: 16px 20px;
+        }
+
+        .glossary-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
+        }
+
+        .glossary-item {
+            font-size: 14px;
+            line-height: 1.3;
+        }
+
+        .glossary-term {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .glossary-def {
+            color: var(--text-secondary);
+        }
+
+        .term {
+            position: relative;
+            border-bottom: 1px dotted var(--accent);
+            cursor: help;
+        }
+
+        .term-tip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--text-primary);
+            color: var(--bg-container);
+            padding: 6px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+            z-index: 100;
+        }
+
+        .term:hover .term-tip,
+        .term:focus .term-tip {
+            opacity: 1;
+        }
+
+        .news-item {
+            margin-bottom: 20px;
+        }
+
+        .news-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .news-title {
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .news-content {
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .step-list {
+            counter-reset: step;
+            margin-left: 0;
+        }
+
+        .step-list li {
+            counter-increment: step;
+            margin-bottom: 12px;
+            padding-left: 28px;
+            position: relative;
+            list-style: none;
+        }
+
+        .step-list li:before {
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: var(--accent);
+            color: var(--bg-container);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 500;
+            font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        .reading-item {
+            margin-bottom: 16px;
+        }
+
+        .reading-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .reading-link {
+            font-weight: 500;
+            color: var(--text-primary);
+            text-decoration: underline;
+            text-decoration-color: var(--link-underline);
+            text-underline-offset: 2px;
+        }
+
+        .reading-desc {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        a {
+            color: var(--text-primary);
+            text-decoration: underline;
+            text-decoration-color: var(--link-underline);
+            text-underline-offset: 2px;
+        }
+
+        a:hover {
+            text-decoration-color: var(--accent);
+        }
+
+        p {
+            margin-bottom: 16px;
+        }
+
+        p:last-child {
+            margin-bottom: 0;
+        }
+
+        .footer {
+            padding: 36px 0 60px 0;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .footer p {
+            margin-bottom: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 24px;
+            }
+            
+            .newsletter-title {
+                font-size: 28px;
+            }
+            
+            .theme-toggle {
+                top: 16px;
+                right: 16px;
+                width: 36px;
+                height: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="progress-bar"></div>
+    
+    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
+        <svg class="sun-icon" style="display: block;">
+            <path d="M12 17.5a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zm0 1.5a7 7 0 1 1 0-14 7 7 0 0 1 0 14zM12 0v2m0 20v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M0 12h2m20 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+        </svg>
+        <svg class="moon-icon" style="display: none;">
+            <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-5.52-4.48-10-10-10z"/>
+        </svg>
+    </button>
+
+    <div class="container">
+        <header class="header">
+            <h1 class="newsletter-title">Claude & Co.</h1>
+            <div class="issue-info">Issue #10 — June 8, 2026</div>
+            <div class="tagline">AI meets product management for the next generation</div>
+        </header>
+
+        <section class="section">
+            <p class="intro">This week brought seismic shifts in AI land: Anthropic filed confidentially for an IPO, Claude now writes 80% of its own code, and Tim Cook announced Gemini-powered Siri as his farewell at Apple. Meanwhile, we learned that Trump issued an executive order seeking 30-day government preview access to frontier AI models.</p>
+
+            <div class="hook">
+                <p class="hook-quote">"That trend points to an AI system capable of fully autonomously designing and developing its own successor."</p>
+                <div class="hook-subtitle">Also in this issue:</div>
+                <div class="hook-items">Claude's legal connector expansion • Project Glasswing's global rollout • The Great American AI Act debate</div>
+            </div>
+        </section>
+
+        <section class="section">
+            <details>
+                <summary>Jargon Decoder</summary>
+                <div class="glossary">
+                    <div class="glossary-grid">
+                        <div class="glossary-item">
+                            <span class="glossary-term">S-1:</span> <span class="glossary-def">The SEC filing companies submit to go public</span>
+                        </div>
+                        <div class="glossary-item">
+                            <span class="glossary-term">MCP:</span> <span class="glossary-def">Model Context Protocol—lets AI connect to external services</span>
+                        </div>
+                        <div class="glossary-item">
+                            <span class="glossary-term">Recursive self-improvement:</span> <span class="glossary-def">AI that can upgrade itself without human help</span>
+                        </div>
+                        <div class="glossary-item">
+                            <span class="glossary-term">Zero-day vulnerabilities:</span> <span class="glossary-def">Security flaws unknown to software makers</span>
+                        </div>
+                        <div class="glossary-item">
+                            <span class="glossary-term">Dynamic workflows:</span> <span class="glossary-def">AI that creates and runs multi-step processes automatically</span>
+                        </div>
+                        <div class="glossary-item">
+                            <span class="glossary-term">Ultracode:</span> <span class="glossary-def">Claude Code's highest effort setting for complex tasks</span>
+                        </div>
+                        <div class="glossary-item">
+                            <span class="glossary-term">Frontier models:</span> <span class="glossary-def">The most advanced AI systems being developed</span>
+                        </div>
+                        <div class="glossary-item">
+                            <span class="glossary-term">Sandboxes:</span> <span class="glossary-def">Isolated environments where AI can safely run code</span>
+                        </div>
+                    </div>
+                </div>
+            </details>
+        </section>
+
+        <section class="section">
+            <div class="section-label">Anthropic Product News</div>
+            <h2 class="section-title">Going Public, Going Autonomous</h2>
+            
+            <div class="news-item">
+                <div class="news-title">IPO Filing Marks New Chapter</div>
+                <div class="news-content">
+                    Anthropic confidentially filed its S-1 with the SEC on June 1, following a $65 billion funding round at a $965 billion valuation. The move puts Anthropic ahead of rival OpenAI in the race to go public, with the company now booking $47 billion in annualized revenue from Claude subscriptions.
+                </div>
+            </div>
+
+            <div class="news-item">
+                <div class="news-title">Claude's Recursive Self-Improvement Warning</div>
+                <div class="news-content">
+                    In a sobering blog post, Anthropic revealed Claude now writes over 80% of its own code, up from less than 10% in February 2025. The company warns this trend "points to an AI system capable of fully autonomously designing and developing its own successor," raising concerns about humans losing control over AI development.
+                </div>
+            </div>
+
+            <div class="news-item">
+                <div class="news-title">Claude Opus 4.8 Ships with Dynamic Workflows</div>
+                <div class="news-content">
+                    Claude Opus 4.8 brings stronger coding, agentic skills, and reasoning improvements over version 4.7. The standout feature is <span class="term" tabindex="0">dynamic workflows<span class="term-tip">AI that creates and runs multi-step processes automatically</span></span>, where Claude creates orchestration scripts for complex tasks like codebase-wide audits and large migrations. Users can access this via the new <span class="term" tabindex="0">ultracode<span class="term-tip">Claude Code's highest effort setting for complex tasks</span></span> setting.
+                </div>
+            </div>
+
+            <div class="news-item">
+                <div class="news-title">Legal Connectors Expand Rapidly</div>
+                <div class="news-content">
+                    Claude released 20+ new legal MCP connectors and 12 practice-area plugins, covering research, contracts, discovery, and matter management. Legal professionals have become the most engaged Claude Cowork users of any knowledge-work function.
+                </div>
+            </div>
+
+            <div class="news-item">
+                <div class="news-title">Partner Network Gets Services Track</div>
+                <div class="news-content">
+                    On June 3, Anthropic launched the Services Track and Partner Hub of the Claude Partner Network. The program is backed by a $100 million investment in partner training and technical support, with promotions processed twice yearly on January 1 and July 1.
+                </div>
+            </div>
+
+            <div class="news-item">
+                <div class="news-title">Project Glasswing Scales Globally</div>
+                <div class="news-content">
+                    Anthropic expanded Project Glasswing to about 150 new organizations across more than 15 countries. Claude Mythos, the AI model at the heart of the project, can identify thousands of zero-day vulnerabilities and found 23,019 vulnerabilities across 1,000+ open-source projects with 90.6% confirmed real.
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-label">Feature Deep-Dive</div>
+            <h2 class="section-title">Mastering Dynamic Workflows in Claude Code</h2>
+            
+            <p>The biggest productivity unlock in Claude Code isn't a model upgrade—it's <span class="term" tabindex="0">dynamic workflows<span class="term-tip">AI that creates and runs multi-step processes automatically</span></span>. This feature lets Claude orchestrate complex, multi-agent tasks that would normally require careful human coordination.</p>
+
+            <p><strong>What it does:</strong> Dynamic workflows are orchestration scripts Claude writes for your task and runs across many subagents in the background. Use them when a task is too large for one conversation to coordinate.</p>
+
+            <p><strong>How to use it:</strong></p>
+            <ol class="step-list">
+                <li>Enable <span class="term" tabindex="0">ultracode<span class="term-tip">Claude Code's highest effort setting for complex tasks</span></span> mode in Claude Code's effort menu</li>
+                <li>Describe a complex, multi-step task (like "audit our entire codebase for security vulnerabilities")</li>
+                <li>Claude will automatically decide if a workflow is needed and create one</li>
+                <li>Monitor progress with the `/workflows` command</li>
+                <li>Review the consolidated results when complete</li>
+            </ol>
+
+            <p><strong>Best use cases:</strong> Codebase-wide bug hunts, profiler-guided optimization, security audits, large migrations, and framework modernization efforts spanning thousands of files.</p>
+
+            <p><strong>Why it matters:</strong> Instead of you breaking down a massive task into smaller pieces and coordinating them manually, Claude handles the entire orchestration. It's like having a senior developer who can manage a complex project end-to-end while you focus on higher-level decisions.</p>
+
+            <p><strong>Enterprise note:</strong> Dynamic workflows are off by default on Enterprise plans—admins can enable them in Claude Code settings.</p>
+        </section>
+
+        <section class="section">
+            <div class="section-label">Broader Tech News</div>
+            <h2 class="section-title">The AI Policy & Competition Landscape</h2>
+            
+            <div class="news-item">
+                <div class="news-title">Trump's AI Executive Order Shifts Government Stance</div>
+                <div class="news-content">
+                    President Trump issued an executive order seeking to give the U.S. government up to 30 days to assess frontier AI models before companies release them. The order also asks companies to collaborate with the administration to "select trusted partners" for early model access.
+                </div>
+            </div>
+
+            <div class="news-item">
+                <div class="news-title">Apple's Gemini-Powered Siri Surprise</div>
+                <div class="news-content">
+                    Tim Cook announced a Gemini-powered Siri and multi-AI Extensions system that makes Claude an iPhone option for the first time during what reports suggest was his final WWDC keynote as Apple CEO.
+                </div>
+            </div>
+
+            <div class="news-item">
+                <div class="news-title">The Great American AI Act Divides Stakeholders</div>
+                <div class="news-content">
+                    Representatives Jay Obernolte and Lori Trahan released a 269-page bipartisan AI framework that would impose a three-year federal preemption of state AI laws. Labor unions rejected it as "a giveaway to the AI industry," while tech groups praised the unified national approach.
+                </div>
+            </div>
+
+            <div class="news-item">
+                <div class="news-title">Google I/O Reveals Agent-First Search</div>
+                <div class="news-content">
+                    Google announced "Search agents" that can be customized for different tasks and operate 24/7 to monitor for changes. AI Mode has surpassed one billion monthly users, with queries doubling each quarter.
+                </div>
+            </div>
+
+            <div class="news-item">
+                <div class="news-title">Colorado's AI Law Goes Live in 25 Days</div>
+                <div class="news-content">
+                    Colorado's Consumer Protections for Artificial Intelligence Act—the first comprehensive state AI law in the US—takes effect June 30, 2026, requiring developers of high-risk AI systems to protect residents from algorithmic discrimination.
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-label">The Bigger Picture</div>
+            <h2 class="section-title">Racing Toward Autonomous Development</h2>
+            
+            <p>This week's news reveals a startling acceleration: AI systems are increasingly building themselves. Claude writing 80% of its own code isn't just a milestone—it's a warning flag about the speed of progress. For aspiring product managers, the question isn't whether AI will automate development work, but how quickly you can adapt your skills to manage and direct AI systems rather than just human teams.</p>
+
+            <p>The market is responding with remarkable speed. Three trillion-dollar AI companies are racing to go public this year, while governments scramble to establish oversight before capabilities outpace regulation. Meanwhile, Apple's embrace of multi-AI systems signals that the future isn't about one dominant AI assistant—it's about orchestrating multiple specialized AIs for different tasks.</p>
+
+            <p>The strategic takeaway for emerging PMs: focus on learning how to evaluate, direct, and coordinate AI capabilities rather than trying to outcompete them on pure execution speed. The companies that win will be those that best combine human judgment with AI automation.</p>
+        </section>
+
+        <section class="section">
+            <div class="section-label">Reading / Watching / Listening</div>
+            
+            <div class="reading-item">
+                <a href="https://www.anthropic.com/news" class="reading-link">Anthropic's June Newsroom</a>
+                <div class="reading-desc">Complete archive of all Anthropic announcements from this pivotal month</div>
+            </div>
+
+            <div class="reading-item">
+                <a href="https://blog.google/products-and-platforms/products/search/search-io-2026/" class="reading-link">Google Search's I/O 2026 Updates</a>
+                <div class="reading-desc">Deep dive into Google's agent-first search vision and billion-user AI adoption</div>
+            </div>
+
+            <div class="reading-item">
+                <a href="https://www.whitehouse.gov/presidential-actions/2026/06/promoting-advanced-artificial-intelligence-innovation-and-security/" class="reading-link">Trump's AI Executive Order</a>
+                <div class="reading-desc">Full text of the administration's new stance on AI oversight and security</div>
+            </div>
+
+            <div class="reading-item">
+                <a href="https://blog.mean.ceo/anthropic-claude-news-june-2026/" class="reading-link">Claude News: Startup Edition</a>
+                <div class="reading-desc">Founder-focused analysis of how Claude's evolution affects small teams and startups</div>
+            </div>
+
+            <div class="reading-item">
+                <a href="https://docs.anthropic.com/en/docs/build-with-claude/tool-use" class="reading-link">Claude Tool Use Documentation</a>
+                <div class="reading-desc">Technical guide to implementing Claude's new dynamic workflow capabilities</div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p>That's a wrap on Issue #10. Thoughts? Questions? Hit reply.</p>
+            <p><a href="https://forms.gle/pJGxqX6CKyVA9Km99">Share Claude & Co.</a> with someone building the future.</p>
+            <p><a href="#">Browse the archive</a> • This newsletter is generated by Claude</p>
+        </footer>
+    </div>
+
+    <script>
+        function updateProgressBar() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const progress = (scrollTop / scrollHeight) * 100;
+            document.getElementById('progress-bar').style.width = progress + '%';
+        }
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            const sunIcon = document.querySelector('.sun-icon');
+            const moonIcon = document.querySelector('.moon-icon');
+            
+            if (newTheme === 'dark') {
+                sunIcon.style.display = 'none';
+                moonIcon.style.display = 'block';
+            } else {
+                sunIcon.style.display = 'block';
+                moonIcon.style.display = 'none';
+            }
+        }
+
+        // Initialize theme
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            const html = document.documentElement;
+            html.setAttribute('data-theme', savedTheme);
+            
+            const sunIcon = document.querySelector('.sun-icon');
+            const moonIcon = document.querySelector('.moon-icon');
+            
+            if (savedTheme === 'dark') {
+                sunIcon.style.display = 'none';
+                moonIcon.style.display = 'block';
+            } else {
+                sunIcon.style.display = 'block';
+                moonIcon.style.display = 'none';
+            }
+        }
+
+        // Event listeners
+        window.addEventListener('scroll', updateProgressBar);
+        document.addEventListener('DOMContentLoaded', initTheme);
+    </script>
+</body>
+</html>
