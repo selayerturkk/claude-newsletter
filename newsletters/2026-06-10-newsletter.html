@@ -1,0 +1,585 @@
+I'll search for recent news from the specified date range to generate Issue #11 of Claude & Co.<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude & Co. — Issue #11</title>
+    
+    <style>
+        @font-face {
+            font-family: 'TiemposText';
+            src: url('https://www.anthropic.com/_next/static/media/TiemposText_Regular.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        @font-face {
+            font-family: 'TiemposText';
+            src: url('https://www.anthropic.com/_next/static/media/TiemposText_RegularItalic.woff2') format('woff2');
+            font-weight: 400;
+            font-style: italic;
+            font-display: swap;
+        }
+        
+        @font-face {
+            font-family: 'TiemposText';
+            src: url('https://www.anthropic.com/_next/static/media/TiemposText_Medium.woff2') format('woff2');
+            font-weight: 500;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        @font-face {
+            font-family: 'StyreneA';
+            src: url('https://www.anthropic.com/_next/static/media/StyreneA_Regular.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        @font-face {
+            font-family: 'StyreneA';
+            src: url('https://www.anthropic.com/_next/static/media/StyreneA_Medium.woff2') format('woff2');
+            font-weight: 500;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        @font-face {
+            font-family: 'StyreneB';
+            src: url('https://www.anthropic.com/_next/static/media/StyreneB_Regular.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        @font-face {
+            font-family: 'StyreneB';
+            src: url('https://www.anthropic.com/_next/static/media/StyreneB_Medium.woff2') format('woff2');
+            font-weight: 500;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        :root[data-theme="light"] {
+            --bg-outer: #F4F3EE;
+            --bg-container: #FFFFFF;
+            --bg-callout: #F4F3EE;
+            --text-primary: #2f2f2b;
+            --text-secondary: #4a4a44;
+            --text-muted: #B1ADA1;
+            --text-faint: #c5c1b8;
+            --accent: #C15F3C;
+            --border: rgba(177,173,161,0.3);
+            --link-underline: rgba(47,47,43,0.3);
+        }
+        
+        :root[data-theme="dark"] {
+            --bg-outer: #2f2f2b;
+            --bg-container: #3a3a36;
+            --bg-callout: #454540;
+            --text-primary: #F4F3EE;
+            --text-secondary: #d5d3cb;
+            --text-muted: #B1ADA1;
+            --text-faint: #7a776e;
+            --accent: #C15F3C;
+            --border: rgba(244,243,238,0.1);
+            --link-underline: rgba(244,243,238,0.3);
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'TiemposText', Georgia, 'Times New Roman', serif;
+            font-size: 16px;
+            line-height: 1.5;
+            letter-spacing: -0.01em;
+            font-weight: 400;
+            background-color: var(--bg-outer);
+            color: var(--text-primary);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background-color: var(--accent);
+            z-index: 1000;
+            transition: width 0.1s ease-out;
+        }
+        
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 2px solid var(--border);
+            background-color: var(--bg-container);
+            color: var(--text-primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+            transition: all 0.2s ease;
+        }
+        
+        .theme-toggle:hover {
+            transform: scale(1.05);
+        }
+        
+        .theme-toggle svg {
+            width: 20px;
+            height: 20px;
+        }
+        
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 0 48px;
+            background-color: var(--bg-container);
+            min-height: 100vh;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 24px;
+            }
+        }
+        
+        .newsletter-title {
+            font-family: 'StyreneB', 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 36px;
+            font-weight: 500;
+            line-height: 0.95;
+            letter-spacing: -0.02em;
+            text-align: center;
+            padding-top: 48px;
+            margin-bottom: 12px;
+        }
+        
+        .newsletter-meta {
+            font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 13px;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 36px;
+        }
+        
+        .tagline {
+            font-style: italic;
+            color: var(--text-muted);
+            margin-top: 8px;
+        }
+        
+        .section {
+            margin-bottom: 36px;
+        }
+        
+        .section-label {
+            font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 11px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--accent);
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 20px;
+        }
+        
+        .section-heading {
+            font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 21px;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+        }
+        
+        .hook-callout {
+            background-color: var(--bg-callout);
+            border-radius: 4px;
+            padding: 20px;
+            margin: 24px 0;
+            border-left: 4px solid var(--accent);
+        }
+        
+        .hook-quote {
+            font-style: italic;
+            font-size: 18px;
+            line-height: 1.4;
+            margin-bottom: 16px;
+        }
+        
+        .hook-also {
+            font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+        }
+        
+        .hook-list {
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+        
+        details {
+            margin: 24px 0;
+        }
+        
+        summary {
+            font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 12px 0;
+            list-style: none;
+        }
+        
+        summary::-webkit-details-marker {
+            display: none;
+        }
+        
+        summary::before {
+            content: '▶';
+            margin-right: 8px;
+            color: var(--accent);
+            transition: transform 0.2s ease;
+        }
+        
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
+        
+        .glossary {
+            background-color: var(--bg-callout);
+            border-radius: 4px;
+            padding: 20px;
+            margin-top: 12px;
+        }
+        
+        .glossary-grid {
+            display: grid;
+            gap: 12px;
+        }
+        
+        .glossary-item {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            font-size: 15px;
+        }
+        
+        .glossary-term {
+            font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-weight: 500;
+            color: var(--accent);
+            min-width: 80px;
+            flex-shrink: 0;
+        }
+        
+        .glossary-definition {
+            color: var(--text-secondary);
+        }
+        
+        .term {
+            position: relative;
+            cursor: help;
+            text-decoration: underline;
+            text-decoration-style: dotted;
+            text-decoration-color: var(--accent);
+        }
+        
+        .term-tip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--bg-container);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 8px 12px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            white-space: nowrap;
+            z-index: 10;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .term:hover .term-tip,
+        .term:focus .term-tip {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        p {
+            margin-bottom: 16px;
+        }
+        
+        p:last-child {
+            margin-bottom: 0;
+        }
+        
+        a {
+            color: var(--text-primary);
+            text-decoration: underline;
+            text-decoration-color: var(--link-underline);
+            text-underline-offset: 2px;
+        }
+        
+        a:hover {
+            text-decoration-color: var(--accent);
+        }
+        
+        ul, ol {
+            padding-left: 20px;
+            margin-bottom: 16px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        blockquote {
+            border-left: 4px solid var(--accent);
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+        
+        .footer {
+            margin-top: 48px;
+            padding: 24px 0 48px;
+            border-top: 1px solid var(--border);
+            font-size: 15px;
+            color: var(--text-secondary);
+        }
+        
+        .footer p {
+            margin-bottom: 12px;
+        }
+        
+        .footer a {
+            color: var(--accent);
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <svg id="lightIcon" style="display: none;" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 17.5C9.24 17.5 7 15.26 7 12.5S9.24 7.5 12 7.5 17 9.74 17 12.5 14.76 17.5 12 17.5ZM12 9C10.07 9 8.5 10.57 8.5 12.5S10.07 16 12 16 15.5 14.43 15.5 12.5 13.93 9 12 9ZM20 11H23V14H20V11ZM1 11H4V14H1V11ZM13 1H10V4H13V1ZM13 21H10V24H13V21ZM4.5 4.14L6.64 6.28L5.22 7.69L3.08 5.55L4.5 4.14ZM18.78 18.42L20.92 20.56L19.5 21.97L17.36 19.83L18.78 18.42ZM19.5 4.14L20.92 5.55L18.78 7.69L17.36 6.28L19.5 4.14ZM4.5 21.97L3.08 20.56L5.22 18.42L6.64 19.83L4.5 21.97Z"/>
+        </svg>
+        <svg id="darkIcon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 3C12.39 3 12.75 3.15 13.03 3.41L14.12 4.5C14.32 4.7 14.58 4.82 14.86 4.82C15.41 4.82 15.86 4.37 15.86 3.82V2.5C15.86 2.22 16.08 2 16.36 2S16.86 2.22 16.86 2.5V3.82C16.86 4.93 15.97 5.82 14.86 5.82C14.27 5.82 13.73 5.57 13.33 5.17L12.24 4.08C12.11 3.95 11.89 3.95 11.76 4.08L10.67 5.17C10.27 5.57 9.73 5.82 9.14 5.82C8.03 5.82 7.14 4.93 7.14 3.82V2.5C7.14 2.22 7.36 2 7.64 2S8.14 2.22 8.14 2.5V3.82C8.14 4.37 8.59 4.82 9.14 4.82C9.42 4.82 9.68 4.7 9.88 4.5L10.97 3.41C11.25 3.15 11.61 3 12 3ZM12 21C11.61 21 11.25 20.85 10.97 20.59L9.88 19.5C9.68 19.3 9.42 19.18 9.14 19.18C8.59 19.18 8.14 19.63 8.14 20.18V21.5C8.14 21.78 7.92 22 7.64 22S7.14 21.78 7.14 21.5V20.18C7.14 19.07 8.03 18.18 9.14 18.18C9.73 18.18 10.27 18.43 10.67 18.83L11.76 19.92C11.89 20.05 12.11 20.05 12.24 19.92L13.33 18.83C13.73 18.43 14.27 18.18 14.86 18.18C15.97 18.18 16.86 19.07 16.86 20.18V21.5C16.86 21.78 16.64 22 16.36 22S15.86 21.78 15.86 21.5V20.18C15.86 19.63 15.41 19.18 14.86 19.18C14.58 19.18 14.32 19.3 14.12 19.5L13.03 20.59C12.75 20.85 12.39 21 12 21ZM21 12C21 12.39 20.85 12.75 20.59 13.03L19.5 14.12C19.3 14.32 19.18 14.58 19.18 14.86C19.18 15.41 19.63 15.86 20.18 15.86H21.5C21.78 15.86 22 16.08 22 16.36S21.78 16.86 21.5 16.86H20.18C19.07 16.86 18.18 15.97 18.18 14.86C18.18 14.27 18.43 13.73 18.83 13.33L19.92 12.24C20.05 12.11 20.05 11.89 19.92 11.76L18.83 10.67C18.43 10.27 18.18 9.73 18.18 9.14C18.18 8.03 19.07 7.14 20.18 7.14H21.5C21.78 7.14 22 7.36 22 7.64S21.78 8.14 21.5 8.14H20.18C19.63 8.14 19.18 8.59 19.18 9.14C19.18 9.42 19.3 9.68 19.5 9.88L20.59 10.97C20.85 11.25 21 11.61 21 12ZM3 12C3 11.61 3.15 11.25 3.41 10.97L4.5 9.88C4.7 9.68 4.82 9.42 4.82 9.14C4.82 8.59 4.37 8.14 3.82 8.14H2.5C2.22 8.14 2 7.92 2 7.64S2.22 7.14 2.5 7.14H3.82C4.93 7.14 5.82 8.03 5.82 9.14C5.82 9.73 5.57 10.27 5.17 10.67L4.08 11.76C3.95 11.89 3.95 12.11 4.08 12.24L5.17 13.33C5.57 13.73 5.82 14.27 5.82 14.86C5.82 15.97 4.93 16.86 3.82 16.86H2.5C2.22 16.86 2 16.64 2 16.36S2.22 15.86 2.5 15.86H3.82C4.37 15.86 4.82 15.41 4.82 14.86C4.82 14.58 4.7 14.32 4.5 14.12L3.41 13.03C3.15 12.75 3 12.39 3 12Z"/>
+        </svg>
+    </button>
+    
+    <div class="container">
+        <h1 class="newsletter-title">Claude & Co.</h1>
+        <div class="newsletter-meta">
+            Issue #11 · June 10, 2026
+            <div class="tagline">AI moves fast. This newsletter moves faster.</div>
+        </div>
+        
+        <div class="section">
+            <p>The week that changed everything. Claude Fable 5 launched on June 9, bringing the new Mythos-class tier above Opus with state-of-the-art results on nearly all tested benchmarks, always-on adaptive thinking, and a 1-million-token context window. Meanwhile, Apple unveiled Siri AI at WWDC 2026, enabling in-depth conversations, creative brainstorming, and document feedback with new and improved voices. The AI landscape just got a major reshuffling.</p>
+            
+            <div class="hook-callout">
+                <p class="hook-quote">"Claude Fable 5 runs with always-on adaptive thinking, a 1-million-token context window, and 128K output tokens."</p>
+                <div class="hook-also">Also in this issue:</div>
+                <div class="hook-list">Apple's Gemini-powered Siri revamp • Claude Code's dynamic workflows • Project Glasswing expansion</div>
+            </div>
+        </div>
+        
+        <details>
+            <summary>Jargon Decoder</summary>
+            <div class="glossary">
+                <div class="glossary-grid">
+                    <div class="glossary-item">
+                        <span class="glossary-term">Mythos-class</span>
+                        <span class="glossary-definition">New AI capability tier above Opus, designed for the most demanding tasks</span>
+                    </div>
+                    <div class="glossary-item">
+                        <span class="glossary-term">Context window</span>
+                        <span class="glossary-definition">How much text an AI can remember and work with at once</span>
+                    </div>
+                    <div class="glossary-item">
+                        <span class="glossary-term">Dynamic workflows</span>
+                        <span class="glossary-definition">AI systems that automatically break complex tasks into manageable steps</span>
+                    </div>
+                    <div class="glossary-item">
+                        <span class="glossary-term">MCP</span>
+                        <span class="glossary-definition">Model Context Protocol - connects AI models to external tools and data</span>
+                    </div>
+                    <div class="glossary-item">
+                        <span class="glossary-term">Agent SDK</span>
+                        <span class="glossary-definition">Software toolkit for building AI agents that work autonomously</span>
+                    </div>
+                    <div class="glossary-item">
+                        <span class="glossary-term">IPO</span>
+                        <span class="glossary-definition">Initial Public Offering - when a private company sells shares publicly</span>
+                    </div>
+                    <div class="glossary-item">
+                        <span class="glossary-term">Zero-day exploit</span>
+                        <span class="glossary-definition">Security vulnerability unknown to software makers, making it hard to defend against</span>
+                    </div>
+                </div>
+            </div>
+        </details>
+        
+        <div class="section">
+            <div class="section-label">Anthropic Product News</div>
+            
+            <h2 class="section-heading">Claude Fable 5 Launches: The New Frontier Model</h2>
+            <p>Anthropic announced Claude Fable 5 and Claude Mythos 5 on June 9, marking the first models in the new Mythos-class tier above Opus. Claude Fable 5 is the generally available model with state-of-the-art results on nearly all tested benchmarks, running with always-on adaptive thinking, a 1-million-token context window, and 128K output tokens.</p>
+            
+            <p>The safety angle is notable: Fable 5 includes safety classifiers that automatically fall back to Claude Opus 4.8 for flagged requests in domains such as cybersecurity and biology, while Claude Mythos 5 shares the same capabilities without the safety classifiers and is offered only in limited availability through Project Glasswing.</p>
+            
+            <p>The model is available to Pro, Max, and Enterprise customers at no extra charge until June 22, after which pricing will be based on usage. Fable 5 uses tokens at a much faster rate than previous Claude models.</p>
+            
+            <h2 class="section-heading">Claude Code Gets Dynamic Workflows</h2>
+            <p>Claude Code introduced dynamic workflows through a new "ultracode" setting that lets Claude decide automatically when to use workflows for handling tasks. Early access users have been using dynamic workflows for codebase-wide bug hunts, security audits, and large migrations.</p>
+            
+            <p>The same approach works for hardening passes like auth checks and input validation across entire codebases, plus large migrations including framework swaps and API deprecations spanning thousands of files.</p>
+            
+            <h2 class="section-heading">Project Glasswing Expands</h2>
+            <p>Anthropic is expanding Project Glasswing, extending the partnership to approximately 150 new organizations following several weeks of collaboration with security industry partners, open-source software maintainers, and the US government. Initial partners have been deploying the model to scan codebases for vulnerabilities, finding more than 10,000 high- or critical-severity security flaws.</p>
+            
+            <h2 class="section-heading">Managed Agents Go Scheduled</h2>
+            <p>Claude Managed Agents can now run on a schedule and securely access CLI tools and other authenticated services. Both features are available in public beta on the Claude Platform, with agents able to complete routine work automatically using cron schedules.</p>
+        </div>
+        
+        <div class="section">
+            <div class="section-label">Feature Deep-Dive</div>
+            
+            <h2 class="section-heading">Understanding Claude Fable 5's <span class="term" tabindex="0">Adaptive Thinking<span class="term-tip">AI that automatically adjusts its reasoning approach based on the task</span></span></h2>
+            
+            <p>Claude Fable 5's most distinctive feature is "always-on adaptive thinking." Unlike previous models where you had to explicitly request deeper reasoning, <span class="term" tabindex="0">Fable 5<span class="term-tip">The public version of Claude's Mythos-class model</span></span> automatically shifts into different thinking modes based on the complexity of your request.</p>
+            
+            <p>Here's how to make the most of it:</p>
+            
+            <p><strong>For coding tasks:</strong> Ask for complete implementations rather than snippets. Fable 5 will automatically analyze dependencies, consider edge cases, and structure the code for maintainability without you needing to specify these requirements.</p>
+            
+            <p><strong>For research:</strong> Instead of asking for bullet points, request comprehensive analysis. The model will automatically cross-reference sources, identify gaps, and provide nuanced conclusions.</p>
+            
+            <p><strong>For creative work:</strong> Give open-ended prompts. Fable 5 will explore multiple angles, consider audience and tone, and iterate on ideas internally before presenting options.</p>
+            
+            <p>The key difference: users should use Fable 5 in standard conversation mode rather than Workflow with high effort settings during the free period, as the latter can quickly exhaust daily limits. The adaptive thinking handles the heavy lifting automatically.</p>
+        </div>
+        
+        <div class="section">
+            <div class="section-label">Broader Tech News</div>
+            
+            <h2 class="section-heading">Apple's Siri AI: The Gemini Partnership</h2>
+            <p>Apple's Foundation Models on Cloud are the product of its collaboration with Google, with the AFM Cloud Pro model similar in quality to Gemini Frontier models and running on Nvidia GPUs in Google's cloud. In January, Google and Apple announced a multi-year collaboration under which Google's Gemini AI model would be the basis for Apple's AI systems.</p>
+            
+            <p>CEO Tim Cook ended the WWDC keynote with a farewell message as he prepares to step down in September, thanking developers for helping people "connect, create, learn, and experience the world in extraordinary new ways".</p>
+            
+            <h2 class="section-heading">The AI <span class="term" tabindex="0">IPO<span class="term-tip">Initial Public Offering - when a private company sells shares publicly</span></span> Wave</h2>
+            <p>OpenAI has confidentially filed paperwork for a U.S. IPO, positioning itself for a valuation that could reach the trillion-dollar range, following similar moves by Anthropic and SpaceX. SpaceX is targeting a $75 billion raise at a $1.75+ trillion valuation, which would be the largest IPO in history if it prices near target.</p>
+            
+            <h2 class="section-heading">China's AI Infrastructure Push</h2>
+            <p>China is preparing a $295 billion AI infrastructure push operated by state-backed telecom giants and relying heavily on domestic technology suppliers including Huawei, reflecting Beijing's broader effort to strengthen AI infrastructure and reduce dependence on U.S. chips and cloud services.</p>
+            
+            <h2 class="section-heading">Nvidia's South Korea Expansion</h2>
+            <p>Nvidia announced strategic agreements with South Korea's largest technology companies including SK Hynix, SK Telecom, Naver, Hyundai, LG, and Doosan, spanning AI memory chips, cloud infrastructure, robotics, and autonomous mobility, with CEO Jensen Huang personally visiting to advance the deals.</p>
+        </div>
+        
+        <div class="section">
+            <div class="section-label">The Bigger Picture</div>
+            
+            <p>This week marks a inflection point in AI capability and accessibility. Claude Fable 5's launch represents the first time a <span class="term" tabindex="0">frontier model<span class="term-tip">The most advanced AI model available at a given time</span></span> has shipped with adaptive reasoning as a default feature, not an opt-in enhancement. Meanwhile, Apple's Siri AI partnership with Google signals that even the most closed ecosystems are embracing AI collaboration over in-house development.</p>
+            
+            <p>For aspiring product managers, the lesson is clear: the competitive moats in AI are shifting from model capabilities to integration depth and user experience. Anthropic's safety classifiers in Fable 5 and Apple's privacy-first AI approach show that trust and responsibility are becoming key differentiators. The companies winning this race aren't just building better AI—they're building AI that users feel confident deploying in their most critical workflows.</p>
+            
+            <p>The broader geopolitical implications are equally significant. China's $295 billion AI infrastructure investment and Nvidia's South Korean partnerships reveal how AI competition is reshaping international tech alliances and supply chains. The next wave of AI advancement will be as much about geographic positioning as algorithmic innovation.</p>
+        </div>
+        
+        <div class="section">
+            <div class="section-label">Reading / Watching / Listening</div>
+            
+            <ul>
+                <li><a href="https://hidekazu-konishi.com/entry/anthropic_claude_model_release_timeline.html">Anthropic Claude Model Release Timeline</a> — Comprehensive breakdown of the Claude family evolution from 2023 through the Mythos-class tier</li>
+                <li><a href="https://www.augmentcode.com/learn/claude-code-131k-stars">Why Claude Code Hit 131K GitHub Stars</a> — Deep dive into why developers are adopting terminal-native AI coding tools</li>
+                <li><a href="https://www.cnbc.com/2026/06/08/apple-wwdc-2026-live-updates.html">WWDC 2026 Live Coverage</a> — Complete breakdown of Apple's AI strategy pivot and Tim Cook's farewell keynote</li>
+                <li><a href="https://techstartups.com/2026/06/09/top-tech-news-today-june-9-2026/">Tech News June 9</a> — Analysis of the AI IPO wave and infrastructure buildouts reshaping the industry</li>
+                <li><a href="https://blog.mean.ceo/anthropic-claude-news-june-2026/">Claude News for Startups</a> — European entrepreneur's take on how Claude's evolution affects lean operations and founder workflows</li>
+            </ul>
+        </div>
+        
+        <div class="footer">
+            <p>That's a wrap on Issue #11. The AI landscape just shifted dramatically with Fable 5's launch and Apple's Siri overhaul—two moves that will define how we interact with AI for the next year.</p>
+            
+            <p><strong>Share this newsletter:</strong> Forward to a friend or colleague, or point them to our <a href="https://forms.gle/pJGxqX6CKyVA9Km99">signup form</a>.</p>
+            
+            <p><a href="#">Browse the archive</a> • <a href="mailto:hello@claudeandco.ai">Contact us</a></p>
+            
+            <p><em>This newsletter is generated by Claude AI and curated by humans. Views and analysis are computational, not human editorial opinions.</em></p>
+        </div>
+    </div>
+    
+    <script>
+        // Theme toggle
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        }
+        
+        function updateThemeIcon(theme) {
+            const lightIcon = document.getElementById('lightIcon');
+            const darkIcon = document.getElementById('darkIcon');
+            
+            if (theme === 'light') {
+                lightIcon.style.display = 'none';
+                darkIcon.style.display = 'block';
+            } else {
+                lightIcon.style.display = 'block';
+                darkIcon.style.display = 'none';
+            }
+        }
+        
+        // Initialize theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        updateThemeIcon(savedTheme);
+        
+        // Progress bar
+        function updateProgressBar() {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        }
+        
+        window.onscroll = function() {
+            updateProgressBar();
+        };
+    </script>
+</body>
+</html>
