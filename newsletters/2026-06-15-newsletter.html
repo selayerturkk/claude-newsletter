@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude & Co. — Issue #12 — June 15, 2026</title>
+    <style>
+        @font-face {
+            font-family: 'TiemposText';
+            src: url('https://www.anthropic.com/_next/static/media/TiemposText_Regular.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+        }
+        
+        @font-face {
+            font-family: 'TiemposText';
+            src: url('https://www.anthropic.com/_next/static/media/TiemposText_RegularItalic.woff2') format('woff2');
+            font-weight: 400;
+            font-style: italic;
+        }
+        
+        @font-face {
+            font-family: 'TiemposText';
+            src: url('https://www.anthropic.com/_next/static/media/TiemposText_Medium.woff2') format('woff2');
+            font-weight: 500;
+            font-style: normal;
+        }
+        
+        @font-face {
+            font-family: 'StyreneA';
+            src: url('https://www.anthropic.com/_next/static/media/StyreneA_Regular.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+        }
+        
+        @font-face {
+            font-family: 'StyreneA';
+            src: url('https://www.anthropic.com/_next/static/media/StyreneA_Medium.woff2') format('woff2');
+            font-weight: 500;
+            font-style: normal;
+        }
+        
+        @font-face {
+            font-family: 'StyreneB';
+            src: url('https://www.anthropic.com/_next/static/media/StyreneB_Regular.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+        }
+        
+        @font-face {
+            font-family: 'StyreneB';
+            src: url('https://www.anthropic.com/_next/static/media/StyreneB_Medium.woff2') format('woff2');
+            font-weight: 500;
+            font-style: normal;
+        }
+
+        :root[data-theme="light"] {
+            --bg-outer: #F4F3EE;
+            --bg-container: #FFFFFF;
+            --bg-callout: #F4F3EE;
+            --text-primary: #2f2f2b;
+            --text-secondary: #4a4a44;
+            --text-muted: #B1ADA1;
+            --text-faint: #c5c1b8;
+            --accent: #C15F3C;
+            --border: rgba(177,173,161,0.3);
+            --link-underline: rgba(47,47,43,0.3);
+        }
+
+        :root[data-theme="dark"] {
+            --bg-outer: #2f2f2b;
+            --bg-container: #3a3a36;
+            --bg-callout: #454540;
+            --text-primary: #F4F3EE;
+            --text-secondary: #d5d3cb;
+            --text-muted: #B1ADA1;
+            --text-faint: #7a776e;
+            --accent: #C15F3C;
+            --border: rgba(244,243,238,0.1);
+            --link-underline: rgba(244,243,238,0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'TiemposText', Georgia, 'Times New Roman', serif;
+            font-size: 16px;
+            line-height: 1.5;
+            letter-spacing: -0.01em;
+            font-weight: 400;
+            background-color: var(--bg-outer);
+            color: var(--text-primary);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 2px;
+            background-color: var(--accent);
+            z-index: 1000;
+            transition: width 0.1s ease-out;
+            width: 0%;
+        }
+
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            background-color: var(--bg-container);
+            padding: 48px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 24px 20px;
+            }
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            background-color: var(--bg-container);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            transition: all 0.2s ease;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--bg-callout);
+        }
+
+        .theme-toggle svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--text-primary);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .newsletter-title {
+            font-family: 'StyreneB', 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 36px;
+            font-weight: 500;
+            line-height: 0.95;
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+        }
+
+        .issue-info {
+            font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .tagline {
+            font-style: italic;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .section {
+            margin-bottom: 36px;
+        }
+
+        .section-label {
+            font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-title {
+            font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 21px;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+            margin-top: 24px;
+        }
+
+        .intro {
+            font-size: 18px;
+            line-height: 1.4;
+            margin-bottom: 24px;
+        }
+
+        .hook {
+            background-color: var(--bg-callout);
+            border-radius: 4px;
+            padding: 20px;
+            border-left: 4px solid var(--accent);
+            margin-bottom: 24px;
+        }
+
+        .hook-quote {
+            font-style: italic;
+            font-size: 18px;
+            line-height: 1.4;
+            margin-bottom: 16px;
+        }
+
+        .hook-highlights {
+            font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .hook-highlights-title {
+            margin-bottom: 8px;
+        }
+
+        .hook-highlights ul {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .hook-highlights li {
+            margin-bottom: 4px;
+        }
+
+        details {
+            background-color: var(--bg-callout);
+            border-radius: 4px;
+            padding: 16px 20px;
+            margin-bottom: 24px;
+        }
+
+        summary {
+            font-family: 'StyreneA', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            margin-bottom: 12px;
+        }
+
+        .glossary-term {
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .glossary-term strong {
+            color: var(--accent);
+        }
+
+        .term {
+            position: relative;
+            cursor: help;
+            border-bottom: 1px dotted var(--text-muted);
+        }
+
+        .term-tip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--bg-container);
+            color: var(--text-primary);
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border: 1px solid var(--border);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+            z-index: 10;
+        }
+
+        .term:hover .term-tip,
+        .term:focus .term-tip {
+            opacity: 1;
+        }
+
+        p {
+            margin-bottom: 16px;
+        }
+
+        p:last-child {
+            margin-bottom: 0;
+        }
+
+        a {
+            color: var(--text-primary);
+            text-decoration: underline;
+            text-decoration-color: var(--link-underline);
+            text-underline-offset: 2px;
+        }
+
+        a:hover {
+            text-decoration-color: var(--accent);
+        }
+
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 16px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .footer {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .footer a {
+            color: var(--accent);
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <svg class="sun-icon" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1" x2="12" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/>
+            <line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+        <svg class="moon-icon" viewBox="0 0 24 24" style="display: none;">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+    </button>
+
+    <div class="container">
+        <header class="header">
+            <h1 class="newsletter-title">Claude & Co.</h1>
+            <div class="issue-info">Issue #12 — June 15, 2026</div>
+            <div class="tagline">Your twice-weekly guide to the AI revolution, with Claude at the center</div>
+        </header>
+
+        <div class="intro">
+            <p>This week brought the most dramatic AI model launch and takedown in history. Claude Fable 5 launched as Anthropic's first public Mythos-class model on June 9, only to be globally disabled three days later following a US government export control directive. Meanwhile, the broader AI ecosystem powered ahead with infrastructure investments and new capabilities.</p>
+        </div>
+
+        <div class="hook">
+            <div class="hook-quote">
+                "The first time the US government has retroactively banned a commercially available AI model through export controls."
+            </div>
+            <div class="hook-highlights">
+                <div class="hook-highlights-title">Also in this issue:</div>
+                <ul>
+                    <li>Claude Code gets nested sub-agents and 20+ new legal connectors</li>
+                    <li>SpaceX's $1.77 trillion IPO reshapes the AI infrastructure landscape</li>
+                    <li>Major tech earnings drive AI sector optimism despite geopolitical tensions</li>
+                </ul>
+            </div>
+        </div>
+
+        <details>
+            <summary>Jargon Decoder</summary>
+            <div class="glossary-term"><strong>Export controls:</strong> US regulations restricting technology transfer to foreign nationals for national security</div>
+            <div class="glossary-term"><strong>Mythos-class:</strong> Anthropic's tier above Opus, designed for advanced reasoning and security research</div>
+            <div class="glossary-term"><strong>MCP:</strong> Model Context Protocol, connects Claude to external tools and data sources</div>
+            <div class="glossary-term"><strong>Sub-agents:</strong> AI assistants that spawn other specialized assistants for complex tasks</div>
+            <div class="glossary-term"><strong>Jailbreak:</strong> Technique to bypass AI safety restrictions and elicit restricted outputs</div>
+            <div class="glossary-term"><strong>Context window:</strong> The amount of text an AI model can process in a single conversation</div>
+            <div class="glossary-term"><strong>Red-teaming:</strong> Testing AI systems by attempting to find vulnerabilities or harmful outputs</div>
+            <div class="glossary-term"><strong>Zero-day exploit:</strong> Previously unknown software vulnerability that can be exploited</div>
+        </details>
+
+        <section class="section">
+            <div class="section-label">ANTHROPIC PRODUCT NEWS</div>
+            
+            <h2 class="section-title">Claude Fable 5: A Three-Day Revolution</h2>
+            
+            <p>Anthropic launched Claude Fable 5 on June 9, marking its first public release of a Mythos-class model. The model demonstrated exceptional ability to autonomously discover and chain zero-day exploits across major operating systems and browsers, bringing advanced cybersecurity capabilities to public access for the first time.</p>
+
+            <p>But the celebration was short-lived. On the evening of June 12, Anthropic disabled access to both Claude Fable 5 and Claude Mythos 5 worldwide after receiving a US government export control directive at 5:21 PM ET. In response, Anthropic blocked all public access to both models globally, affecting paying enterprise customers and even Anthropic employees internally.</p>
+
+            <p>The shutdown was triggered by a narrow jailbreak that asked the model to review code and find flaws, with Commerce restricting access for any foreign national, including Anthropic's own foreign-national employees. This marks the first time the US government has retroactively banned a commercially available AI model through export controls.</p>
+
+            <p>Anthropic apologized for the disruption and is working to restore access as soon as possible, though the directive has no expiration date and is structured as a formal export control, not a temporary emergency measure.</p>
+
+            <h2 class="section-title">Claude Code: Nested Intelligence</h2>
+
+            <p>While the Fable drama unfolded, Claude Code shipped significant updates. The release adds nested sub-agents, smarter model and region handling, new plugin search, and better Chrome, VSCode, and terminal workflows. Sub-agents can now spawn their own sub-agents up to 5 levels deep, with improved parallel tool handling where failed Bash commands no longer cancel other calls in the same batch.</p>
+
+            <p>Anthropic also released 20+ new legal MCP connectors and 12 practice-area plugins, expanding how law firms and in-house teams work across research, contracts, discovery, matter management, and legal aid. Legal professionals have become the most engaged Claude Cowork users of any knowledge-work function.</p>
+
+            <h2 class="section-title">Model Deprecations</h2>
+
+            <p>Anthropic is deprecating two Claude models on June 15, 2026, with scenarios using these models failing after that date. Users should migrate to newer models before the cutoff.</p>
+        </section>
+
+        <section class="section">
+            <div class="section-label">FEATURE DEEP-DIVE</div>
+            
+            <h2 class="section-title">Understanding Claude Connectors: The <span class="term" tabindex="0">MCP<span class="term-tip">Model Context Protocol, connects Claude to external tools</span></span> Revolution</h2>
+            
+            <p>Claude connectors allow you to connect Claude AI directly to the tools and data sources that matter most to your workflows. These connections work through Model Context Protocol (MCP) servers — small programs that expose tools and data to the model over the Model Context Protocol.</p>
+
+            <p>Here's how it works in practice. When you ask Claude "What are my top 3 GitHub issues this week?" the system:</p>
+            
+            <ol>
+                <li>Identifies the need for a GitHub connector</li>
+                <li>Uses the MCP server to query GitHub API with your OAuth token</li>
+                <li>Returns a structured list of issues</li>
+                <li>Formats and presents the results in context</li>
+            </ol>
+
+            <p>As of June 5, 2026, there are 439 verified MCP integrations across 30 categories, making Claude connectors one of the fastest-growing AI integration ecosystems.</p>
+
+            <p>For product managers and developers, this represents a fundamental shift: instead of building custom AI interfaces, you can extend Claude's native capabilities to work within your existing tool stack. The key insight is that this approach covers setting up custom connectors, MCP server authentication with OAuth 2.0, building your own remote MCP servers, and real-world automation workflows.</p>
+        </section>
+
+        <section class="section">
+            <div class="section-label">BROADER TECH NEWS</div>
+
+            <h2 class="section-title">SpaceX Goes Public at $1.77 Trillion</h2>
+
+            <p>SpaceX priced the largest IPO in recorded history at a staggering $1.77 trillion valuation. The company's pitch includes orbital AI data centers, space-based compute, and broader AI infrastructure tied to Elon Musk's xAI ambitions, making SpaceX part space company, part telecom provider, part AI infrastructure bet.</p>
+
+            <h2 class="section-title">Market Movements</h2>
+
+            <p>The primary market drivers were President Trump's announcement of a tentative peace deal to end the U.S.-Iran war, which boosted global risk appetite and sent oil prices down, and SpaceX's strong Wall Street debut. Technology (XLK) climbed 3.15% while Energy (XLE) declined 3.75%, reflecting the sector rotation toward AI and away from traditional energy.</p>
+
+            <h2 class="section-title">AI Infrastructure Race</h2>
+
+            <p>Billions are pouring into AI infrastructure, with humanoid robots inching toward mass production in China and OpenAI's 10-gigawatt ambitions alongside China's $295 billion data-center plan. Jeff Bezos is betting $12 billion on an "artificial general engineer" that could redesign how everything from jet engines to medicines gets built.</p>
+
+            <h2 class="section-title">Research Breakthroughs</h2>
+
+            <p>Oxford physicists created an entirely new type of Schrödinger's cat-like quantum state using components that are themselves highly quantum in nature, potentially opening new possibilities for more resilient quantum computers. Meanwhile, researchers found a major flaw in top AI models using a classic attention test, where performance deteriorated sharply on longer lists despite accuracy on short ones.</p>
+        </section>
+
+        <section class="section">
+            <div class="section-label">THE BIGGER PICTURE</div>
+            
+            <p>The Fable 5 incident reveals the new reality of AI development: models powerful enough to find vulnerabilities are inherently dual-use technologies. For product managers, this creates both opportunity and risk. The same capabilities that make Claude Fable 5 excellent at security auditing also make it a potential national security concern. As AI systems become more capable, expect similar tensions between innovation and regulation. The winners will be those who can navigate both technical excellence and geopolitical complexity, building systems that are both powerful and trustworthy.</p>
+        </section>
+
+        <section class="section">
+            <div class="section-label">READING / WATCHING / LISTENING</div>
+            
+            <ul>
+                <li><a href="https://www.anthropic.com/news/claude-fable-5-mythos-5">Anthropic's official statement on the Fable 5 suspension</a> — The company's perspective on the export control directive</li>
+                <li><a href="https://simonwillison.net/2026/Jun/13/us-government-directive-to-suspend-access/">Simon Willison's analysis of the government directive</a> — Technical perspective on the takedown mechanics</li>
+                <li><a href="https://explainx.ai/blog/how-to-use-claude-connectors-mcp-servers-complete-guide-2026">Complete guide to Claude Connectors and MCP servers</a> — Practical tutorial for implementing AI workflow automation</li>
+                <li><a href="https://techstartups.com/2026/06/12/top-tech-news-today-june-12-2026/">Tech industry analysis on the SpaceX IPO</a> — Context on the largest public offering in history</li>
+                <li><a href="https://snyk.io/blog/fable-mythos-suspension-security-takeaways/">Security implications of the Fable 5 suspension</a> — What security teams should learn from this incident</li>
+            </ul>
+        </section>
+
+        <footer class="footer">
+            <p>Thanks for reading Claude & Co. This newsletter is AI-generated using Claude, with human oversight for accuracy and editorial direction.</p>
+            
+            <p><a href="https://forms.gle/pJGxqX6CKyVA9Km99">Share this newsletter</a> with someone building the future. Visit our <a href="#">archive</a> for past issues.</p>
+            
+            <p>Disclaimer: This newsletter is independently produced and not affiliated with Anthropic. All information is for educational purposes.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Progress bar
+        function updateProgressBar() {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.body.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            document.getElementById('progressBar').style.width = scrollPercent + '%';
+        }
+
+        window.addEventListener('scroll', updateProgressBar);
+
+        // Theme toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+        const sunIcon = document.querySelector('.sun-icon');
+        const moonIcon = document.querySelector('.moon-icon');
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        html.setAttribute('data-theme', savedTheme);
+        updateThemeIcons();
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcons();
+        });
+
+        function updateThemeIcons() {
+            const currentTheme = html.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
+                sunIcon.style.display = 'block';
+                moonIcon.style.display = 'none';
+            } else {
+                sunIcon.style.display = 'none';
+                moonIcon.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
